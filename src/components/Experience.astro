@@ -1,0 +1,81 @@
+---
+import { Icon } from 'astro-icon/components';
+import Section from './Section.astro';
+import SkillChip from './SkillChip.astro';
+import { experience } from '../data/cv';
+---
+
+<Section id="experiencia" eyebrow="Experiencia" title="Trayectoria profesional">
+  <div class="space-y-8">
+    {
+      experience.map((job) => (
+        <article data-reveal class="card overflow-hidden">
+          <header class="flex flex-col gap-5 border-b border-line p-6 sm:flex-row sm:items-start sm:justify-between sm:p-8">
+            <div class="flex items-start gap-4">
+              <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[var(--btn-from)] to-[var(--btn-to)] text-white shadow-lg shadow-[var(--glow)]">
+                <Icon name="lucide:briefcase" class="size-5" />
+              </span>
+              <div>
+                <h3 class="font-display text-xl font-semibold sm:text-2xl">{job.role}</h3>
+                <p class="mt-1 text-muted">
+                  <a
+                    href={job.companyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 font-medium text-fg underline-offset-4 hover:text-accent hover:underline"
+                  >
+                    {job.company}
+                    <Icon name="lucide:arrow-up-right" class="size-3.5" />
+                  </a>
+                  <span class="mx-1.5">·</span>
+                  {job.description}
+                </p>
+              </div>
+            </div>
+            <div class="flex shrink-0 flex-wrap gap-2 sm:flex-col sm:items-end">
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-2 px-3 py-1 font-mono text-xs">
+                <Icon name="lucide:calendar" class="size-3.5 text-accent" />
+                {job.period}
+              </span>
+              <span class="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1 text-xs text-muted">
+                <Icon name="lucide:globe" class="size-3.5" />
+                {job.mode} · {job.duration}
+              </span>
+            </div>
+          </header>
+
+          <div class="space-y-9 p-6 sm:p-8">
+            {job.groups.map((group) => (
+              <section>
+                <h4 class="mb-4 flex items-center gap-2.5 font-display text-sm font-semibold tracking-wide text-accent uppercase">
+                  <Icon name={group.icon} class="size-4" />
+                  {group.title}
+                </h4>
+                <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                  {group.items.map((item) => (
+                    <li class:list={['rounded-2xl border border-line bg-surface-2/40 p-5', group.items.length === 1 && 'md:col-span-full']}>
+                      <p class="flex items-start gap-2 font-semibold">
+                        <Icon name="lucide:check" class="mt-0.5 size-4 shrink-0 text-emerald-500" />
+                        {item.title}
+                      </p>
+                      <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+
+            <div class="border-t border-line pt-6">
+              <p class="mb-3 text-xs font-semibold tracking-wide text-muted uppercase">Stack</p>
+              <ul class="flex flex-wrap gap-2">
+                {job.stack.map((skill) => (
+                  <SkillChip skill={skill} size="sm" />
+                ))}
+              </ul>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</Section>

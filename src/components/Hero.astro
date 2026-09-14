@@ -1,0 +1,125 @@
+---
+import { Picture } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import photo from '../assets/juan-mata.png';
+import { profile } from '../data/cv';
+---
+
+<section id="inicio" class="relative isolate overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
+  <div aria-hidden="true" class="bg-grid absolute inset-0 -z-10"></div>
+  <div
+    aria-hidden="true"
+    class="absolute -top-48 left-1/2 -z-10 h-[40rem] w-[64rem] max-w-none -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]"
+  >
+  </div>
+
+  <div class="mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+    <div class="order-2 lg:order-1">
+      <p
+        data-reveal
+        class="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3.5 py-1.5 text-xs font-medium text-muted backdrop-blur"
+      >
+        <span class="relative flex size-2">
+          <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60"></span>
+          <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+        </span>
+        {profile.availability}
+      </p>
+
+      <h1
+        data-reveal
+        style="--d: 80ms"
+        class="mt-6 font-display text-[2.75rem] leading-[1.05] font-bold tracking-tight sm:text-6xl lg:text-7xl"
+      >
+        Hola, soy <span class="text-gradient">{profile.name}</span>
+      </h1>
+
+      <p data-reveal style="--d: 140ms" class="mt-5 font-display text-xl font-medium sm:text-2xl">
+        {profile.role}
+      </p>
+      <p data-reveal style="--d: 180ms" class="mt-1 font-mono text-sm text-muted">{profile.headline}</p>
+
+      <p data-reveal style="--d: 220ms" class="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+        {profile.tagline}
+      </p>
+
+      <div data-reveal style="--d: 260ms" class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted">
+        <span class="inline-flex items-center gap-1.5">
+          <Icon name="lucide:map-pin" class="size-4 text-accent" />
+          {profile.location}
+        </span>
+        <span class="inline-flex items-center gap-1.5">
+          <Icon name="lucide:briefcase" class="size-4 text-accent" />
+          {profile.yearsOfExperience} años de experiencia
+        </span>
+      </div>
+
+      <div data-reveal style="--d: 320ms" class="mt-9 flex flex-wrap items-center gap-3">
+        <a href={profile.cv} download class="btn btn-primary">
+          <Icon name="lucide:download" class="size-4" />
+          Descargar CV
+        </a>
+        <a href="#contacto" class="btn btn-secondary">
+          Contactar
+          <Icon name="lucide:arrow-right" class="size-4" />
+        </a>
+        <div class="flex items-center gap-2 sm:ml-1">
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="GitHub">
+            <Icon name="simple-icons:github" class="size-[18px]" />
+          </a>
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="icon-btn" aria-label="LinkedIn">
+            <Icon name="simple-icons:linkedin" class="size-[18px]" />
+          </a>
+          <a href={`mailto:${profile.email}`} class="icon-btn" aria-label="Enviar correo">
+            <Icon name="lucide:mail" class="size-[18px]" />
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal class="order-1 mx-auto w-full max-w-[19rem] sm:max-w-[23rem] lg:order-2 lg:max-w-none">
+      <div class="relative">
+        <div
+          aria-hidden="true"
+          class="absolute -inset-5 rounded-[2.75rem] bg-gradient-to-br from-accent/45 via-accent-2/25 to-transparent blur-2xl"
+        >
+        </div>
+        <div class="relative rounded-[2rem] border border-line bg-surface p-2 shadow-2xl shadow-black/20">
+          <Picture
+            src={photo}
+            alt={`Retrato de ${profile.name}`}
+            widths={[320, 480, 640, 900]}
+            sizes="(min-width: 1024px) 420px, (min-width: 640px) 23rem, 19rem"
+            formats={['avif', 'webp']}
+            fallbackFormat="jpg"
+            quality={80}
+            loading="eager"
+            fetchpriority="high"
+            class="aspect-square w-full rounded-[1.6rem] object-cover"
+          />
+        </div>
+
+        <div
+          class="animate-float absolute -bottom-4 left-2 flex items-center gap-2.5 rounded-2xl border border-line bg-surface/90 px-3.5 py-2.5 shadow-xl backdrop-blur sm:-left-8"
+        >
+          <span class="brand-tile size-8 rounded-lg" style="--brand: #FF2D20">
+            <Icon name="simple-icons:laravel" class="size-4" />
+          </span>
+          <span class="brand-tile size-8 rounded-lg" style="--brand: #149ECA">
+            <Icon name="simple-icons:react" class="size-4" />
+          </span>
+          <span class="brand-tile size-8 rounded-lg" style="--brand: #3178C6">
+            <Icon name="simple-icons:typescript" class="size-4" />
+          </span>
+        </div>
+
+        <div
+          class="animate-float absolute top-6 right-2 flex items-center gap-2 rounded-2xl border border-line bg-surface/90 px-3.5 py-2.5 text-sm font-medium shadow-xl backdrop-blur [animation-delay:-2.5s] sm:-right-6"
+        >
+          <Icon name="lucide:shield-check" class="size-4 text-emerald-500" />
+          150+ tests en CI
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

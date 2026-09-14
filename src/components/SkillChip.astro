@@ -1,0 +1,30 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { Skill } from '../data/cv';
+
+interface Props {
+  skill: Skill;
+  size?: 'sm' | 'md';
+}
+
+const { skill, size = 'md' } = Astro.props;
+const brand = skill.color ? `--brand: ${skill.color}` : undefined;
+---
+
+{
+  size === 'md' ? (
+    <li class="group flex items-center gap-2.5 rounded-xl border border-line bg-surface-2/50 py-2 pr-3.5 pl-2 text-sm font-medium transition-colors hover:border-[color-mix(in_oklab,var(--brand,var(--accent))_45%,var(--border))]" style={brand}>
+      <span class="brand-tile size-8 rounded-lg transition-transform duration-300 group-hover:scale-110">
+        <Icon name={skill.icon} class="size-[18px]" aria-hidden="true" />
+      </span>
+      {skill.name}
+    </li>
+  ) : (
+    <li class="flex items-center gap-1.5 rounded-full border border-line bg-surface-2/50 py-1 pr-3 pl-1.5 text-xs font-medium text-muted" style={brand}>
+      <span class="brand-tile size-5 rounded-full">
+        <Icon name={skill.icon} class="size-3" aria-hidden="true" />
+      </span>
+      {skill.name}
+    </li>
+  )
+}

@@ -1,0 +1,131 @@
+---
+import { Icon } from 'astro-icon/components';
+import { profile } from '../data/cv';
+
+const methods = [
+  {
+    label: 'Correo',
+    value: profile.email,
+    href: `mailto:${profile.email}`,
+    icon: 'lucide:mail',
+    color: '#EA4335',
+    copy: profile.email,
+  },
+  {
+    label: 'WhatsApp',
+    value: profile.whatsapp,
+    href: profile.whatsappUrl,
+    icon: 'simple-icons:whatsapp',
+    color: '#25D366',
+    copy: profile.whatsapp,
+  },
+  {
+    label: 'LinkedIn',
+    value: profile.linkedinUser,
+    href: profile.linkedin,
+    icon: 'simple-icons:linkedin',
+    color: '#0A66C2',
+  },
+  {
+    label: 'GitHub',
+    value: profile.githubUser,
+    href: profile.github,
+    icon: 'simple-icons:github',
+  },
+];
+---
+
+<section id="contacto" class="relative py-20 sm:py-28">
+  <div class="mx-auto max-w-6xl px-5 sm:px-8">
+    <div data-reveal class="card relative isolate overflow-hidden p-7 sm:p-12">
+      <div aria-hidden="true" class="bg-grid absolute inset-0 -z-10 opacity-70"></div>
+      <div
+        aria-hidden="true"
+        class="absolute -top-32 -right-24 -z-10 size-[28rem] rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]"
+      >
+      </div>
+
+      <div class="grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center lg:gap-14">
+        <div>
+          <p class="flex items-center gap-3 font-mono text-xs font-semibold tracking-[0.2em] text-accent uppercase">
+            <span class="h-px w-8 bg-gradient-to-r from-accent to-transparent"></span>
+            Contacto
+          </p>
+          <h2 class="mt-4 font-display text-3xl font-bold tracking-tight sm:text-5xl">
+            ¿Construimos algo <span class="text-gradient">juntos</span>?
+          </h2>
+          <p class="mt-5 max-w-md text-base leading-relaxed text-muted sm:text-lg">
+            Estoy disponible de inmediato para roles remotos o híbridos. Escríbeme y conversemos sobre tu proyecto o equipo.
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href={`mailto:${profile.email}`} class="btn btn-primary">
+              <Icon name="lucide:mail" class="size-4" />
+              Enviar correo
+            </a>
+            <a href={profile.cv} download class="btn btn-secondary">
+              <Icon name="lucide:file-text" class="size-4" />
+              Descargar CV
+            </a>
+          </div>
+        </div>
+
+        <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          {
+            methods.map((method) => (
+              <li
+                class="group flex items-center gap-3 rounded-2xl border border-line bg-surface/80 p-3 pr-3 backdrop-blur transition-colors hover:border-[color-mix(in_oklab,var(--accent)_45%,var(--border))]"
+                style={method.color ? `--brand: ${method.color}` : undefined}
+              >
+                <span class="brand-tile size-11 rounded-xl">
+                  <Icon name={method.icon} class="size-5" />
+                </span>
+                <a
+                  href={method.href}
+                  target={method.href.startsWith('http') ? '_blank' : undefined}
+                  rel={method.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  class="min-w-0 flex-1"
+                >
+                  <span class="block text-xs text-muted">{method.label}</span>
+                  <span class="block truncate font-medium group-hover:text-accent">{method.value}</span>
+                </a>
+                {method.copy ? (
+                  <button
+                    type="button"
+                    class="icon-btn size-9 shrink-0"
+                    data-copy={method.copy}
+                    aria-label={`Copiar ${method.label.toLowerCase()}`}
+                  >
+                    <Icon name="lucide:copy" class="size-4" data-copy-icon />
+                    <Icon name="lucide:check" class="hidden size-4 text-emerald-500" data-copied-icon />
+                  </button>
+                ) : (
+                  <Icon name="lucide:arrow-up-right" class="mr-2 size-4 shrink-0 text-muted group-hover:text-accent" />
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy!);
+      } catch {
+        return;
+      }
+      const copyIcon = button.querySelector('[data-copy-icon]');
+      const copiedIcon = button.querySelector('[data-copied-icon]');
+      copyIcon?.classList.add('hidden');
+      copiedIcon?.classList.remove('hidden');
+      setTimeout(() => {
+        copyIcon?.classList.remove('hidden');
+        copiedIcon?.classList.add('hidden');
+      }, 1600);
+    });
+  });
+</script>

@@ -1,0 +1,38 @@
+---
+import { Icon } from 'astro-icon/components';
+import Section from './Section.astro';
+import SkillChip from './SkillChip.astro';
+import { skillGroups } from '../data/cv';
+---
+
+<Section
+  id="habilidades"
+  eyebrow="Habilidades"
+  title="Herramientas con las que trabajo"
+  subtitle="Stack que uso a diario para diseñar, construir, probar y desplegar software empresarial."
+>
+  <div class="grid gap-5 lg:grid-cols-2">
+    {
+      skillGroups.map((group, i) => (
+        <article data-reveal style={`--d: ${(i % 2) * 80}ms`} class:list={['card p-6 sm:p-7', group.wide && 'lg:col-span-2']}>
+          <header class="mb-5 flex items-center justify-between gap-4">
+            <h3 class="flex items-center gap-3 font-display text-lg font-semibold">
+              <span class="grid size-9 place-items-center rounded-xl bg-accent/12 text-accent">
+                <Icon name={group.icon} class="size-[18px]" />
+              </span>
+              {group.title}
+            </h3>
+            <span class="rounded-full border border-line px-2.5 py-0.5 font-mono text-xs text-muted">
+              {group.skills.length}
+            </span>
+          </header>
+          <ul class="flex flex-wrap gap-2.5">
+            {group.skills.map((skill) => (
+              <SkillChip skill={skill} />
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+</Section>

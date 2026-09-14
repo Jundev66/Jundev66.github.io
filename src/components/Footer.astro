@@ -1,0 +1,23 @@
+---
+import { Icon } from 'astro-icon/components';
+import { profile } from '../data/cv';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-muted sm:flex-row sm:px-8">
+    <p>© {year} {profile.name}. Hecho con Astro y Tailwind CSS.</p>
+    <div class="flex items-center gap-2">
+      <a href={profile.github} target="_blank" rel="noopener noreferrer" class="icon-btn size-9" aria-label="GitHub">
+        <Icon name="simple-icons:github" class="size-4" />
+      </a>
+      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="icon-btn size-9" aria-label="LinkedIn">
+        <Icon name="simple-icons:linkedin" class="size-4" />
+      </a>
+      <a href="#inicio" class="icon-btn size-9" aria-label="Volver arriba">
+        <Icon name="lucide:arrow-up" class="size-4" />
+      </a>
+    </div>
+  </div>
+</footer>
