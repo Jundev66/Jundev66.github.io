@@ -237,49 +237,100 @@ export const experience = [
   },
 ];
 
-export const projects = [
+export interface Project {
+  name: string;
+  subtitle: string;
+  status: string;
+  statusTone: 'amber' | 'emerald' | 'sky';
+  description: string;
+  bullets: string[];
+  /** Cifras destacadas que se muestran como etiquetas */
+  metrics: string[];
+  stack: Skill[];
+  /** Ilustración de la tarjeta: `cryotech` usa capturas reales, las otras son ilustraciones */
+  visual: 'hexagon' | 'tenants' | 'cryotech';
+  repo?: string;
+  demo?: string;
+}
+
+export const projects: Project[] = [
+  {
+    name: 'CoreBiz',
+    subtitle: 'ERP multi-tenant para comercios',
+    status: 'Por desplegar',
+    statusTone: 'sky',
+    description:
+      'Sistema de gestión comercial multi-tenant —inventario, ventas y notas de entrega— con arquitectura hexagonal y aislamiento de datos con Row Level Security de PostgreSQL.',
+    bullets: [
+      'Hexagonal con DDD táctico y CQRS ligero: el dominio no tiene dependencias y el build falla si se acopla.',
+      'Aislamiento multi-tenant en cuatro capas, verificado tabla por tabla con una matriz de tests.',
+      'Demo efímera por visitante, con un circuit breaker que protege el presupuesto de infraestructura.',
+    ],
+    metrics: ['497 tests', '11 ADRs', 'Threat model STRIDE'],
+    stack: [
+      { name: 'NestJS', icon: 'simple-icons:nestjs', color: '#E0234E' },
+      { name: 'Next.js', icon: 'simple-icons:nextdotjs' },
+      { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+      { name: 'Supabase', icon: 'simple-icons:supabase', color: '#3ECF8E' },
+      { name: 'Prisma', icon: 'simple-icons:prisma' },
+      { name: 'Zod', icon: 'simple-icons:zod', color: '#3E67B1' },
+      { name: 'Vitest', icon: 'simple-icons:vitest', color: '#6E9F18' },
+      { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
+    ],
+    visual: 'hexagon',
+    repo: 'https://github.com/Jundev66/CoreBiz',
+  },
   {
     name: 'Kombo',
     subtitle: 'Sistema de pedidos multi-negocio',
     status: 'En desarrollo',
-    statusTone: 'amber' as const,
+    statusTone: 'amber',
     description:
-      'Plataforma de pedidos de comida para múltiples negocios sobre un solo despliegue, orientada a atención rápida en punto de venta.',
+      'Pedidos de comida para múltiples negocios en un solo despliegue: cada negocio entra por su propio subdominio y solo ve sus datos, garantizado por PostgreSQL Row Level Security.',
     bullets: [
-      'Aislamiento de datos por negocio mediante PostgreSQL Row Level Security.',
-      'Módulos core ya funcionales, en desarrollo activo.',
+      'Tres canales de entrada —portal del cliente, bot de WhatsApp/Telegram y caja— que llegan a la misma pantalla de cocina.',
+      'El cliente recibe el aviso de pedido listo por el mismo canal en el que pidió.',
+      'Chequeos automáticos de arquitectura, aislamiento, tipos y presupuesto de bundle, más E2E con Playwright.',
     ],
+    metrics: ['Multi-tenant RLS', 'Caja + cocina', 'Bots de pedidos'],
     stack: [
       { name: 'Laravel', icon: 'simple-icons:laravel', color: '#FF2D20' },
+      { name: 'PHP', icon: 'simple-icons:php', color: '#8892BF' },
       { name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
       { name: 'Redis', icon: 'simple-icons:redis', color: '#FF4438' },
       { name: 'React', icon: 'simple-icons:react', color: '#149ECA' },
       { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+      { name: 'Tailwind', icon: 'simple-icons:tailwindcss', color: '#06B6D4' },
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
-    ] satisfies Skill[],
-    image: null,
-    repo: undefined as string | undefined,
-    demo: undefined as string | undefined,
+    ],
+    visual: 'tenants',
+    repo: 'https://github.com/Jundev66/kombo',
   },
   {
     name: 'CryoTech',
-    subtitle: 'Administración de crías de aves',
-    status: 'En uso',
-    statusTone: 'emerald' as const,
+    subtitle: 'Gestión avícola para pequeños productores',
+    status: 'En producción',
+    statusTone: 'emerald',
     description:
-      'Aplicación de gestión y seguimiento de cría de pollos de engorde, construida para un caso real y en uso personal activo.',
+      'Lotes, costos y tesorería en dos monedas para una granja real en Venezuela, con un asistente que registra operaciones desde Telegram leyendo fotos de comprobantes bancarios.',
     bullets: [
-      'Lotes, registros diarios, ventas, finanzas, tesorería y reportes.',
-      'Usuarios y roles, con tema claro y oscuro.',
+      'Métricas por lote: conversión alimenticia (FCR), mortalidad, curva de crecimiento y costo por ave.',
+      'Lectura de comprobantes con Tesseract.js y la API de Anthropic como respaldo.',
+      'Multiempresa con roles y permisos por módulo, rotación de refresh tokens y rate limiting.',
     ],
+    metrics: ['76 unit tests', '82 E2E', '418 checks de API'],
     stack: [
       { name: 'React', icon: 'simple-icons:react', color: '#149ECA' },
-      { name: 'Nest.js', icon: 'simple-icons:nestjs', color: '#E0234E' },
+      { name: 'NestJS', icon: 'simple-icons:nestjs', color: '#E0234E' },
+      { name: 'Prisma', icon: 'simple-icons:prisma' },
+      { name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
       { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
-    ] satisfies Skill[],
-    image: 'cryotech',
-    repo: undefined as string | undefined,
-    demo: undefined as string | undefined,
+      { name: 'Telegram', icon: 'simple-icons:telegram', color: '#26A5E4' },
+      { name: 'Cloudflare', icon: 'simple-icons:cloudflare', color: '#F38020' },
+      { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
+    ],
+    visual: 'cryotech',
+    repo: 'https://github.com/Jundev66/cryotech',
   },
 ];
 
