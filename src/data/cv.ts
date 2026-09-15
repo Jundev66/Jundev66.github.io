@@ -249,6 +249,8 @@ export interface Project {
   stack: Skill[];
   /** Ilustración de la tarjeta: `cryotech` usa capturas reales, las otras son ilustraciones */
   visual: 'hexagon' | 'tenants' | 'cryotech';
+  /** Logo propio del proyecto (ver `ProjectLogo.astro`) */
+  logo: 'corebiz' | 'kombo' | 'cryotech';
   repo?: string;
   demo?: string;
 }
@@ -257,8 +259,8 @@ export const projects: Project[] = [
   {
     name: 'CoreBiz',
     subtitle: 'ERP multi-tenant para comercios',
-    status: 'Por desplegar',
-    statusTone: 'sky',
+    status: 'En línea',
+    statusTone: 'emerald',
     description:
       'Sistema de gestión comercial multi-tenant —inventario, ventas y notas de entrega— con arquitectura hexagonal y aislamiento de datos con Row Level Security de PostgreSQL.',
     bullets: [
@@ -278,7 +280,9 @@ export const projects: Project[] = [
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
     visual: 'hexagon',
+    logo: 'corebiz',
     repo: 'https://github.com/Jundev66/CoreBiz',
+    demo: 'https://corebiz-web.vercel.app',
   },
   {
     name: 'Kombo',
@@ -304,13 +308,14 @@ export const projects: Project[] = [
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
     visual: 'tenants',
+    logo: 'kombo',
     repo: 'https://github.com/Jundev66/kombo',
   },
   {
     name: 'CryoTech',
     subtitle: 'Gestión avícola para pequeños productores',
-    status: 'En producción',
-    statusTone: 'emerald',
+    status: 'API en producción',
+    statusTone: 'sky',
     description:
       'Lotes, costos y tesorería en dos monedas para una granja real en Venezuela, con un asistente que registra operaciones desde Telegram leyendo fotos de comprobantes bancarios.',
     bullets: [
@@ -330,6 +335,7 @@ export const projects: Project[] = [
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
     visual: 'cryotech',
+    logo: 'cryotech',
     repo: 'https://github.com/Jundev66/cryotech',
   },
 ];
