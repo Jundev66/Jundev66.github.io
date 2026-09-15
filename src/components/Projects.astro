@@ -5,8 +5,9 @@ import Section from './Section.astro';
 import SkillChip from './SkillChip.astro';
 import ProjectLogo from './ProjectLogo.astro';
 import { projects } from '../data/cv';
-import cryotechLight from '../assets/projects/cryotech-dashboard.png';
-import cryotechDark from '../assets/projects/cryotech-dashboard-dark.png';
+import corebizApp from '../assets/projects/corebiz-app.png';
+import cryotechReports from '../assets/projects/cryotech-reports.png';
+import cryotechReportsDark from '../assets/projects/cryotech-reports-dark.png';
 
 const tones = {
   amber: { dot: 'bg-amber-500', text: 'text-amber-700 dark:text-amber-400' },
@@ -14,10 +15,10 @@ const tones = {
   sky: { dot: 'bg-sky-500', text: 'text-sky-700 dark:text-sky-400' },
 };
 
-const tenants = [
-  { name: 'Negocio A', color: '#FF2D20' },
-  { name: 'Negocio B', color: '#4169E1' },
-  { name: 'Negocio C', color: '#149ECA' },
+const komboChannels = [
+  { label: 'Portal del cliente', icons: ['lucide:smartphone'], color: '#1f6f4a' },
+  { label: 'Bots', icons: ['simple-icons:whatsapp', 'simple-icons:telegram'], color: '#2f855a' },
+  { label: 'Caja', icons: ['lucide:receipt'], color: '#e8783c' },
 ];
 ---
 
@@ -32,6 +33,7 @@ const tenants = [
       projects.map((project, i) => {
         const spansTablet = projects.length % 2 === 1 && i === projects.length - 1;
         const tone = tones[project.statusTone];
+        const { brand } = project;
         return (
           <article
             data-reveal
@@ -41,12 +43,21 @@ const tenants = [
               spansTablet && 'md:col-span-2 lg:col-span-1',
             ]}
           >
+            {/* Portada de marca */}
             <div
               class:list={[
-                'relative aspect-[16/10] overflow-hidden border-b border-line bg-surface-2',
+                'relative aspect-[16/10] overflow-hidden border-b border-line',
+                'bg-[linear-gradient(145deg,var(--b-soft),#ffffff_75%)] dark:bg-[linear-gradient(145deg,var(--b-deep),#07080d_80%)]',
                 spansTablet && 'md:max-lg:aspect-[21/9]',
               ]}
+              style={`--b-from: ${brand.from}; --b-to: ${brand.to}; --b-soft: ${brand.soft}; --b-deep: ${brand.deep}`}
             >
+              <div aria-hidden="true" class="bg-grid absolute inset-0 opacity-50 [mask-image:none]" />
+              <div
+                aria-hidden="true"
+                class="absolute -top-1/3 -right-1/4 size-[75%] rounded-full bg-[var(--b-from)] opacity-20 blur-3xl dark:opacity-35"
+              />
+
               <span class="absolute top-3 right-3 z-[1] inline-flex items-center gap-1.5 rounded-full border border-line bg-surface/90 px-2.5 py-1 text-xs font-medium shadow-sm backdrop-blur">
                 <span class="relative flex size-2">
                   {project.demo && (
@@ -57,102 +68,111 @@ const tenants = [
                 <span class={tone.text}>{project.status}</span>
               </span>
 
-              {project.visual === 'cryotech' && (
-                <>
+              {project.logo === 'corebiz' && (
+                <div class="absolute top-[15%] left-[27%] w-[66%] overflow-hidden rounded-2xl shadow-2xl ring-1 shadow-black/25 ring-black/10 transition-transform duration-500 group-hover:-translate-y-1.5 dark:ring-white/10">
                   <Image
-                    src={cryotechDark}
-                    alt="Dashboard de CryoTech en tema oscuro"
-                    widths={[480, 720, 1080]}
-                    sizes="(min-width: 1024px) 380px, (min-width: 768px) 700px, 100vw"
-                    class="hidden size-full object-cover object-left-top transition-transform duration-500 group-hover:scale-[1.03] dark:block"
+                    src={corebizApp}
+                    alt="Pantalla de inicio de la app de CoreBiz: ventas del período y últimas notas de entrega"
+                    widths={[360, 540, 800]}
+                    sizes="(min-width: 1024px) 260px, (min-width: 768px) 320px, 72vw"
+                    class="block w-full"
                   />
-                  <Image
-                    src={cryotechLight}
-                    alt="Dashboard de CryoTech en tema claro"
-                    widths={[480, 720, 1080]}
-                    sizes="(min-width: 1024px) 380px, (min-width: 768px) 700px, 100vw"
-                    class="block size-full object-cover object-left-top transition-transform duration-500 group-hover:scale-[1.03] dark:hidden"
-                  />
-                </>
+                </div>
               )}
 
-              {project.visual !== 'cryotech' && (
-                <div class="relative grid size-full place-items-center overflow-hidden">
-                  <div aria-hidden="true" class="bg-grid absolute inset-0 opacity-70 [mask-image:none]" />
-                  <div
-                    aria-hidden="true"
-                    class="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,var(--glow),transparent_60%)]"
-                  />
+              {project.logo === 'cryotech' && (
+                <div class="absolute top-[17%] left-[26%] w-[100%] overflow-hidden rounded-tl-xl border-t border-l border-black/10 bg-white shadow-2xl shadow-black/30 transition-transform duration-500 group-hover:-translate-y-1.5 dark:border-white/10 dark:bg-[#0c0b09]">
+                  <div class="flex h-6 items-center gap-1.5 border-b border-black/5 px-2.5 dark:border-white/10">
+                    <span class="size-2 rounded-full bg-[#ff5f57]" />
+                    <span class="size-2 rounded-full bg-[#febc2e]" />
+                    <span class="size-2 rounded-full bg-[#28c840]" />
+                    <span class="ml-2 truncate rounded-md bg-black/5 px-2 py-0.5 font-mono text-[9px] text-black/50 dark:bg-white/10 dark:text-white/50">
+                      cryotech · reportes
+                    </span>
+                  </div>
+                  <div class="aspect-[16/10] overflow-hidden">
+                    <Image
+                      src={cryotechReports}
+                      alt="Reportes de CryoTech: conversión alimenticia por lote y curva de crecimiento"
+                      widths={[720, 1080, 1440]}
+                      sizes="(min-width: 1024px) 560px, (min-width: 768px) 1100px, 150vw"
+                      class="-mt-[25%] -ml-[23%] block w-[150%] max-w-none dark:hidden"
+                    />
+                    <Image
+                      src={cryotechReportsDark}
+                      alt="Reportes de CryoTech en tema oscuro: conversión alimenticia por lote y curva de crecimiento"
+                      widths={[720, 1080, 1440]}
+                      sizes="(min-width: 1024px) 560px, (min-width: 768px) 1100px, 150vw"
+                      class="-mt-[25%] -ml-[23%] hidden w-[150%] max-w-none dark:block"
+                    />
+                  </div>
+                </div>
+              )}
 
-                  {project.visual === 'tenants' && (
-                    <div class="relative mt-4 flex w-[80%] max-w-sm flex-col gap-2.5 transition-transform duration-500 group-hover:-translate-y-1">
-                      {tenants.map((tenant, n) => (
-                        <div
-                          class="flex items-center justify-between rounded-xl border border-line bg-surface/90 px-3.5 py-2.5 shadow-lg backdrop-blur"
-                          style={`margin-left: ${n * 1.1}rem`}
-                        >
-                          <span class="flex items-center gap-2.5 text-sm font-medium">
-                            <span class="brand-tile size-7 rounded-lg" style={`--brand: ${tenant.color}`}>
-                              <Icon name="lucide:store" class="size-4" />
-                            </span>
-                            {tenant.name}
-                          </span>
-                          <span class="inline-flex items-center gap-1 font-mono text-[11px] text-muted">
-                            <Icon name="lucide:shield-check" class="size-3.5 text-emerald-500" />
-                            RLS
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+              {project.logo === 'kombo' && (
+                <div class="absolute inset-0 flex items-center justify-center gap-[4%] px-[7%] pb-[10%] transition-transform duration-500 group-hover:-translate-y-1">
+                  <ul class="flex w-[46%] flex-col gap-2">
+                    {komboChannels.map((channel) => (
+                      <li class="flex items-center gap-2 rounded-lg border border-black/5 bg-white/95 px-2 py-1.5 text-[11px] font-medium text-[#16130f] shadow-md dark:border-white/10 dark:bg-white/10 dark:text-white/90">
+                        <span class="grid h-5 min-w-5 shrink-0 grid-flow-col place-items-center gap-0.5 rounded-md px-1 text-white" style={`background: ${channel.color}`}>
+                          {channel.icons.map((icon) => (
+                            <Icon name={icon} class="size-3" />
+                          ))}
+                        </span>
+                        <span class="truncate">{channel.label}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                  {project.visual === 'hexagon' && (
-                    <div class="relative aspect-square h-[86%] transition-transform duration-500 group-hover:scale-[1.03]">
-                      <div class="absolute inset-0 rounded-full border border-dashed border-line bg-surface/40" />
-                      <div class="absolute inset-[17%] rounded-full border border-line bg-surface/80 shadow-lg" />
-                      <div class="absolute inset-[35%] grid place-items-center rounded-full bg-gradient-to-br from-[var(--btn-from)] to-[var(--btn-to)] text-white shadow-lg shadow-[var(--glow)]">
-                        <Icon name="lucide:hexagon" class="size-[42%]" />
-                      </div>
-                      <span class="absolute top-[5.5%] left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-wide text-muted">
-                        infraestructura
+                  <Icon name="lucide:arrow-right" class="size-4 shrink-0 text-[#1f6f4a] dark:text-[#77bd9d]" />
+
+                  <div class="w-[38%] rotate-2 rounded-xl border border-black/5 bg-white p-2.5 text-[#16130f] shadow-xl dark:border-white/10 dark:bg-[#12241a] dark:text-white">
+                    <div class="flex items-center justify-between text-[9px] font-semibold tracking-wide text-[#1f6f4a] uppercase dark:text-[#77bd9d]">
+                      <span class="flex items-center gap-1">
+                        <Icon name="lucide:chef-hat" class="size-3" />
+                        Cocina
                       </span>
-                      <span class="absolute top-[22%] left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-wide text-muted">
-                        aplicación
-                      </span>
-                      <span class="absolute bottom-[23%] left-1/2 -translate-x-1/2 font-mono text-[10px] tracking-wide text-accent">
-                        dominio
-                      </span>
+                      <span class="font-mono">#128</span>
                     </div>
-                  )}
+                    <ul class="mt-1.5 space-y-0.5 text-[10px] leading-tight">
+                      <li>2× Arepa reina</li>
+                      <li>1× Cachapa</li>
+                      <li>2× Papelón</li>
+                    </ul>
+                    <div class="mt-2 flex items-center justify-center gap-1 rounded-md bg-[#e8783c] py-1 text-[10px] font-semibold text-white">
+                      <Icon name="lucide:bell-ring" class="size-3" />
+                      Listo
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
 
-            <div class="flex flex-1 flex-col p-6 sm:p-7">
-              <div class="flex items-center gap-4">
-                <ProjectLogo logo={project.logo} name={project.name} />
-                <div class="min-w-0">
-                  <h3 class="font-display text-2xl leading-tight font-semibold">
-                    {project.demo ? (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="inline-flex items-center gap-1.5 transition-colors outline-none group-hover:text-accent after:absolute after:inset-0 after:rounded-[1.25rem] focus-visible:after:ring-2 focus-visible:after:ring-accent"
-                      >
-                        {project.name}
-                        <Icon name="lucide:arrow-up-right" class="size-4 opacity-60" />
-                        <span class="sr-only">(abrir sitio en línea)</span>
-                      </a>
-                    ) : (
-                      project.name
-                    )}
-                  </h3>
-                  <p class="mt-0.5 text-sm text-muted">{project.subtitle}</p>
-                </div>
-              </div>
+            {/* Logo sobre el borde de la portada */}
+            <div class="pointer-events-none relative z-[2] -mt-8 px-6 sm:px-7">
+              <ProjectLogo logo={project.logo} name={project.name} class="size-14 ring-4 ring-[var(--surface)]" />
+            </div>
 
-              <p class="mt-5 leading-relaxed text-muted">{project.description}</p>
+            <div class="flex flex-1 flex-col px-6 pt-3 pb-6 sm:px-7 sm:pb-7">
+              <h3 class="font-display text-2xl leading-tight font-semibold">
+                {project.demo ? (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 transition-colors outline-none group-hover:text-accent after:absolute after:inset-0 after:rounded-[1.25rem] focus-visible:after:ring-2 focus-visible:after:ring-accent"
+                  >
+                    {project.name}
+                    <Icon name="lucide:arrow-up-right" class="size-4 opacity-60" />
+                    <span class="sr-only">(abrir sitio en línea)</span>
+                  </a>
+                ) : (
+                  project.name
+                )}
+              </h3>
+              <p class="mt-0.5 text-sm text-muted">{project.subtitle}</p>
+
+              <p class="mt-4 leading-relaxed text-muted">{project.description}</p>
 
               <ul class="mt-4 space-y-2 text-sm">
                 {project.bullets.map((bullet) => (

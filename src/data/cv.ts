@@ -48,7 +48,7 @@ export const nav = [
 
 export const about = {
   paragraphs: [
-    'Soy desarrollador Full-Stack con 4 años de experiencia en software empresarial (ERP/SaaS B2B) para clientes de toda Latinoamérica, trabajando en equipos de 15 a 20 personas bajo metodología Scrum.',
+    'Soy desarrollador Full-Stack con 4 años de experiencia en Medine.tech, una consultora que desarrolla software empresarial (ERP/SaaS B2B) para empresas de toda Latinoamérica, donde trabajé en equipos de 15 a 20 personas bajo metodología Scrum.',
     'Desarrollo módulos de negocio completos —nómina, compras, ventas, alquileres y facturación— desde el levantamiento de necesidades del cliente y el diseño de la solución hasta el backend, la interfaz y sus pruebas.',
     'Al rol de desarrollador le sumo el de QA y seguridad: suites automatizadas en integración continua, auditorías OWASP y modernización de código heredado hacia arquitectura hexagonal con DDD.',
   ],
@@ -76,9 +76,9 @@ export const about = {
   ],
   stats: [
     { value: '4', label: 'años de experiencia' },
-    { value: '150+', label: 'pruebas automatizadas en CI' },
+    { value: '500+', label: 'pruebas automatizadas en CI' },
     { value: '15–20', label: 'personas por equipo Scrum' },
-    { value: 'LATAM', label: 'clientes en toda la región' },
+    { value: '5', label: 'dominios de negocio' },
   ],
 };
 
@@ -172,7 +172,7 @@ export const experience = [
     period: '10/2022 – 09/2026',
     duration: '4 años',
     description:
-      'Consultora de desarrollo de software empresarial (ERP/SaaS) para clientes de toda Latinoamérica.',
+      'Consultora de software empresarial (ERP/SaaS) con clientes en toda Latinoamérica.',
     groups: [
       {
         title: 'Desarrollo',
@@ -198,7 +198,7 @@ export const experience = [
         items: [
           {
             title: 'Automatización de pruebas',
-            text: 'Diseñé y mantuve una suite de más de 150 pruebas (Playwright E2E con Page Object Model, Behat ATDD/BDD y PHPUnit) en CI con GitHub Actions, como control de entrega previo a cada release.',
+            text: 'Diseñé y mantuve una suite de más de 500 pruebas (Playwright E2E con Page Object Model, Behat ATDD/BDD y PHPUnit) en CI con GitHub Actions, como control de entrega previo a cada release.',
           },
           {
             title: 'Ciclo completo de vulnerabilidades',
@@ -247,8 +247,8 @@ export interface Project {
   /** Cifras destacadas que se muestran como etiquetas */
   metrics: string[];
   stack: Skill[];
-  /** Ilustración de la tarjeta: `cryotech` usa capturas reales, las otras son ilustraciones */
-  visual: 'hexagon' | 'tenants' | 'cryotech';
+  /** Colores de la portada: degradado del logo, fondo claro (`soft`) y fondo oscuro (`deep`) */
+  brand: { from: string; to: string; soft: string; deep: string };
   /** Logo propio del proyecto (ver `ProjectLogo.astro`) */
   logo: 'corebiz' | 'kombo' | 'cryotech';
   repo?: string;
@@ -279,7 +279,7 @@ export const projects: Project[] = [
       { name: 'Vitest', icon: 'simple-icons:vitest', color: '#6E9F18' },
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
-    visual: 'hexagon',
+    brand: { from: '#6366f1', to: '#4f46e5', soft: '#eef0ff', deep: '#1b1a4a' },
     logo: 'corebiz',
     repo: 'https://github.com/Jundev66/CoreBiz',
     demo: 'https://corebiz-web.vercel.app',
@@ -307,7 +307,7 @@ export const projects: Project[] = [
       { name: 'Tailwind', icon: 'simple-icons:tailwindcss', color: '#06B6D4' },
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
-    visual: 'tenants',
+    brand: { from: '#2f855a', to: '#1f6f4a', soft: '#eef7f2', deep: '#0f2c1e' },
     logo: 'kombo',
     repo: 'https://github.com/Jundev66/kombo',
   },
@@ -334,7 +334,7 @@ export const projects: Project[] = [
       { name: 'Cloudflare', icon: 'simple-icons:cloudflare', color: '#F38020' },
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
-    visual: 'cryotech',
+    brand: { from: '#00a081', to: '#007b5f', soft: '#dbf6ed', deep: '#003d31' },
     logo: 'cryotech',
     repo: 'https://github.com/Jundev66/cryotech',
   },
