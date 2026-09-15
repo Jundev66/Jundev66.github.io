@@ -16,7 +16,7 @@ npm run preview  # sirve ./dist
 Todo el texto del sitio está en [`src/data/cv.ts`](src/data/cv.ts): perfil, resumen, habilidades, experiencia, proyectos, formación y contacto.
 
 - **Foto:** reemplaza `src/assets/juan-mata.png` (se optimiza automáticamente a AVIF/WebP).
-- **CV descargable:** la fuente es [`cv/cv.html`](cv/cv.html). Ábrelo en Chrome → Imprimir → Guardar como PDF (A4, con gráficos de fondo) y reemplaza `public/juan-mata-cv.pdf`. Debe quedar en una sola página.
+- **CV descargable:** la fuente es [`cv/cv.html`](cv/cv.html). Ábrelo en Chrome → Imprimir → Guardar como PDF (A4, con gráficos de fondo) y reemplaza `public/juan-mata-cv.pdf`. Debe quedar en una sola página y seguir siendo compatible con ATS: una columna, fuente Arial, viñetas nativas (sin `position` ni `::before`), encabezados estándar (Resumen profesional, Habilidades, Experiencia profesional, Proyectos, Educación, Certificaciones, Idiomas) y URLs escritas en texto.
 - **Iconos:** cada habilidad usa un nombre de [Iconify](https://icon-sets.iconify.design/) — `simple-icons:*` para logos de tecnologías y `lucide:*` para iconos genéricos.
 - **Proyectos:** agrega `repo` o `demo` en un proyecto para mostrar sus botones.
 
