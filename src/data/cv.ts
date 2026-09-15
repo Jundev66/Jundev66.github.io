@@ -19,9 +19,9 @@ export const profile = {
   name: 'Juan Mata',
   initials: 'JM',
   role: 'Desarrollador Full-Stack & QA',
-  headline: 'PHP/Laravel · React · Vue.js · TypeScript · DDD',
+  headline: 'PHP/Laravel · React · TypeScript · DDD · IA aplicada',
   tagline:
-    'Construyo software empresarial de punta a punta —del levantamiento con el cliente al backend, la interfaz y sus pruebas— con foco en calidad, seguridad y arquitectura limpia.',
+    'Construyo software empresarial de punta a punta —del levantamiento con el cliente al backend, la interfaz y sus pruebas— con foco en calidad, seguridad, arquitectura limpia e IA aplicada.',
   location: 'Caracas, Venezuela',
   availability: 'Disponibilidad inmediata · Remoto o híbrido',
   yearsOfExperience: 4,
@@ -34,13 +34,14 @@ export const profile = {
   linkedinUser: 'juan-mata-1b959a235',
   cv: '/juan-mata-cv.pdf',
   seoDescription:
-    'Juan Mata — Desarrollador Full-Stack y QA con 4 años de experiencia en ERP/SaaS B2B. PHP/Laravel, React, Vue.js, TypeScript, DDD, Playwright y seguridad OWASP.',
+    'Juan Mata — Desarrollador Full-Stack y QA con 4 años de experiencia en ERP/SaaS B2B. PHP/Laravel, React, TypeScript, DDD, Playwright, seguridad OWASP e IA aplicada: agentes, LLM y OCR.',
 };
 
 export const nav = [
   { id: 'sobre-mi', label: 'Sobre mí' },
   { id: 'habilidades', label: 'Habilidades' },
   { id: 'experiencia', label: 'Experiencia' },
+  { id: 'ia', label: 'IA' },
   { id: 'proyectos', label: 'Proyectos' },
   { id: 'formacion', label: 'Formación' },
   { id: 'contacto', label: 'Contacto' },
@@ -51,6 +52,7 @@ export const about = {
     'Soy desarrollador Full-Stack con 4 años de experiencia en Medine.tech, una consultora que desarrolla software empresarial (ERP/SaaS B2B) para empresas de toda Latinoamérica, donde trabajé en equipos de 15 a 20 personas bajo metodología Scrum.',
     'Desarrollo módulos de negocio completos —nómina, compras, ventas, alquileres y facturación— desde el levantamiento de necesidades del cliente y el diseño de la solución hasta el backend, la interfaz y sus pruebas.',
     'Al rol de desarrollador le sumo el de QA y seguridad: suites automatizadas en integración continua, auditorías OWASP y modernización de código heredado hacia arquitectura hexagonal con DDD.',
+    'Y aplico IA en dos frentes: en el producto, con modelos de lenguaje en funcionalidades para clientes y lectura de documentos con OCR y LLM; y en el desarrollo, con agentes especializados para escribir pruebas, revisar código y analizar hallazgos de seguridad.',
   ],
   highlights: [
     {
@@ -69,9 +71,9 @@ export const about = {
       text: 'DDD, arquitectura hexagonal y SOLID para código mantenible y fácil de probar.',
     },
     {
-      icon: 'lucide:bot',
-      title: 'Desarrollo asistido por IA',
-      text: 'Agentes especializados y skills con Claude Code, Cursor y GitHub Copilot.',
+      icon: 'lucide:brain-circuit',
+      title: 'IA aplicada',
+      text: 'LLM y OCR en productos, y agentes especializados para pruebas, revisión de código y seguridad.',
     },
   ],
   stats: [
@@ -99,6 +101,21 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Nest.js', icon: 'simple-icons:nestjs', color: '#E0234E' },
       { name: 'React Native', icon: 'simple-icons:react', color: '#149ECA' },
       { name: 'Inertia.js', icon: 'simple-icons:inertia', color: '#9553E9' },
+    ],
+  },
+  {
+    title: 'IA aplicada',
+    icon: 'lucide:brain-circuit',
+    wide: true,
+    skills: [
+      { name: 'Claude Code', icon: 'simple-icons:claude', color: '#D97757' },
+      { name: 'Cursor', icon: 'simple-icons:cursor' },
+      { name: 'GitHub Copilot', icon: 'simple-icons:githubcopilot' },
+      { name: 'API de Anthropic', icon: 'simple-icons:anthropic' },
+      { name: 'Integración de LLMs', icon: 'lucide:brain-circuit', color: '#8B5CF6' },
+      { name: 'OCR con respaldo de LLM', icon: 'lucide:scan-text', color: '#8B5CF6' },
+      { name: 'Agentes y subagentes', icon: 'lucide:bot', color: '#8B5CF6' },
+      { name: 'Skills y AGENTS.md', icon: 'lucide:folder-tree', color: '#8B5CF6' },
     ],
   },
   {
@@ -139,17 +156,9 @@ export const skillGroups: SkillGroup[] = [
     ],
   },
   {
-    title: 'Desarrollo asistido por IA',
-    icon: 'lucide:sparkles',
-    skills: [
-      { name: 'Claude Code', icon: 'simple-icons:claude', color: '#D97757' },
-      { name: 'Cursor', icon: 'simple-icons:cursor' },
-      { name: 'GitHub Copilot', icon: 'simple-icons:githubcopilot' },
-    ],
-  },
-  {
     title: 'Arquitectura y Prácticas',
     icon: 'lucide:workflow',
+    wide: true,
     skills: [
       { name: 'Domain-Driven Design', icon: 'lucide:boxes', color: '#6366F1' },
       { name: 'Arquitectura Hexagonal', icon: 'lucide:hexagon', color: '#6366F1' },
@@ -211,12 +220,20 @@ export const experience = [
         ],
       },
       {
-        title: 'Automatización con IA',
-        icon: 'lucide:bot',
+        title: 'IA aplicada',
+        icon: 'lucide:brain-circuit',
         items: [
           {
             title: 'Ecosistema de agentes',
             text: 'Diseñé un entorno de IA para el ciclo de desarrollo y pruebas, con agentes especializados que se coordinan entre sí y skills que se activan según el contexto de la tarea y la herramienta en uso (Claude Code, Cursor, GitHub Copilot).',
+          },
+          {
+            title: 'Pruebas y revisión con IA',
+            text: 'Generación y mantenimiento de pruebas de Playwright, Behat y PHPUnit, revisión de código y análisis de hallazgos de OWASP ZAP con apoyo de agentes de IA.',
+          },
+          {
+            title: 'LLM en el producto',
+            text: 'Integración de modelos de lenguaje en funcionalidades de los módulos del ERP que utilizaban los clientes.',
           },
         ],
       },
@@ -232,10 +249,90 @@ export const experience = [
       { name: 'Docker', icon: 'simple-icons:docker', color: '#2496ED' },
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
       { name: 'Swagger', icon: 'simple-icons:swagger', color: '#49A32B' },
+      { name: 'Claude Code', icon: 'simple-icons:claude', color: '#D97757' },
       { name: 'Git', icon: 'simple-icons:git', color: '#F05032' },
     ] satisfies Skill[],
   },
 ];
+
+export interface AiItem {
+  icon: string;
+  title: string;
+  text: string;
+  /** Dónde se aplicó: empresa o proyecto */
+  source: string;
+}
+
+export const ai = {
+  intro:
+    'Uso la IA en dos frentes: dentro de los productos, para automatizar tareas reales de los usuarios, y en el ciclo de desarrollo, con agentes que trabajan con el contexto y las reglas de cada proyecto.',
+  pillars: [
+    {
+      icon: 'lucide:brain-circuit',
+      title: 'IA en el producto',
+      subtitle: 'Funcionalidades que ahorran trabajo a quien usa el sistema.',
+      items: [
+        {
+          icon: 'lucide:scan-text',
+          title: 'OCR con respaldo de LLM',
+          text: 'Los comprobantes bancarios se leen con Tesseract.js y, cuando faltan campos, se extraen con la API de Anthropic: el modelo más costoso solo se usa cuando hace falta.',
+          source: 'CryoTech',
+        },
+        {
+          icon: 'lucide:message-square-text',
+          title: 'Asistente conversacional',
+          text: 'Registra ventas, cobros y gastos desde Telegram: propone el asiento a partir de la foto del comprobante y pregunta por los datos que faltan en lugar de adivinarlos.',
+          source: 'CryoTech',
+        },
+        {
+          icon: 'lucide:cpu',
+          title: 'Modelos de lenguaje en el ERP',
+          text: 'Integración de LLMs en funcionalidades de los módulos que utilizaban los clientes.',
+          source: 'Medine.tech',
+        },
+      ] satisfies AiItem[],
+    },
+    {
+      icon: 'lucide:bot',
+      title: 'IA en el desarrollo',
+      subtitle: 'Agentes con el contexto y las reglas de cada proyecto.',
+      items: [
+        {
+          icon: 'lucide:workflow',
+          title: 'Ecosistema de agentes',
+          text: 'Agentes especializados que se coordinan entre sí y skills que se activan según la tarea, con Claude Code, Cursor y GitHub Copilot.',
+          source: 'Medine.tech',
+        },
+        {
+          icon: 'lucide:test-tube',
+          title: 'Pruebas, revisión y seguridad',
+          text: 'Generación y mantenimiento de pruebas de Playwright, Behat y PHPUnit, revisión de código y análisis de hallazgos de OWASP ZAP con apoyo de IA.',
+          source: 'Medine.tech',
+        },
+        {
+          icon: 'lucide:folder-tree',
+          title: 'Fuente única de contexto',
+          text: 'Una carpeta .ai/ con 8 agentes (seguridad, QA, base de datos, dominio…) y skills según agentskills.io, sincronizada para cada herramienta; en Kombo, un solo AGENTS.md que leen Claude, Gemini, Cursor y Copilot.',
+          source: 'CryoTech · Kombo',
+        },
+        {
+          icon: 'lucide:key-round',
+          title: 'Subagentes con límites',
+          text: 'Subagentes con herramientas y modelo definidos: uno audita el aislamiento entre negocios en cada consulta, otro diseña módulos por capas y otro mantiene las pruebas de usuario.',
+          source: 'Proyectos privados',
+        },
+      ] satisfies AiItem[],
+    },
+  ],
+  tools: [
+    { name: 'Claude Code', icon: 'simple-icons:claude', color: '#D97757' },
+    { name: 'Cursor', icon: 'simple-icons:cursor' },
+    { name: 'GitHub Copilot', icon: 'simple-icons:githubcopilot' },
+    { name: 'API de Anthropic', icon: 'simple-icons:anthropic' },
+    { name: 'Tesseract.js', icon: 'lucide:scan-text', color: '#8B5CF6' },
+    { name: 'Agent Skills', icon: 'lucide:folder-tree', color: '#8B5CF6' },
+  ] satisfies Skill[],
+};
 
 export interface Project {
   name: string;
@@ -294,9 +391,9 @@ export const projects: Project[] = [
     bullets: [
       'Tres canales de entrada —portal del cliente, bot de WhatsApp/Telegram y caja— que llegan a la misma pantalla de cocina.',
       'El cliente recibe el aviso de pedido listo por el mismo canal en el que pidió.',
-      'Chequeos automáticos de arquitectura, aislamiento, tipos y presupuesto de bundle, más E2E con Playwright.',
+      'Repositorio preparado para agentes de IA: un solo AGENTS.md como contexto para Claude, Gemini, Cursor y Copilot.',
     ],
-    metrics: ['Multi-tenant RLS', 'Caja + cocina', 'Bots de pedidos'],
+    metrics: ['Multi-tenant RLS', 'Caja + cocina', 'Listo para agentes IA'],
     stack: [
       { name: 'Laravel', icon: 'simple-icons:laravel', color: '#FF2D20' },
       { name: 'PHP', icon: 'simple-icons:php', color: '#8892BF' },
@@ -319,19 +416,19 @@ export const projects: Project[] = [
     description:
       'Lotes, costos y tesorería en dos monedas para una granja real en Venezuela, con un asistente que registra operaciones desde Telegram leyendo fotos de comprobantes bancarios.',
     bullets: [
+      'Lectura de comprobantes con OCR (Tesseract.js) y, si faltan campos, extracción con la API de Anthropic.',
       'Métricas por lote: conversión alimenticia (FCR), mortalidad, curva de crecimiento y costo por ave.',
-      'Lectura de comprobantes con Tesseract.js y la API de Anthropic como respaldo.',
       'Multiempresa con roles y permisos por módulo, rotación de refresh tokens y rate limiting.',
     ],
-    metrics: ['76 unit tests', '82 E2E', '418 checks de API'],
+    metrics: ['OCR + LLM', '8 agentes de IA', '76 unit + 82 E2E'],
     stack: [
       { name: 'React', icon: 'simple-icons:react', color: '#149ECA' },
       { name: 'NestJS', icon: 'simple-icons:nestjs', color: '#E0234E' },
       { name: 'Prisma', icon: 'simple-icons:prisma' },
       { name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
       { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+      { name: 'API de Anthropic', icon: 'simple-icons:anthropic' },
       { name: 'Telegram', icon: 'simple-icons:telegram', color: '#26A5E4' },
-      { name: 'Cloudflare', icon: 'simple-icons:cloudflare', color: '#F38020' },
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
     brand: { from: '#00a081', to: '#007b5f', soft: '#dbf6ed', deep: '#003d31' },

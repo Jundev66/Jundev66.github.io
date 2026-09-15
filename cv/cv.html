@@ -1,0 +1,181 @@
+<!doctype html>
+<!--
+  Fuente del CV descargable (public/juan-mata-cv.pdf).
+  Para regenerarlo: abre este archivo en Chrome → Imprimir → Guardar como PDF,
+  tamaño A4, márgenes "Predeterminados", con "Gráficos de fondo" activado.
+  Debe quedar en una sola página.
+-->
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <title>Juan Mata — CV</title>
+    <style>
+      @page {
+        size: A4;
+        margin: 10mm 12mm;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif;
+        font-size: 7.9pt;
+        line-height: 1.33;
+        color: #222;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      h1 {
+        margin: 0;
+        font-size: 19pt;
+        color: #1f4e8c;
+        letter-spacing: 0.3px;
+      }
+      .role {
+        margin: 1px 0 2px;
+        font-size: 8.8pt;
+        color: #333;
+      }
+      .contact {
+        margin: 0;
+        font-size: 7.6pt;
+        color: #444;
+      }
+      h2 {
+        margin: 6.5px 0 3.5px;
+        padding-bottom: 1.5px;
+        border-bottom: 1.2px solid #1f4e8c;
+        font-size: 8.3pt;
+        color: #1f4e8c;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+      h3 {
+        margin: 3.5px 0 1px;
+        font-size: 8pt;
+      }
+      p {
+        margin: 0 0 2px;
+      }
+      .justify,
+      li {
+        text-align: justify;
+      }
+      ul {
+        margin: 1px 0 2px;
+        padding-left: 11px;
+        list-style: none;
+      }
+      li {
+        position: relative;
+        margin: 1px 0;
+      }
+      li::before {
+        content: '›';
+        position: absolute;
+        left: -9px;
+        color: #1f4e8c;
+        font-weight: bold;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 8px;
+      }
+      .muted {
+        color: #555;
+      }
+      .tech {
+        font-style: italic;
+        color: #555;
+        font-size: 7.5pt;
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+      .skills p {
+        margin-bottom: 1.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JUAN MATA</h1>
+    <p class="role">Desarrollador Full-Stack y QA — PHP/Laravel · React · Vue.js · TypeScript · DDD · IA aplicada</p>
+    <p class="contact">matajuan134@gmail.com &nbsp;|&nbsp; WhatsApp: +58-416-094-4040 &nbsp;|&nbsp; Caracas, Venezuela &nbsp;|&nbsp; Disponibilidad inmediata · Remoto o híbrido</p>
+    <p class="contact">Portafolio: <a href="https://juanmata.krono.date">juanmata.krono.date</a> &nbsp;|&nbsp; GitHub: <a href="https://github.com/Jundev66">github.com/Jundev66</a> &nbsp;|&nbsp; LinkedIn: <a href="https://www.linkedin.com/in/juan-mata-1b959a235">linkedin.com/in/juan-mata-1b959a235</a></p>
+
+    <h2>Resumen profesional</h2>
+    <p class="justify">
+      Desarrollador Full-Stack con 4 años de experiencia en Medine.tech, consultora de software empresarial (ERP/SaaS B2B) con clientes en toda Latinoamérica, en equipos Scrum de 15 a 20 personas. Desarrolla módulos de negocio completos —nómina, compras, ventas, alquileres y facturación— desde el levantamiento con el cliente hasta el backend, la interfaz y sus pruebas. Suma el rol de QA y seguridad: suites automatizadas en CI, auditorías OWASP y modernización de código heredado hacia arquitectura hexagonal con DDD. Aplica IA en el producto —LLMs en funcionalidades para clientes y lectura de documentos con OCR y LLM— y en el desarrollo, con agentes especializados para pruebas, revisión de código y seguridad.
+    </p>
+
+    <h2>Habilidades</h2>
+    <div class="skills">
+      <p><b>Lenguajes y Frameworks:</b> PHP 8.x, Laravel, JavaScript, TypeScript, React, Vue.js, Next.js, Node.js, Nest.js, React Native, Inertia.js</p>
+      <p><b>IA aplicada:</b> Claude Code, Cursor, GitHub Copilot; API de Anthropic; integración de LLMs en producto; OCR con respaldo de LLM; agentes y subagentes especializados, skills y contexto por módulo (AGENTS.md / CLAUDE.md)</p>
+      <p><b>Arquitectura y Prácticas:</b> DDD, Arquitectura Hexagonal, ATDD, BDD, SOLID, Clean Code, OOP, diseño de APIs RESTful</p>
+      <p><b>Bases de Datos:</b> MySQL, PostgreSQL, Eloquent ORM, Redis &nbsp;·&nbsp; <b>Pruebas y Seguridad:</b> Playwright (E2E, Page Object Model), Behat, PHPUnit, PHPStan, OWASP ZAP</p>
+      <p><b>DevOps y Herramientas:</b> Docker, Git / GitHub (Pull Requests, revisiones), CI con GitHub Actions, RabbitMQ, Sentry, Swagger/OpenAPI, Laravel Sanctum</p>
+    </div>
+
+    <h2>Experiencia profesional</h2>
+    <div class="row">
+      <span><b>Desarrollador Full-Stack y QA</b> · Medine.tech (remoto) · <span class="muted">Consultora ERP/SaaS para Latinoamérica</span></span>
+      <span class="muted nowrap"><i>10/2022 – 09/2026 (4 años)</i></span>
+    </div>
+
+    <h3>Desarrollo</h3>
+    <ul>
+      <li><b>Módulos de negocio desde cero:</b> levantamiento con el cliente, diseño de la solución, modelado de datos, backend en Laravel/Eloquent e interfaz en React, Vue.js e Inertia.js, traduciendo las reglas contables y operativas de nómina, compras, ventas, alquileres y facturación a modelos y flujos.</li>
+      <li><b>Diseño y construcción de APIs:</b> contratos, versionado, autenticación con Laravel Sanctum y documentación en Swagger/OpenAPI; integraciones con terceros con manejo de errores, reintentos y sincronización, y mensajería asíncrona con RabbitMQ.</li>
+      <li><b>Modernización y deuda técnica:</b> migré controladores heredados masivos a una arquitectura de APIs, con la lógica en servicios con arquitectura hexagonal y DDD, endpoints documentados y pruebas, sin frenar la entrega de nuevas funcionalidades.</li>
+    </ul>
+
+    <h3>QA, seguridad e infraestructura</h3>
+    <ul>
+      <li><b>Automatización de pruebas:</b> diseñé y mantuve una suite de más de 500 pruebas automatizadas (Playwright E2E con Page Object Model, Behat ATDD/BDD y PHPUnit) en CI con GitHub Actions, cubriendo los flujos críticos como control de entrega antes de cada release.</li>
+      <li><b>Ciclo completo de vulnerabilidades:</b> escaneos con OWASP ZAP en producción, priorización, remediación, verificación y documentación. Resolví inyección SQL, configuración insegura de Nginx y dependencias vulnerables.</li>
+      <li><b>Servidores y producción:</b> administración de servidores y atención de incidentes críticos con diagnóstico en caliente; entornos con Docker, despliegues y monitoreo de errores con Sentry.</li>
+    </ul>
+
+    <h3>IA aplicada</h3>
+    <ul>
+      <li><b>Ecosistema de agentes:</b> diseñé un entorno de IA para desarrollo y pruebas, con agentes especializados que se coordinan entre sí y skills que se activan según la tarea y la herramienta (Claude Code, Cursor, GitHub Copilot).</li>
+      <li><b>Pruebas, revisión y seguridad con IA:</b> generación y mantenimiento de pruebas de Playwright, Behat y PHPUnit, revisión de código y análisis de hallazgos de OWASP ZAP con apoyo de agentes de IA.</li>
+      <li><b>LLM en el producto:</b> integración de modelos de lenguaje en funcionalidades de los módulos del ERP utilizados por los clientes.</li>
+    </ul>
+    <p class="tech">Stack: PHP · Laravel · React · Vue.js · TypeScript · MySQL · PostgreSQL · Docker · Playwright · Behat · PHPUnit · Claude Code · Git</p>
+
+    <h2>Proyectos personales</h2>
+    <div class="row">
+      <span><b>CoreBiz — ERP multi-tenant para comercios</b> &nbsp;<span class="tech">NestJS · Next.js · TypeScript · Supabase · Prisma · Playwright</span></span>
+      <span class="muted nowrap">En línea</span>
+    </div>
+    <ul>
+      <li>Inventario, ventas y notas de entrega con arquitectura hexagonal (DDD táctico, CQRS ligero) y aislamiento multi-tenant con PostgreSQL RLS. Demo por visitante en corebiz-web.vercel.app; 497 tests, 11 ADRs y modelo de amenazas STRIDE.</li>
+    </ul>
+    <div class="row">
+      <span><b>Kombo — Sistema de pedidos multi-negocio</b> &nbsp;<span class="tech">Laravel · PostgreSQL · Redis · React · TypeScript · Playwright</span></span>
+      <span class="muted nowrap">En desarrollo</span>
+    </div>
+    <ul>
+      <li>Pedidos para múltiples negocios en un solo despliegue con PostgreSQL RLS: portal, bots de WhatsApp/Telegram y caja llegan a la misma pantalla de cocina. Preparado para agentes de IA: un único AGENTS.md para Claude, Gemini, Cursor y Copilot.</li>
+    </ul>
+    <div class="row">
+      <span><b>CryoTech — Gestión avícola</b> &nbsp;<span class="tech">React · NestJS · Prisma · PostgreSQL · API de Anthropic · Telegram</span></span>
+      <span class="muted nowrap">API en producción</span>
+    </div>
+    <ul>
+      <li>Lotes, costos y tesorería en dos monedas para una granja real. Asistente en Telegram que lee comprobantes bancarios con OCR (Tesseract.js) y, si faltan campos, los extrae con la API de Anthropic; 8 agentes de IA especializados para el desarrollo.</li>
+    </ul>
+
+    <h2>Formación, certificaciones e idiomas</h2>
+    <p><b>Licenciatura en Informática</b> — Universidad de Oriente (UDO), Carúpano, Venezuela · 6.º semestre cursado · En curso</p>
+    <p><b>Codely:</b> SOLID, Clean Code, buenas prácticas de Programación Orientada a Objetos y Testing</p>
+    <p><b>Idiomas:</b> Español nativo · Inglés básico, en mejora activa</p>
+  </body>
+</html>

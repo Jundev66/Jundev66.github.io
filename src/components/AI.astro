@@ -1,0 +1,52 @@
+---
+import { Icon } from 'astro-icon/components';
+import Section from './Section.astro';
+import SkillChip from './SkillChip.astro';
+import { ai } from '../data/cv';
+---
+
+<Section id="ia" eyebrow="IA aplicada" title="IA en el producto y en el proceso" subtitle={ai.intro}>
+  <div class="grid gap-5 lg:grid-cols-2">
+    {
+      ai.pillars.map((pillar, i) => (
+        <article data-reveal style={`--d: ${i * 90}ms`} class="card relative overflow-hidden p-6 sm:p-8">
+          <div
+            aria-hidden="true"
+            class="absolute -top-28 -right-28 size-72 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]"
+          />
+          <header class="relative flex items-start gap-4">
+            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[var(--btn-from)] to-[var(--btn-to)] text-white shadow-lg shadow-[var(--glow)]">
+              <Icon name={pillar.icon} class="size-6" />
+            </span>
+            <div>
+              <h3 class="font-display text-xl font-semibold">{pillar.title}</h3>
+              <p class="mt-1 text-sm text-muted">{pillar.subtitle}</p>
+            </div>
+          </header>
+
+          <ul class="relative mt-6 space-y-3">
+            {pillar.items.map((item) => (
+              <li class="rounded-2xl border border-line bg-surface-2/40 p-4">
+                <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5">
+                  <span class="flex items-center gap-2 font-semibold">
+                    <Icon name={item.icon} class="size-4 shrink-0 text-accent" />
+                    {item.title}
+                  </span>
+                  <span class="rounded-full border border-line px-2 py-0.5 font-mono text-[10px] text-muted">{item.source}</span>
+                </div>
+                <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+
+  <div data-reveal class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+    <p class="text-xs font-semibold tracking-wide text-muted uppercase">Herramientas</p>
+    <ul class="flex flex-wrap gap-2">
+      {ai.tools.map((tool) => <SkillChip skill={tool} size="sm" />)}
+    </ul>
+  </div>
+</Section>
