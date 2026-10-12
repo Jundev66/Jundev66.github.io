@@ -41,7 +41,7 @@ const personLd = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#07080d" />
+    <meta name="theme-color" content="#07090e" />
 
     <meta property="og:type" content="profile" />
     <meta property="og:locale" content="es_VE" />
@@ -69,32 +69,41 @@ const personLd = {
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(personLd)} />
   </head>
-  <body class="min-h-dvh overflow-x-hidden">
+  <body class="relative min-h-dvh overflow-x-hidden bg-bg text-fg">
+    <!-- Fondos de ambientación tecnológica y cuadrícula -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-50 tech-ambient-bg opacity-70"></div>
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 -z-40 tech-grid opacity-30"></div>
+
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-surface focus:px-4 focus:py-2"
     >
       Saltar al contenido
     </a>
+    
     <slot />
 
     <script>
-      const elements = document.querySelectorAll<HTMLElement>('[data-reveal]');
-      if (!('IntersectionObserver' in window)) {
-        elements.forEach((el) => el.classList.add('is-visible'));
-      } else {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (!entry.isIntersecting) continue;
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          },
-          { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
-        );
-        elements.forEach((el) => observer.observe(el));
-      }
+      (function () {
+        var elements = document.querySelectorAll('[data-reveal]');
+        if ('IntersectionObserver' in window) {
+          var observer = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+          );
+          elements.forEach(function (el) { observer.observe(el); });
+          document.documentElement.classList.add('reveal-ready');
+        } else {
+          elements.forEach(function (el) { el.classList.add('is-visible'); });
+        }
+      })();
     </script>
   </body>
 </html>

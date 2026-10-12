@@ -7,24 +7,27 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://juanmata.krono.date',
   integrations: [icon(), sitemap()],
-  // GitHub Pages no permite cabeceras HTTP propias: la CSP viaja en un <meta> con hashes.
-  security: {
-    csp: {
-      directives: [
-        "default-src 'self'",
-        "img-src 'self' data:",
-        "font-src 'self'",
-        "connect-src 'self'",
-        "base-uri 'self'",
-        "form-action 'none'",
-        "object-src 'none'",
-        'upgrade-insecure-requests',
-      ],
-      scriptDirective: { resources: ["'self'"] },
-      // Solo los atributos style (variables CSS como --brand); nada de <style> ni scripts inline.
-      styleDirective: { resources: ["'self'", { kind: 'attribute', resource: "'unsafe-inline'" }] },
-    },
-  },
+  // GitHub Pages no permite cabeceras HTTP propias: la CSP viaja en un <meta> con hashes en producción.
+  // En desarrollo se desactiva para evitar bloqueos de HMR y scripts cliente por Vite/Astro.
+  security: process.env.NODE_ENV === 'production'
+    ? {
+        csp: {
+          directives: [
+            "default-src 'self'",
+            "img-src 'self' data:",
+            "font-src 'self'",
+            "connect-src 'self'",
+            "base-uri 'self'",
+            "form-action 'none'",
+            "object-src 'none'",
+            'upgrade-insecure-requests',
+          ],
+          scriptDirective: { resources: ["'self'"] },
+          // Solo los atributos style (variables CSS como --brand); nada de <style> ni scripts inline.
+          styleDirective: { resources: ["'self'", { kind: 'attribute', resource: "'unsafe-inline'" }] },
+        },
+      }
+    : undefined,
   vite: {
     plugins: [tailwindcss()],
   },

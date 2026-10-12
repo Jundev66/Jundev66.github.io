@@ -18,10 +18,10 @@ export interface SkillGroup {
 export const profile = {
   name: 'Juan Mata',
   initials: 'JM',
-  role: 'Desarrollador Full-Stack & QA',
-  headline: 'PHP/Laravel · React · TypeScript · DDD · IA aplicada',
+  role: 'Desarrollador Full-Stack, Cloud & QA',
+  headline: 'Node.js · NestJS · Laravel · Next.js · Cloud · Ex-Medine.tech',
   tagline:
-    'Construyo software empresarial de punta a punta —del levantamiento con el cliente al backend, la interfaz y sus pruebas— con foco en calidad, seguridad, arquitectura limpia e IA aplicada.',
+    'Construyo software empresarial y plataformas SaaS de punta a punta: desde el levantamiento de requerimientos y gestión ágil (Jira, Linear, Zoho) hasta arquitecturas limpias con DDD/Hexagonal, administración de servidores Linux y control riguroso con +500 pruebas automatizadas.',
   location: 'Caracas, Venezuela',
   availability: 'Disponibilidad inmediata · Remoto o híbrido',
   yearsOfExperience: 4,
@@ -34,16 +34,15 @@ export const profile = {
   linkedinUser: 'juan-mata-1b959a235',
   cv: '/juan-mata-cv.pdf',
   seoDescription:
-    'Juan Mata — Desarrollador Full-Stack y QA con 4 años de experiencia en ERP/SaaS B2B. PHP/Laravel, React, TypeScript, DDD, Playwright, seguridad OWASP e IA aplicada: agentes, LLM y OCR.',
+    'Juan Mata — Desarrollador Full-Stack, Cloud y QA con 4 años de experiencia en ERP/SaaS B2B. Node.js, NestJS, Next.js, Laravel, React, TypeScript, Servidores Linux, DigitalOcean, Vercel, Supabase, Jira, Linear, Zoho, Playwright e IA aplicada.',
 };
 
 export const nav = [
-  { id: 'sobre-mi', label: 'Sobre mí' },
-  { id: 'habilidades', label: 'Habilidades' },
-  { id: 'experiencia', label: 'Experiencia' },
-  { id: 'ia', label: 'IA' },
   { id: 'proyectos', label: 'Proyectos' },
-  { id: 'formacion', label: 'Formación' },
+  { id: 'laboratorio', label: 'Tech Lab' },
+  { id: 'experiencia', label: 'Trayectoria' },
+  { id: 'sobre-mi', label: 'Sobre mí' },
+  { id: 'habilidades', label: 'Stack' },
   { id: 'contacto', label: 'Contacto' },
 ];
 
@@ -174,14 +173,14 @@ export const skillGroups: SkillGroup[] = [
 
 export const experience = [
   {
-    role: 'Desarrollador Full-Stack y QA',
+    role: 'Desarrollador Full-Stack, Cloud & QA',
     company: 'Medine.tech',
     companyUrl: 'https://www.linkedin.com/company/medinetech',
-    mode: 'Remoto',
+    mode: 'Remoto · 4 años de trayectoria',
     period: '10/2022 – 09/2026',
-    duration: '4 años',
+    duration: '4 años (Finalizado)',
     description:
-      'Consultora de software empresarial (ERP/SaaS) con clientes en toda Latinoamérica.',
+      'Consultora de software empresarial (ERP/SaaS B2B) con clientes corporativos en Latinoamérica. Equipos Scrum de 15 a 20 ingenieros.',
     groups: [
       {
         title: 'Desarrollo',

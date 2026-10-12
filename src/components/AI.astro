@@ -3,50 +3,172 @@ import { Icon } from 'astro-icon/components';
 import Section from './Section.astro';
 import SkillChip from './SkillChip.astro';
 import { ai } from '../data/cv';
+
+const [productPillar, engineeringPillar] = ai.pillars;
+
+const pipelineSteps = [
+  {
+    step: '01',
+    title: 'Comprobante / Factura',
+    desc: 'Ingreso de PDF o imagen de transacción bancaria',
+    tag: 'Input',
+    icon: 'lucide:file-text',
+  },
+  {
+    step: '02',
+    title: 'OCR Tesseract.js',
+    desc: 'Extracción instantánea de texto sin coste de API',
+    tag: 'Local OCR',
+    icon: 'lucide:scan-text',
+  },
+  {
+    step: '03',
+    title: 'Claude Vision (Anthropic)',
+    desc: 'Inferencia contable inteligente si hay baja resolución o campos omitidos',
+    tag: 'LLM Fallback',
+    icon: 'lucide:sparkles',
+  },
+  {
+    step: '04',
+    title: 'PostgreSQL Validado',
+    desc: 'Impacto seguro en base de datos con políticas RLS multi-tenant',
+    tag: 'Producción',
+    icon: 'lucide:database',
+  },
+];
 ---
 
-<Section id="ia" eyebrow="IA aplicada" title="IA en el producto y en el proceso" subtitle={ai.intro}>
-  <div class="grid gap-5 lg:grid-cols-2">
-    {
-      ai.pillars.map((pillar, i) => (
-        <article data-reveal style={`--d: ${i * 90}ms`} class="card relative overflow-hidden p-6 sm:p-8">
-          <div
-            aria-hidden="true"
-            class="absolute -top-28 -right-28 size-72 rounded-full bg-[radial-gradient(closest-side,var(--glow),transparent)]"
-          />
-          <header class="relative flex items-start gap-4">
-            <span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-[var(--btn-from)] to-[var(--btn-to)] text-white shadow-lg shadow-[var(--glow)]">
-              <Icon name={pillar.icon} class="size-6" />
-            </span>
-            <div>
-              <h3 class="font-display text-xl font-semibold">{pillar.title}</h3>
-              <p class="mt-1 text-sm text-muted">{pillar.subtitle}</p>
-            </div>
-          </header>
+<Section
+  id="ia"
+  eyebrow="Inteligencia Artificial Aplicada"
+  title="IA en producción & automatización de ingeniería"
+  subtitle="Integración pragmática de modelos de lenguaje y visión por computadora en sistemas empresariales, y aceleración del ciclo de entrega mediante agentes autónomos controlados."
+>
+  <div class="space-y-8">
+    
+    <!-- Módulo 1: Pipeline de IA en Producto (CryoTech) -->
+    <div data-reveal class="glass-card glow-border p-6 sm:p-8 shadow-xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line pb-5">
+        <div>
+          <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold text-accent uppercase tracking-wider">
+            <Icon name="lucide:cpu" class="size-4" />
+            <span>Arquitectura en Producto</span>
+          </div>
+          <h3 class="mt-1 font-display text-xl font-bold text-fg sm:text-2xl">
+            {productPillar.title}
+          </h3>
+        </div>
+        <span class="rounded-full border border-line bg-surface-2 px-3 py-1 text-xs font-mono text-muted">
+          CryoTech · Producción Real
+        </span>
+      </div>
 
-          <ul class="relative mt-6 space-y-3">
-            {pillar.items.map((item) => (
-              <li class="rounded-2xl border border-line bg-surface-2/40 p-4">
-                <div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5">
-                  <span class="flex items-center gap-2 font-semibold">
-                    <Icon name={item.icon} class="size-4 shrink-0 text-accent" />
-                    {item.title}
-                  </span>
-                  <span class="rounded-full border border-line px-2 py-0.5 font-mono text-[10px] text-muted">{item.source}</span>
+      <!-- Pipeline de Datos Interactivo Paso a Paso -->
+      <div class="mt-8">
+        <div class="flex items-center justify-between mb-4">
+          <p class="font-mono text-xs font-bold uppercase tracking-wider text-muted">
+            Flujo de Ejecución: OCR Híbrido con Inferencia Contable
+          </p>
+          <span class="hidden sm:inline-flex items-center gap-1.5 font-mono text-[11px] text-emerald-500">
+            <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Pipeline Activo
+          </span>
+        </div>
+
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 relative">
+          {pipelineSteps.map((step, idx) => (
+            <div class="group relative rounded-xl border border-line bg-surface-2/50 p-4 transition-all duration-300 hover:border-accent hover:bg-surface-2 hover:shadow-lg hover:-translate-y-1">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-mono text-xs font-bold text-accent">{step.step}</span>
+                <span class="rounded-md border border-line bg-surface px-1.5 py-0.5 font-mono text-[10px] text-muted group-hover:text-fg">
+                  {step.tag}
+                </span>
+              </div>
+              <div class="flex items-center gap-2 font-display text-sm font-bold text-fg mt-2">
+                <Icon name={step.icon} class="size-4 text-accent shrink-0" />
+                <span>{step.title}</span>
+              </div>
+              <p class="mt-2 text-xs leading-relaxed text-muted">
+                {step.desc}
+              </p>
+
+              {idx < pipelineSteps.length - 1 && (
+                <div class="hidden lg:block absolute -right-2.5 top-1/2 -translate-y-1/2 z-10 text-muted/60">
+                  <Icon name="lucide:chevron-right" class="size-4" />
                 </div>
-                <p class="mt-2 text-sm leading-relaxed text-muted">{item.text}</p>
-              </li>
-            ))}
-          </ul>
-        </article>
-      ))
-    }
-  </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
 
-  <div data-reveal class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-    <p class="text-xs font-semibold tracking-wide text-muted uppercase">Herramientas</p>
-    <ul class="flex flex-wrap gap-2">
-      {ai.tools.map((tool) => <SkillChip skill={tool} size="sm" />)}
-    </ul>
+      <!-- Otros Módulos de IA en Producto -->
+      <div class="mt-6 grid gap-4 sm:grid-cols-2 pt-6 border-t border-line">
+        {productPillar.items.slice(1).map((item) => (
+          <div class="rounded-xl border border-line bg-surface-2/30 p-4 transition-colors hover:border-line-strong hover:bg-surface-2/60">
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="font-display text-xs font-bold text-fg flex items-center gap-2">
+                <Icon name={item.icon} class="size-4 text-accent" />
+                {item.title}
+              </span>
+              <span class="rounded border border-line bg-surface px-2 py-0.5 font-mono text-[10px] text-muted">
+                {item.source}
+              </span>
+            </div>
+            <p class="text-xs text-muted leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Módulo 2: IA en el Flujo de Ingeniería & Agentes -->
+    <div data-reveal style="--d: 80ms" class="glass-card glow-border p-6 sm:p-8 shadow-xl">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-line pb-5">
+        <div>
+          <div class="inline-flex items-center gap-2 font-mono text-xs font-semibold text-accent uppercase tracking-wider">
+            <Icon name="lucide:bot" class="size-4" />
+            <span>Ingeniería Acelerada</span>
+          </div>
+          <h3 class="mt-1 font-display text-xl font-bold text-fg sm:text-2xl">
+            {engineeringPillar.title}
+          </h3>
+        </div>
+        <span class="rounded-full border border-line bg-surface-2 px-3 py-1 text-xs font-mono text-muted">
+          CI/CD · Testing · AGENTS.md
+        </span>
+      </div>
+
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        {engineeringPillar.items.map((item) => (
+          <div class="rounded-xl border border-line bg-surface-2/30 p-4 transition-colors hover:border-line-strong hover:bg-surface-2/60 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-2">
+                <span class="font-display text-xs font-bold text-fg flex items-center gap-2">
+                  <Icon name={item.icon} class="size-4 text-accent" />
+                  {item.title}
+                </span>
+                <span class="rounded border border-line bg-surface px-2 py-0.5 font-mono text-[10px] text-muted">
+                  {item.source}
+                </span>
+              </div>
+              <p class="text-xs text-muted leading-relaxed">{item.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Barra de Ecosistema & Modelos -->
+      <div class="mt-6 pt-5 border-t border-line flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <span class="font-mono text-muted uppercase tracking-wider font-semibold">
+          Modelos & Herramientas Integradas:
+        </span>
+        <ul class="flex flex-wrap gap-1.5">
+          {ai.tools.map((tool) => (
+            <SkillChip skill={tool} size="sm" />
+          ))}
+        </ul>
+      </div>
+    </div>
+
   </div>
 </Section>
