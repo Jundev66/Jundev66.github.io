@@ -6,103 +6,119 @@ import { about } from '../data/cv';
 const pillars = [
   {
     icon: 'lucide:boxes',
-    title: 'Arquitectura Limpia & DDD',
-    text: 'Domain-Driven Design (DDD), patrones hexagonales y separación estricta de capas para sistemas mantenibles y desacoplados sin tiempo de inactividad.',
-    color: 'text-indigo-500 bg-indigo-500/10 border-indigo-500/20',
+    title: { es: 'Arquitectura Limpia & DDD', en: 'Clean Architecture & DDD' },
+    text: {
+      es: 'Domain-Driven Design (DDD), patrones hexagonales y desacoplamiento estricto para sistemas escalables con cero tiempo de inactividad.',
+      en: 'Domain-Driven Design (DDD), hexagonal patterns, and decoupled boundaries for maintainable software with zero downtime.',
+    },
   },
   {
     icon: 'lucide:server',
-    title: 'Servidores Linux & Cloud Ops',
-    text: 'Administración de servidores Linux en DigitalOcean, proxies Nginx, contenedores Docker, CI/CD en GitHub Actions y plataformas con Vercel y Supabase.',
-    color: 'text-sky-500 bg-sky-500/10 border-sky-500/20',
+    title: { es: 'Servidores Linux & Cloud Ops', en: 'Linux Servers & Cloud Ops' },
+    text: {
+      es: 'Administración de servidores Linux (DigitalOcean, Ubuntu), proxies Nginx, Docker, GitHub Actions y plataformas serverless (Vercel, Supabase).',
+      en: 'Linux server administration (DigitalOcean, Ubuntu), Nginx reverse proxies, Docker, GitHub Actions CI/CD, and serverless stacks (Vercel, Supabase).',
+    },
   },
   {
     icon: 'lucide:shield-check',
-    title: 'QA Automatizado & Seguridad',
-    text: 'Más de 500 pruebas automatizadas en CI con Playwright (E2E), Vitest, Behat y PHPUnit, junto a auditorías de vulnerabilidades con OWASP ZAP.',
-    color: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
+    title: { es: 'QA Automatizado & Seguridad', en: 'Automated QA & Security' },
+    text: {
+      es: 'Más de 500 pruebas automatizadas en CI (Playwright E2E con POM, Vitest, Behat, PHPUnit) junto a auditorías continuas con OWASP ZAP.',
+      en: '500+ automated tests in CI (Playwright E2E with POM, Vitest, Behat, PHPUnit) along with continuous OWASP ZAP vulnerability triage.',
+    },
   },
   {
     icon: 'lucide:users',
-    title: 'Gestión Ágil & Scrum',
-    text: 'Coordinación diaria de sprints, historias y bugs en Jira, Linear y Zoho (CRM/Desk) en equipos Scrum multidisciplinarios de 15 a 20 ingenieros.',
-    color: 'text-purple-500 bg-purple-500/10 border-purple-500/20',
+    title: { es: 'Gestión Ágil & Scrum', en: 'Agile & Scrum Delivery' },
+    text: {
+      es: 'Coordinación diaria de sprints, historias de usuario y bugs en Jira, Linear y Zoho en equipos Scrum de 15 a 20 ingenieros.',
+      en: 'Daily coordination of sprints, user stories, and bug tracking in Jira, Linear, and Zoho across Scrum teams of 15 to 20 engineers.',
+    },
   },
 ];
 ---
 
-<Section id="sobre-mi" eyebrow="Sobre mí" title="Ingeniería de software & arquitectura de entrega">
+<Section
+  id="sobre-mi"
+  eyebrow={{ es: 'Filosofía & Práctica', en: 'Philosophy & Practice' }}
+  title={{ es: 'Enfoque Técnico y Metodología', en: 'Technical Focus & Methodology' }}
+  subtitle={{
+    es: 'Cómo abordo el ciclo de vida del software: desde la comprensión de las reglas del negocio hasta la resiliencia en servidores de producción.',
+    en: 'How I approach the software lifecycle: from understanding business domain rules to operational resilience in production.',
+  }}
+>
   <div class="space-y-8">
     
-    <!-- Bloque Bento Principal: Narrativa y Métricas -->
-    <div class="grid gap-6 lg:grid-cols-12">
-      
-      <!-- Narrativa (7 cols) -->
-      <div data-reveal class="glass-card glow-border p-6 sm:p-8 lg:col-span-7 flex flex-col justify-between shadow-xl">
-        <div>
-          <div class="flex items-center gap-2 font-mono text-xs text-accent uppercase tracking-wider mb-4 font-bold">
-            <Icon name="lucide:terminal" class="size-4" />
-            <span>Perfil Técnico & Metodología</span>
-          </div>
-          <div class="space-y-4 text-sm sm:text-base leading-relaxed text-muted">
-            {about.paragraphs.map((p) => <p>{p}</p>)}
-          </div>
-        </div>
+    <!-- Bloque Principal: Narrativa de Juan -->
+    <div class="card-editorial p-6 sm:p-8 lg:p-10 space-y-6">
+      <div class="flex items-center gap-2 text-xs text-accent uppercase tracking-wider font-bold">
+        <Icon name="lucide:terminal" class="size-4" />
+        <span>
+          <span class="lang-es">Trayectoria & Enfoque de Entrega</span>
+          <span class="lang-en">Track Record & Delivery Approach</span>
+        </span>
+      </div>
 
-        <div class="mt-8 pt-6 border-t border-line flex flex-wrap items-center gap-2 text-xs font-mono">
-          <span class="rounded-lg border border-purple-500/30 bg-purple-500/10 px-2.5 py-1 text-purple-700 dark:text-purple-300">
-            Jira & Linear Sprints
-          </span>
-          <span class="rounded-lg border border-sky-500/30 bg-sky-500/10 px-2.5 py-1 text-sky-700 dark:text-sky-300">
-            Servidores Linux & Cloud
-          </span>
-          <span class="rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-emerald-700 dark:text-emerald-300">
-            Supabase RLS Multi-tenant
-          </span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm leading-relaxed text-muted">
+        <div class="space-y-4">
+          <p>
+            <span class="lang-es">{about.paragraphs.es[0]}</span>
+            <span class="lang-en">{about.paragraphs.en[0]}</span>
+          </p>
+          <p>
+            <span class="lang-es">{about.paragraphs.es[1]}</span>
+            <span class="lang-en">{about.paragraphs.en[1]}</span>
+          </p>
+        </div>
+        <div class="space-y-4">
+          <p>
+            <span class="lang-es">{about.paragraphs.es[2]}</span>
+            <span class="lang-en">{about.paragraphs.en[2]}</span>
+          </p>
+          <p>
+            <span class="lang-es">{about.paragraphs.es[3]}</span>
+            <span class="lang-en">{about.paragraphs.en[3]}</span>
+          </p>
         </div>
       </div>
 
-      <!-- Métricas Clave de Impacto (5 cols) -->
-      <div data-reveal style="--d: 80ms" class="glass-card p-6 lg:col-span-5 flex flex-col justify-between shadow-xl">
-        <div>
-          <h3 class="font-mono text-xs font-bold uppercase tracking-wider text-muted mb-4 flex items-center justify-between">
-            <span>Métricas en Producción</span>
-            <Icon name="lucide:activity" class="size-4 text-accent" />
-          </h3>
-
-          <div class="grid grid-cols-2 gap-3 font-mono">
-            {about.stats.map((stat) => (
-              <div class="rounded-xl border border-line bg-surface-2/60 p-4 transition-transform hover:scale-102">
-                <span class="block font-display text-3xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-sky-400 dark:to-indigo-300">
-                  {stat.value}
-                </span>
-                <span class="block mt-1 text-xs text-muted leading-tight">{stat.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div class="mt-6 pt-4 border-t border-line font-mono text-xs text-muted flex items-center justify-between">
-          <span>Medine.tech · 2022–2026</span>
-          <span class="text-emerald-500 flex items-center gap-1">
-            <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Verificado
-          </span>
-        </div>
+      <div class="pt-4 border-t border-border flex flex-wrap items-center gap-2 text-xs font-semibold">
+        <span class="rounded-lg border border-border bg-surface-muted px-2.5 py-1 text-fg">
+          Jira & Linear Sprints
+        </span>
+        <span class="rounded-lg border border-border bg-surface-muted px-2.5 py-1 text-fg">
+          Linux Servers (DigitalOcean)
+        </span>
+        <span class="rounded-lg border border-border bg-surface-muted px-2.5 py-1 text-fg">
+          Supabase RLS Multi-tenant
+        </span>
+        <span class="rounded-lg border border-border bg-surface-muted px-2.5 py-1 text-fg">
+          Playwright + Vitest + PHPUnit
+        </span>
       </div>
-
     </div>
 
-    <!-- 4 Pilares de Práctica Técnica -->
+    <!-- 4 Pilares de Práctica -->
     <div class="grid gap-4 sm:grid-cols-2">
       {pillars.map((item, i) => (
-        <div data-reveal style={`--d: ${100 + i * 40}ms`} class="glass-card p-5 sm:p-6 flex items-start gap-4 transition-all hover:-translate-y-1">
-          <span class:list={['grid size-10 shrink-0 place-items-center rounded-xl border', item.color]}>
+        <div
+          data-reveal
+          style={`--d: ${i * 40}ms`}
+          class="card-editorial p-5 sm:p-6 flex items-start gap-4"
+        >
+          <span class="grid size-10 shrink-0 place-items-center rounded-xl border border-border bg-surface-muted text-accent">
             <Icon name={item.icon} class="size-5" />
           </span>
-          <div>
-            <h4 class="font-display text-sm font-bold text-fg">{item.title}</h4>
-            <p class="mt-1.5 text-xs sm:text-sm leading-relaxed text-muted">{item.text}</p>
+          <div class="space-y-1">
+            <h4 class="font-display text-sm font-bold text-fg">
+              <span class="lang-es">{item.title.es}</span>
+              <span class="lang-en">{item.title.en}</span>
+            </h4>
+            <p class="text-xs leading-relaxed text-muted">
+              <span class="lang-es">{item.text.es}</span>
+              <span class="lang-en">{item.text.en}</span>
+            </p>
           </div>
         </div>
       ))}

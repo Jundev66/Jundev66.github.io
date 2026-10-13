@@ -5,18 +5,47 @@ import { profile } from '../data/cv';
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-line">
-  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 text-sm text-muted sm:flex-row sm:px-8">
-    <p>© {year} {profile.name}. Hecho con Astro y Tailwind CSS.</p>
+<footer class="border-t border-border/40 py-8 text-xs text-muted font-medium">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 sm:flex-row sm:px-6 lg:px-8">
     <div class="flex items-center gap-2">
-      <a href={profile.github} target="_blank" rel="noopener noreferrer" class="icon-btn size-9" aria-label="GitHub">
-        <Icon name="simple-icons:github" class="size-4" />
+      <span class="font-bold text-fg">{profile.name}</span>
+      <span>·</span>
+      <span>© {year}</span>
+      <span>·</span>
+      <span>
+        <span class="lang-es">Hecho con Astro y Tailwind CSS</span>
+        <span class="lang-en">Crafted with Astro & Tailwind CSS</span>
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a
+        href={profile.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="icon-btn size-8"
+        aria-label="GitHub"
+        title="GitHub"
+      >
+        <Icon name="simple-icons:github" class="size-3.5" />
       </a>
-      <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" class="icon-btn size-9" aria-label="LinkedIn">
-        <Icon name="simple-icons:linkedin" class="size-4" />
+      <a
+        href={profile.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="icon-btn size-8"
+        aria-label="LinkedIn"
+        title="LinkedIn"
+      >
+        <Icon name="simple-icons:linkedin" class="size-3.5" />
       </a>
-      <a href="#inicio" class="icon-btn size-9" aria-label="Volver arriba">
-        <Icon name="lucide:arrow-up" class="size-4" />
+      <a
+        href="#inicio"
+        class="icon-btn size-8"
+        aria-label="Volver arriba / Back to top"
+        title="Volver arriba"
+      >
+        <Icon name="lucide:arrow-up" class="size-3.5" />
       </a>
     </div>
   </div>

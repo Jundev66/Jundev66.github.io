@@ -3,125 +3,251 @@ import { Icon } from 'astro-icon/components';
 import { nav, profile } from '../data/cv';
 ---
 
-<header id="site-header" class="fixed inset-x-0 top-0 z-50 border-b border-transparent transition-colors duration-300">
-  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8" aria-label="Principal">
-    <a href="#inicio" class="flex items-center gap-2.5 font-display font-semibold tracking-tight">
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 border-b border-border/40 bg-bg/85 backdrop-blur-md transition-all duration-200"
+>
+  <nav class="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
+    
+    <!-- Identidad & Monograma -->
+    <a href="#main" class="group flex items-center gap-3 transition-opacity hover:opacity-90">
       <span
-        class="grid size-9 place-items-center rounded-xl bg-gradient-to-br from-[var(--btn-from)] to-[var(--btn-to)] text-sm font-bold text-white shadow-lg shadow-[var(--glow)]"
+        class="grid size-9 place-items-center rounded-lg border border-border bg-surface-muted text-xs font-bold text-fg group-hover:border-accent group-hover:text-accent transition-colors shadow-2xs"
       >
         {profile.initials}
       </span>
-      <span class="hidden sm:inline">{profile.name}</span>
+      <div class="flex flex-col">
+        <span class="font-display text-sm font-bold tracking-tight text-fg leading-none">
+          {profile.name}
+        </span>
+        <span class="text-[11px] text-muted leading-tight mt-0.5 font-medium">
+          <span class="lang-es">Software Engineer</span>
+          <span class="lang-en">Software Engineer</span>
+        </span>
+      </div>
     </a>
 
-    <ul class="hidden items-center gap-1 lg:flex">
+    <!-- Enlaces Desktop con Scroll Spy -->
+    <ul class="hidden items-center gap-1 lg:flex text-xs font-medium">
       {
         nav.map((item) => (
           <li>
             <a
               href={`#${item.id}`}
               data-nav-link={item.id}
-              class="rounded-full px-3.5 py-2 text-sm text-muted transition-colors hover:text-fg data-[active=true]:bg-surface-2 data-[active=true]:text-fg"
+              class="rounded-md px-3 py-1.5 text-muted transition-colors hover:text-fg hover:bg-surface-muted data-[active=true]:bg-surface-muted data-[active=true]:text-accent data-[active=true]:font-bold"
             >
-              {item.label}
+              <span class="lang-es">{item.label.es}</span>
+              <span class="lang-en">{item.label.en}</span>
             </a>
           </li>
         ))
       }
     </ul>
 
-    <div class="flex items-center gap-2">
-      <button type="button" id="theme-toggle" class="icon-btn size-10" aria-label="Cambiar entre tema claro y oscuro">
-        <Icon name="lucide:sun" class="hidden size-[18px] dark:block" />
-        <Icon name="lucide:moon" class="block size-[18px] dark:hidden" />
+    <!-- Controles de Modo (Light/Black) + Selector Bilingüe (ES/EN) + CV -->
+    <div class="flex items-center gap-2 sm:gap-2.5">
+      
+      <!-- CHECK / SELECTOR BILINGÜE (ES / EN) -->
+      <div
+        class="inline-flex items-center rounded-lg border border-border bg-surface-muted p-0.5 text-xs font-medium shadow-2xs"
+        role="group"
+        aria-label="Selector de idioma / Language selector"
+      >
+        <button
+          type="button"
+          id="lang-btn-es"
+          data-lang-select="es"
+          class="rounded-md px-2 py-1 font-semibold transition-all cursor-pointer text-muted hover:text-fg"
+          aria-label="Cambiar idioma a Español"
+        >
+          ES
+        </button>
+        <span class="text-border">|</span>
+        <button
+          type="button"
+          id="lang-btn-en"
+          data-lang-select="en"
+          class="rounded-md px-2 py-1 font-semibold transition-all cursor-pointer text-muted hover:text-fg"
+          aria-label="Switch language to English"
+        >
+          EN
+        </button>
+      </div>
+
+      <!-- CONMUTADOR DE TEMA (MODO LICHT / BLACK) -->
+      <button
+        type="button"
+        id="theme-toggle"
+        class="icon-btn size-9"
+        aria-label="Cambiar entre tema claro y oscuro"
+        title="Cambiar tema (Claro / Oscuro)"
+      >
+        <Icon name="lucide:sun" class="hidden size-4 text-amber-500 dark:block" />
+        <Icon name="lucide:moon" class="block size-4 text-blue-600 dark:hidden" />
       </button>
-      <a href={profile.cv} download class="btn btn-primary hidden !px-4 !py-2 text-sm sm:inline-flex">
-        <Icon name="lucide:download" class="size-4" />
-        CV
+
+      <!-- BOTÓN DESCARGAR CV -->
+      <a
+        href={profile.cv}
+        download
+        class="btn btn-primary hidden text-xs !px-3.5 !py-1.5 font-medium sm:inline-flex"
+      >
+        <Icon name="lucide:download" class="size-3.5" />
+        <span class="lang-es">CV (PDF)</span>
+        <span class="lang-en">Resume</span>
       </a>
+
+      <!-- BOTÓN MENÚ MÓVIL -->
       <button
         type="button"
         id="menu-toggle"
-        class="icon-btn size-10 lg:hidden"
+        class="icon-btn size-9 lg:hidden"
         aria-label="Abrir menú"
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <Icon name="lucide:menu" class="size-5" data-icon-open />
-        <Icon name="lucide:x" class="hidden size-5" data-icon-close />
+        <Icon name="lucide:menu" class="size-4" data-icon-open />
+        <Icon name="lucide:x" class="hidden size-4" data-icon-close />
       </button>
     </div>
   </nav>
 
-  <div id="mobile-menu" class="border-t border-line bg-bg/95 backdrop-blur-xl lg:hidden" hidden>
-    <ul class="mx-auto max-w-6xl px-5 py-3 sm:px-8">
-      {
-        nav.map((item) => (
-          <li>
-            <a
-              href={`#${item.id}`}
-              class="flex items-center justify-between rounded-xl px-3 py-3 text-base text-muted transition-colors hover:bg-surface-2 hover:text-fg"
-            >
-              {item.label}
-              <Icon name="lucide:arrow-right" class="size-4 opacity-50" />
-            </a>
-          </li>
-        ))
-      }
-      <li class="mt-2 sm:hidden">
-        <a href={profile.cv} download class="btn btn-primary w-full justify-center">
-          <Icon name="lucide:download" class="size-4" />
-          Descargar CV
+  <!-- MENÚ RESPONSIVE DESPLEGABLE -->
+  <div id="mobile-menu" class="border-t border-border bg-bg/95 backdrop-blur-xl lg:hidden shadow-xl" hidden>
+    <div class="mx-auto max-w-6xl px-4 py-4 space-y-3 sm:px-6">
+      <ul class="space-y-1 text-sm font-medium">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={`#${item.id}`}
+                class="flex items-center justify-between rounded-lg px-3 py-2.5 text-muted transition-colors hover:bg-surface-muted hover:text-fg"
+              >
+                <span>
+                  <span class="lang-es">{item.label.es}</span>
+                  <span class="lang-en">{item.label.en}</span>
+                </span>
+                <Icon name="lucide:chevron-right" class="size-4 text-muted/60" />
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="pt-3 border-t border-border flex items-center justify-between gap-3">
+        <a href={profile.cv} download class="btn btn-primary w-full text-xs font-medium justify-center">
+          <Icon name="lucide:download" class="size-3.5" />
+          <span class="lang-es">Descargar CV Completo</span>
+          <span class="lang-en">Download Full Resume</span>
         </a>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </header>
 
 <script>
-  const header = document.getElementById('site-header')!;
-  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
+  function initNavbar() {
+    const header = document.getElementById('site-header');
+    if (!header) return;
 
-  document.getElementById('theme-toggle')?.addEventListener('click', () => {
-    const root = document.documentElement;
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    try {
-      localStorage.setItem('theme', next);
-    } catch {}
-  });
+    // 1. Manejo de scroll para añadir sombra/borde sutil
+    const onScroll = () => {
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
 
-  const menuButton = document.getElementById('menu-toggle')!;
-  const menu = document.getElementById('mobile-menu')!;
-  const setMenuOpen = (open: boolean) => {
-    menu.hidden = !open;
-    menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
-    menuButton.querySelector('[data-icon-open]')?.classList.toggle('hidden', open);
-    menuButton.querySelector('[data-icon-close]')?.classList.toggle('hidden', !open);
-    if (open) header.classList.add('is-scrolled');
-    else onScroll();
-  };
-  menuButton.addEventListener('click', () => setMenuOpen(menu.hidden));
-  menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenuOpen(false)));
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && !menu.hidden) setMenuOpen(false);
-  });
+    // 2. Conmutador de Tema Claro / Oscuro (Licht / Black)
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn?.addEventListener('click', () => {
+      const root = document.documentElement;
+      const current = root.dataset.theme === 'dark' ? 'dark' : 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+    });
 
-  const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
-  const sections = [...links]
-    .map((link) => document.getElementById(link.dataset.navLink!))
-    .filter((section): section is HTMLElement => section !== null);
-  const spy = new IntersectionObserver(
-    (entries) => {
-      for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
-        links.forEach((link) => (link.dataset.active = String(link.dataset.navLink === entry.target.id)));
+    // 3. Conmutador Bilingüe con Botones/Checks Activos (ES / EN)
+    const btnEs = document.getElementById('lang-btn-es');
+    const btnEn = document.getElementById('lang-btn-en');
+
+    function syncLangButtons(activeLang: string) {
+      if (!btnEs || !btnEn) return;
+      if (activeLang === 'es') {
+        btnEs.classList.add('bg-surface', 'text-fg', 'shadow-xs', 'border', 'border-border');
+        btnEs.classList.remove('text-muted');
+        btnEn.classList.remove('bg-surface', 'text-fg', 'shadow-xs', 'border', 'border-border');
+        btnEn.classList.add('text-muted');
+      } else {
+        btnEn.classList.add('bg-surface', 'text-fg', 'shadow-xs', 'border', 'border-border');
+        btnEn.classList.remove('text-muted');
+        btnEs.classList.remove('bg-surface', 'text-fg', 'shadow-xs', 'border', 'border-border');
+        btnEs.classList.add('text-muted');
       }
-    },
-    { rootMargin: '-45% 0px -50% 0px' },
-  );
-  sections.forEach((section) => spy.observe(section));
+    }
+
+    function setLanguage(lang: 'es' | 'en') {
+      const root = document.documentElement;
+      root.dataset.lang = lang;
+      root.lang = lang;
+      try {
+        localStorage.setItem('lang', lang);
+      } catch {}
+      syncLangButtons(lang);
+    }
+
+    // Inicializar estado visual de los botones según dataset.lang actual
+    const currentLang = document.documentElement.dataset.lang === 'en' ? 'en' : 'es';
+    syncLangButtons(currentLang);
+
+    btnEs?.addEventListener('click', () => setLanguage('es'));
+    btnEn?.addEventListener('click', () => setLanguage('en'));
+
+    // 4. Menú responsive en móvil
+    const menuButton = document.getElementById('menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    if (menuButton && menu) {
+      const setMenuOpen = (open: boolean) => {
+        menu.hidden = !open;
+        menuButton.setAttribute('aria-expanded', String(open));
+        menuButton.querySelector('[data-icon-open]')?.classList.toggle('hidden', open);
+        menuButton.querySelector('[data-icon-close]')?.classList.toggle('hidden', !open);
+      };
+
+      menuButton.addEventListener('click', () => setMenuOpen(menu.hidden));
+      menu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => setMenuOpen(false));
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !menu.hidden) setMenuOpen(false);
+      });
+    }
+
+    // 5. Scroll spy para los enlaces
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+    const sections = [...links]
+      .map((link) => document.getElementById(link.dataset.navLink!))
+      .filter((section): section is HTMLElement => section !== null);
+
+    if (sections.length > 0 && 'IntersectionObserver' in window) {
+      const spy = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            links.forEach((link) => {
+              link.dataset.active = String(link.dataset.navLink === entry.target.id);
+            });
+          }
+        },
+        { rootMargin: '-40% 0px -50% 0px' }
+      );
+      sections.forEach((section) => spy.observe(section));
+    }
+  }
+
+  initNavbar();
+  document.addEventListener('astro:page-load', initNavbar);
 </script>

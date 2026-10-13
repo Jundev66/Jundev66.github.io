@@ -1,221 +1,226 @@
 ---
-import { Picture } from 'astro:assets';
+import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import photo from '../assets/juan-mata.png';
-import { profile } from '../data/cv';
+import { profile, about } from '../data/cv';
 
-const heroBadges = [
-  { name: 'Node.js', icon: 'simple-icons:nodedotjs', color: '#5FA04E' },
+const keyBadges = [
+  { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+  { name: 'Python / FastAPI', icon: 'simple-icons:fastapi', color: '#009688' },
+  { name: 'MCP & RAG', icon: 'lucide:cpu', color: '#3B82F6' },
   { name: 'NestJS', icon: 'simple-icons:nestjs', color: '#E0234E' },
-  { name: 'Next.js', icon: 'simple-icons:nextdotjs' },
   { name: 'Laravel', icon: 'simple-icons:laravel', color: '#FF2D20' },
-  { name: 'React', icon: 'simple-icons:react', color: '#149ECA' },
-  { name: 'Linux / DigitalOcean', icon: 'simple-icons:digitalocean', color: '#0080FF' },
+  { name: 'Next.js', icon: 'simple-icons:nextdotjs' },
   { name: 'Supabase RLS', icon: 'simple-icons:supabase', color: '#3ECF8E' },
-  { name: 'Playwright QA', icon: 'simple-icons:playwright', color: '#2EAD33' },
-];
-
-const metrics = [
-  { value: '4+', label: 'Años en B2B', icon: 'lucide:briefcase' },
-  { value: '500+', label: 'Tests en CI/CD', icon: 'lucide:shield-check' },
-  { value: '15–20', label: 'Devs en Scrum', icon: 'lucide:users' },
-  { value: '100%', label: 'Ciclo completo', icon: 'lucide:layers' },
+  { name: 'Playwright POM (+500)', icon: 'simple-icons:playwright', color: '#2EAD33' },
 ];
 ---
 
-<section id="inicio" class="relative isolate overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
-  <div class="mx-auto max-w-6xl px-4 sm:px-6">
-    <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
+<section id="inicio" class="relative pt-28 pb-16 sm:pt-36 sm:pb-24">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-12">
+    
+    <!-- Bloque Superior: Badges, Headline & Pitch -->
+    <div class="space-y-6 max-w-4xl">
       
-      <!-- Columna Izquierda: Pitch, Credenciales & Acciones (7 cols) -->
-      <div class="lg:col-span-7">
-        
-        <!-- Badges de Disponibilidad & Ex-Medine -->
-        <div data-reveal class="flex flex-wrap items-center gap-2">
-          <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-mono font-medium text-emerald-700 dark:text-emerald-300 backdrop-blur-md shadow-xs">
-            <span class="relative flex size-2">
-              <span class="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-              <span class="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
-            </span>
-            <span>{profile.availability}</span>
+      <!-- Badges de Disponibilidad y Experiencia -->
+      <div data-reveal class="flex flex-wrap items-center gap-2.5 text-xs font-semibold">
+        <span class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-emerald-600 dark:text-emerald-400">
+          <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="lang-es">{profile.availability.es}</span>
+          <span class="lang-en">{profile.availability.en}</span>
+        </span>
+        <span class="text-muted-light">·</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-muted px-3 py-1 text-muted">
+          <Icon name="lucide:building-2" class="size-3 text-accent" />
+          <span class="lang-es">{profile.companyHighlight.es}</span>
+          <span class="lang-en">{profile.companyHighlight.en}</span>
+        </span>
+      </div>
+
+      <!-- Titular de Autoridad Profesional -->
+      <h1
+        data-reveal
+        style="--d: 80ms"
+        class="font-display text-3xl font-extrabold tracking-tight text-fg sm:text-5xl lg:text-6xl leading-[1.12]"
+      >
+        <span class="lang-es">
+          Arquitectura evolutiva, <span class="text-accent underline decoration-accent/30 underline-offset-4">inteligencia artificial</span> y rigor de ingeniería con +500 tests.
+        </span>
+        <span class="lang-en">
+          Evolutionary architecture, <span class="text-accent underline decoration-accent/30 underline-offset-4">applied artificial intelligence</span>, and engineering rigor with 500+ tests.
+        </span>
+      </h1>
+
+      <!-- Tagline / Propuesta de Valor -->
+      <p
+        data-reveal
+        style="--d: 140ms"
+        class="text-base sm:text-lg leading-relaxed text-muted max-w-3xl"
+      >
+        <span class="lang-es">{profile.tagline.es}</span>
+        <span class="lang-en">{profile.tagline.en}</span>
+      </p>
+
+      <!-- Chips de Stack Activo -->
+      <div data-reveal style="--d: 200ms" class="flex flex-wrap items-center gap-2 pt-1">
+        {keyBadges.map((badge) => (
+          <span class="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface-muted px-2.5 py-1 text-xs font-semibold text-fg shadow-2xs hover:border-border-strong transition-colors">
+            <Icon name={badge.icon} class="size-3.5 shrink-0" style={badge.color ? `color: ${badge.color}` : undefined} />
+            <span>{badge.name}</span>
+          </span>
+        ))}
+      </div>
+
+      <!-- Botones de Acción Primaria -->
+      <div data-reveal style="--d: 260ms" class="flex flex-wrap items-center gap-3 pt-3 text-xs font-semibold">
+        <a href="#proyectos" class="btn btn-primary !px-5 !py-2.5">
+          <span class="lang-es">Ver Casos de Estudio</span>
+          <span class="lang-en">View Case Studies</span>
+          <Icon name="lucide:arrow-down" class="size-3.5" />
+        </a>
+
+        <a href={profile.cv} download class="btn btn-secondary !px-4 !py-2.5">
+          <Icon name="lucide:file-text" class="size-3.5 text-accent" />
+          <span class="lang-es">Descargar CV (PDF)</span>
+          <span class="lang-en">Download Resume (PDF)</span>
+        </a>
+
+        <a
+          href={profile.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-accent-subtle !px-4 !py-2.5"
+        >
+          <Icon name="simple-icons:whatsapp" class="size-3.5" />
+          <span class="lang-es">WhatsApp Directo</span>
+          <span class="lang-en">Direct WhatsApp</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bloque Medio: Tarjeta de Identidad & Métricas de Impacto -->
+    <div data-reveal style="--d: 320ms" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+      
+      <!-- Tarjeta de Perfil & Contacto Rápido (5 cols) -->
+      <div class="lg:col-span-5 card-editorial p-5 flex flex-col justify-between">
+        <div class="flex items-center gap-4">
+          <div class="relative size-24 sm:size-28 rounded-xl overflow-hidden border border-border bg-surface-muted shrink-0 shadow-sm">
+            <Image
+              src={photo}
+              alt="Juan Mata"
+              width={240}
+              height={240}
+              class="h-full w-full object-cover object-center"
+              loading="eager"
+            />
           </div>
 
-          <div class="inline-flex items-center gap-1.5 rounded-full border border-line bg-surface-2/80 px-3 py-1 text-xs font-mono text-muted backdrop-blur-md">
-            <Icon name="lucide:building-2" class="size-3 text-accent" />
-            <span>Ex-Medine.tech (2022–2026 · 4 años)</span>
+          <div class="space-y-1 min-w-0">
+            <div class="text-lg font-bold font-display text-fg truncate">{profile.name}</div>
+            <div class="text-xs font-bold text-accent leading-tight">
+              <span class="lang-es">{profile.role.es}</span>
+              <span class="lang-en">{profile.role.en}</span>
+            </div>
+            <div class="text-xs text-muted flex items-center gap-1.5 pt-0.5">
+              <Icon name="lucide:map-pin" class="size-3 text-accent shrink-0" />
+              <span>{profile.location}</span>
+            </div>
+            <div class="text-xs flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-semibold">
+              <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="lang-es">Disponible de inmediato</span>
+              <span class="lang-en">Available for hire</span>
+            </div>
+            <div class="text-xs text-muted flex items-center gap-1.5 font-medium">
+              <Icon name="lucide:briefcase" class="size-3 text-muted-light shrink-0" />
+              <span class="lang-es">Ex-Medine.tech · 4 años exp.</span>
+              <span class="lang-en">Ex-Medine.tech · 4 yrs exp.</span>
+            </div>
           </div>
         </div>
 
-        <!-- Nombre Principal con Tipografía de Alto Impacto -->
-        <h1
-          data-reveal
-          style="--d: 80ms"
-          class="mt-4 font-display text-4xl font-extrabold tracking-tight text-fg sm:text-5xl lg:text-6xl"
-        >
-          {profile.name}
-        </h1>
-
-        <!-- Rol con Gradiente Futurista -->
-        <p
-          data-reveal
-          style="--d: 140ms"
-          class="mt-2 text-xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 dark:from-sky-400 dark:via-indigo-300 dark:to-cyan-400 sm:text-2xl"
-        >
-          {profile.role}
-        </p>
-
-        <!-- Propuesta de Valor / Tagline -->
-        <p
-          data-reveal
-          style="--d: 200ms"
-          class="mt-5 text-base leading-relaxed text-muted sm:text-lg max-w-xl"
-        >
-          {profile.tagline}
-        </p>
-
-        <!-- Píldoras de Stack Activo con Micro-interacciones -->
-        <div data-reveal style="--d: 260ms" class="mt-6 flex flex-wrap items-center gap-2">
-          {heroBadges.map((badge) => (
-            <span class="inline-flex items-center gap-1.5 rounded-lg border border-line bg-surface/80 px-2.5 py-1 text-xs font-mono font-medium text-fg backdrop-blur-sm transition-all duration-200 hover:scale-105 hover:border-accent shadow-2xs">
-              <Icon name={badge.icon} class="size-3.5 shrink-0" style={badge.color ? `color: ${badge.color}` : undefined} />
-              <span>{badge.name}</span>
-            </span>
-          ))}
-        </div>
-
-        <!-- Botones de Acción Primarios & Redes -->
-        <div data-reveal style="--d: 320ms" class="mt-8 flex flex-wrap items-center gap-3">
-          <a href="#proyectos" class="btn btn-primary">
-            <Icon name="lucide:sparkles" class="size-4" />
-            <span>Explorar Proyectos</span>
-          </a>
-
-          <a href={profile.cv} download class="btn btn-secondary">
-            <Icon name="lucide:download" class="size-4" />
-            <span>Descargar CV (PDF)</span>
-          </a>
-
-          <!-- Iconos de Contacto Rápido -->
-          <div class="flex items-center gap-2 sm:ml-2">
+        <!-- Enlaces directos a redes -->
+        <div class="mt-4 pt-4 border-t border-border flex items-center justify-between">
+          <span class="text-xs text-muted font-medium">
+            <span class="lang-es">Redes & Contacto:</span>
+            <span class="lang-en">Social & Contact:</span>
+          </span>
+          <div class="flex items-center gap-1.5">
             <a
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              class="icon-btn"
-              aria-label="GitHub de Juan Mata"
+              class="icon-btn size-8"
               title="GitHub"
+              aria-label="GitHub"
             >
-              <Icon name="simple-icons:github" class="size-4" />
+              <Icon name="simple-icons:github" class="size-3.5" />
             </a>
             <a
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              class="icon-btn"
-              aria-label="LinkedIn de Juan Mata"
+              class="icon-btn size-8"
               title="LinkedIn"
+              aria-label="LinkedIn"
             >
-              <Icon name="simple-icons:linkedin" class="size-4 text-[#0a66c2]" />
+              <Icon name="simple-icons:linkedin" class="size-3.5 text-[#0a66c2]" />
             </a>
             <a
               href={profile.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="icon-btn"
-              aria-label="WhatsApp de Juan Mata"
+              class="icon-btn size-8"
               title="WhatsApp"
+              aria-label="WhatsApp"
             >
-              <Icon name="simple-icons:whatsapp" class="size-4 text-[#25d366]" />
+              <Icon name="simple-icons:whatsapp" class="size-3.5 text-[#25d366]" />
             </a>
             <a
               href={`mailto:${profile.email}`}
-              class="icon-btn"
-              aria-label="Enviar correo a Juan Mata"
-              title="Correo"
+              class="icon-btn size-8"
+              title="Email"
+              aria-label="Email"
             >
-              <Icon name="lucide:mail" class="size-4" />
+              <Icon name="lucide:mail" class="size-3.5" />
             </a>
           </div>
         </div>
-
       </div>
 
-      <!-- Columna Derecha: Tarjeta HUD Tecnológica con Retrato & Telemetría (5 cols) -->
-      <div data-reveal style="--d: 180ms" class="lg:col-span-5">
-        <div class="glass-card glow-border overflow-hidden p-4 sm:p-5 shadow-2xl">
-          
-          <!-- Encabezado de la Tarjeta HUD -->
-          <div class="flex items-center justify-between border-b border-line pb-3 mb-4">
-            <div class="flex items-center gap-2">
-              <span class="size-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span class="font-mono text-xs font-semibold text-fg">Sistemas & Cloud</span>
-            </div>
-            <div id="local-time" class="font-mono text-[11px] text-muted">
-              Caracas, VE
+      <!-- Cuadrícula de Métricas de Ingeniería (7 cols) -->
+      <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {about.stats.map((s) => (
+          <div class="card-editorial p-4 flex flex-col justify-center text-center sm:text-left">
+            <div class="text-2xl sm:text-3xl font-extrabold text-accent tabular-nums tracking-tight">{s.value}</div>
+            <div class="text-xs text-muted font-semibold mt-1 leading-snug">
+              <span class="lang-es">{s.label.es}</span>
+              <span class="lang-en">{s.label.en}</span>
             </div>
           </div>
-
-          <!-- Marco del Retrato con Acabado de Precisión -->
-          <div class="group relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-line bg-surface-2">
-            <Picture
-              src={photo}
-              alt={`Retrato de ${profile.name}`}
-              widths={[320, 480, 640]}
-              sizes="(min-width: 1024px) 420px, 320px"
-              formats={['avif', 'webp']}
-              fallbackFormat="jpg"
-              quality={92}
-              loading="eager"
-              fetchpriority="high"
-              class="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-
-            <!-- Chip flotante sobre la imagen -->
-            <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between rounded-lg border border-black/20 bg-black/75 px-3 py-1.5 font-mono text-[11px] text-white shadow-lg backdrop-blur-md">
-              <span class="flex items-center gap-1.5">
-                <Icon name="lucide:shield-check" class="size-3 text-sky-400" />
-                <span>Full-Stack & QA</span>
-              </span>
-              <span class="text-emerald-400 font-bold">Medine.tech</span>
-            </div>
-          </div>
-
-          <!-- Módulo de Métricas Rápidas en Grid -->
-          <div class="mt-4 grid grid-cols-2 gap-2 font-mono text-xs">
-            {metrics.map((m) => (
-              <div class="flex items-center gap-2 rounded-xl border border-line bg-surface-2/60 p-2.5">
-                <Icon name={m.icon} class="size-4 text-accent shrink-0" />
-                <div>
-                  <span class="block font-bold text-fg leading-none">{m.value}</span>
-                  <span class="block text-[10px] text-muted mt-0.5">{m.label}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
+        ))}
       </div>
 
     </div>
+
+    <!-- Bloque Inferior: 4 Pilares de Práctica (Bento Grid) -->
+    <div data-reveal style="--d: 380ms" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {about.highlights.map((h) => (
+        <div class="card-editorial p-4 sm:p-5 space-y-2">
+          <div class="flex items-center gap-2 text-accent">
+            <Icon name={h.icon} class="size-4 shrink-0" />
+            <h3 class="font-display text-sm font-bold text-fg">
+              <span class="lang-es">{h.title.es}</span>
+              <span class="lang-en">{h.title.en}</span>
+            </h3>
+          </div>
+          <p class="text-xs text-muted leading-relaxed">
+            <span class="lang-es">{h.text.es}</span>
+            <span class="lang-en">{h.text.en}</span>
+          </p>
+        </div>
+      ))}
+    </div>
+
   </div>
 </section>
-
-<script>
-  // Reloj local en tiempo real de Caracas (UTC-4)
-  const timeEl = document.getElementById('local-time');
-  if (timeEl) {
-    const updateTime = () => {
-      const now = new Date();
-      const timeStr = now.toLocaleTimeString('es-VE', {
-        timeZone: 'America/Caracas',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-      });
-      timeEl.textContent = `Caracas · ${timeStr}`;
-    };
-    updateTime();
-    setInterval(updateTime, 1000);
-  }
-</script>

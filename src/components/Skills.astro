@@ -7,41 +7,35 @@ import { skillGroups } from '../data/cv';
 
 <Section
   id="habilidades"
-  eyebrow="Ecosistema & Stack"
-  title="Matriz de capacidades técnicas"
-  subtitle="Stack de producción para construir, desplegar, monitorear y gestionar plataformas de software de misión crítica."
+  eyebrow={{ es: 'Ecosistema & Stack', en: 'Ecosystem & Stack' }}
+  title={{ es: 'Matriz de Capacidades Técnicas', en: 'Technical Capabilities Matrix' }}
+  subtitle={{
+    es: 'Stack tecnológico probado en producción para construir, desplegar, asegurar y monitorear plataformas SaaS de misión crítica.',
+    en: 'Production-tested technology stack for building, deploying, securing, and monitoring mission-critical SaaS platforms.',
+  }}
 >
-  <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {skillGroups.map((group, i) => (
       <article
         data-reveal
         style={`--d: ${i * 40}ms`}
-        class:list={[
-          'glass-card p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1',
-          group.wide && 'sm:col-span-2 lg:col-span-1'
-        ]}
+        class="card-editorial p-5 sm:p-6 flex flex-col justify-between"
       >
-        <div>
-          <header class="mb-4 flex items-center justify-between gap-3 border-b border-line pb-3">
+        <div class="space-y-4">
+          <header class="flex items-center justify-between gap-3 border-b border-border pb-3">
             <div class="flex items-center gap-2.5">
-              <span class="grid size-8 place-items-center rounded-xl border border-line bg-surface-2 text-accent shadow-2xs">
+              <span class="grid size-8 place-items-center rounded-lg border border-border bg-surface-muted text-accent shadow-2xs">
                 <Icon name={group.icon} class="size-4" />
               </span>
               <h3 class="font-display text-sm font-bold text-fg">
-                {group.title}
+                <span class="lang-es">{group.title.es}</span>
+                <span class="lang-en">{group.title.en}</span>
               </h3>
             </div>
 
-            <div class="flex items-center gap-1.5 font-mono text-[10px]">
-              {group.badge && (
-                <span class="rounded-md border border-line bg-surface-2 px-2 py-0.5 text-muted">
-                  {group.badge}
-                </span>
-              )}
-              <span class="rounded-md border border-line bg-surface-2 px-1.5 py-0.5 text-muted">
-                {group.skills.length}
-              </span>
-            </div>
+            <span class="text-[10px] rounded border border-border bg-surface-muted px-2 py-0.5 text-muted font-bold">
+              {group.skills.length}
+            </span>
           </header>
 
           <ul class="flex flex-wrap gap-1.5">
@@ -51,10 +45,11 @@ import { skillGroups } from '../data/cv';
           </ul>
         </div>
 
-        <div class="mt-4 pt-3 border-t border-line/60 flex items-center justify-between text-[11px] font-mono text-muted">
+        <div class="mt-4 pt-3 border-t border-border/60 flex items-center justify-between text-xs text-muted font-medium">
           <span class="flex items-center gap-1.5">
             <span class="size-1.5 rounded-full bg-emerald-500"></span>
-            Uso en producción
+            <span class="lang-es">Uso en producción real</span>
+            <span class="lang-en">Used in real production</span>
           </span>
         </div>
       </article>

@@ -1,53 +1,79 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/plus-jakarta-sans';
 @import '@fontsource-variable/inter';
-@import '@fontsource-variable/space-grotesk';
 
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
 
-/* ---------- Tokens de Diseño Futurista & Alta Tecnología ---------- */
+/* ---------- Tokens de Diseño UI/UX Senior con Textura & Alto Contraste ---------- */
 :root {
-  --bg: #f8fafc;
+  /* Modo Claro ("Licht"): Fondo técnico texturizado + Tarjetas blancas nítidas con alto contraste */
+  --bg: #eef1f6;
   --surface: #ffffff;
-  --surface-2: #f1f5f9;
-  --surface-3: #e2e8f0;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --text: #0f172a;
-  --muted: #64748b;
+  --surface-muted: #e2e7ef;
+  --surface-elevated: #ffffff;
+  --border: #cbd5e1;
+  --border-strong: #94a3b8;
+  --text: #09090b;
+  --muted: #1e293b;
+  --muted-light: #475569;
 
-  --accent: #3b82f6;
-  --accent-2: #6366f1;
-  --accent-cyan: #06b6d4;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
+  /* Acento Modo Claro: Azul Cobalto Real con contraste perfecto sobre blanco */
+  --accent: #1d4ed8;
+  --accent-hover: #1e40af;
+  --accent-subtle: #dbeafe;
+  --accent-border: #93c5fd;
+  --accent-fg: #ffffff;
 
-  --glow: rgba(59, 130, 246, 0.15);
-  --btn-from: #1e293b;
-  --btn-to: #0f172a;
+  --emerald: #059669;
+  --emerald-subtle: #d1fae5;
+  --amber: #d97706;
+  --amber-subtle: #fef3c7;
+
+  /* Sombras definidas para dar volumen y evitar aspecto "plano/pálido" */
+  --card-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 4px 16px -2px rgba(15, 23, 42, 0.05);
+  --card-shadow-hover: 0 16px 32px -4px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+
+  /* Textura física: Matriz de micro-puntos + retícula arquitectónica */
+  --texture-dots: radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.10) 1.2px, transparent 0);
+  --texture-grid: linear-gradient(to right, rgba(15, 23, 42, 0.035) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(15, 23, 42, 0.035) 1px, transparent 1px);
+  --ambient-light: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(29, 78, 216, 0.08), transparent 70%);
 
   color-scheme: light;
 }
 
 [data-theme='dark'] {
-  --bg: #05070c;
-  --surface: #0a0d15;
-  --surface-2: #101420;
-  --surface-3: #181d2e;
-  --border: rgba(255, 255, 255, 0.09);
-  --border-strong: rgba(255, 255, 255, 0.20);
-  --text: #f8fafc;
+  /* Modo Oscuro ("Black"): Negro Obsidiana texturizado + Zafiro Eléctrico */
+  --bg: #07080c;
+  --surface: #0f1219;
+  --surface-muted: #161b24;
+  --surface-elevated: #1a202c;
+  --border: rgba(255, 255, 255, 0.11);
+  --border-strong: rgba(255, 255, 255, 0.24);
+  --text: #ffffff;
   --muted: #94a3b8;
+  --muted-light: #64748b;
 
-  --accent: #38bdf8;
-  --accent-2: #818cf8;
-  --accent-cyan: #22d3ee;
-  --accent-emerald: #10b981;
-  --accent-amber: #f59e0b;
-  --accent-purple: #a855f7;
+  /* Acento Modo Oscuro: Zafiro Eléctrico de alta visibilidad */
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-subtle: rgba(59, 130, 246, 0.15);
+  --accent-border: rgba(59, 130, 246, 0.35);
+  --accent-fg: #ffffff;
 
-  --glow: rgba(56, 189, 248, 0.2);
-  --btn-from: #38bdf8;
-  --btn-to: #818cf8;
+  --emerald: #10b981;
+  --emerald-subtle: rgba(16, 185, 129, 0.15);
+  --amber: #f59e0b;
+  --amber-subtle: rgba(245, 158, 11, 0.15);
+
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 8px 24px -4px rgba(0, 0, 0, 0.5);
+  --card-shadow-hover: 0 20px 40px -8px rgba(0, 0, 0, 0.75);
+
+  /* Textura física: Puntos tenues y cuadrícula estructural */
+  --texture-dots: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.09) 1.2px, transparent 0);
+  --texture-grid: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                  linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  --ambient-light: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(59, 130, 246, 0.10), transparent 70%);
 
   color-scheme: dark;
 }
@@ -55,42 +81,63 @@
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-surface-3: var(--surface-3);
-  --color-line: var(--border);
-  --color-line-strong: var(--border-strong);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
   --color-fg: var(--text);
   --color-muted: var(--muted);
+  --color-muted-light: var(--muted-light);
   --color-accent: var(--accent);
-  --color-accent-2: var(--accent-2);
-  --color-accent-cyan: var(--accent-cyan);
-  --color-accent-emerald: var(--accent-emerald);
-  --color-accent-amber: var(--accent-amber);
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Space Grotesk Variable', 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-border: var(--accent-border);
+  --color-accent-fg: var(--accent-fg);
+  --color-emerald: var(--emerald);
+  --color-emerald-subtle: var(--emerald-subtle);
+  --color-amber: var(--amber);
+  --color-amber-subtle: var(--amber-subtle);
+
+  --font-sans: 'Plus Jakarta Sans Variable', 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Plus Jakarta Sans Variable', 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Cascadia Code', 'JetBrains Mono', 'Fira Code', Consolas, monospace;
 }
 
-/* ---------- Base ---------- */
+/* ---------- Reglas de Visualización Bilingüe (Instantánea & Compatible con CSP) ---------- */
+html[data-lang='es'] .lang-en {
+  display: none !important;
+}
+html[data-lang='en'] .lang-es {
+  display: none !important;
+}
+
+/* ---------- Base & Tipografía ---------- */
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 5rem;
   }
 
   body {
     background-color: var(--bg);
     color: var(--text);
     font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.25s ease, color 0.25s ease;
     overflow-x: hidden;
   }
 
+  /* Optimización de suavizado de fuentes */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
   ::selection {
-    background: color-mix(in oklab, var(--accent) 30%, transparent);
-    color: var(--text);
+    background: var(--accent);
+    color: var(--accent-fg);
   }
 
   :focus-visible {
@@ -99,184 +146,141 @@
   }
 }
 
-/* ---------- Componentes & Efectos Futuristas ---------- */
+/* ---------- Componentes UI Profesionales ---------- */
 @layer components {
-  /* Fondo tecnológico con cuadrícula & gradientes */
-  .tech-ambient-bg {
-    background-image: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
-      radial-gradient(circle 500px at 80% 20%, rgba(99, 102, 241, 0.1), transparent),
-      radial-gradient(circle 600px at 20% 80%, rgba(6, 182, 212, 0.08), transparent);
+  /* Capas de textura de fondo (acaban con el fondo plano unicolor) */
+  .texture-ambient-light {
+    background-image: var(--ambient-light);
   }
 
-  .tech-grid {
-    background-size: 40px 40px;
-    background-image: 
-      linear-gradient(to right, var(--border) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, #000 30%, transparent 80%);
+  .texture-grid-mesh {
+    background-size: 56px 56px;
+    background-image: var(--texture-grid);
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, #000 30%, transparent 90%);
   }
 
-  /* Tarjetas con efecto de cristal (Glassmorphism) */
-  .glass-card {
-    background-color: color-mix(in oklab, var(--surface) 80%, transparent);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+  .texture-dot-matrix {
+    background-size: 28px 28px;
+    background-image: var(--texture-dots);
+  }
+
+  /* Tarjeta de estilo editorial limpio con volumen y bordes nítidos */
+  .card-editorial {
+    background-color: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 1.25rem;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 1rem;
+    box-shadow: var(--card-shadow);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   }
 
-  .glass-card:hover {
+  .card-editorial:hover {
     border-color: var(--border-strong);
-    box-shadow: 0 20px 40px -15px var(--glow);
+    box-shadow: var(--card-shadow-hover);
     transform: translateY(-2px);
   }
 
-  /* Bordes brillantes animados (Border Beam) */
-  .glow-border {
-    position: relative;
-  }
-  .glow-border::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), var(--accent-2), transparent);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0.7;
-  }
-
-  /* Botones con estilo futurista */
+  /* Botones limpios & táctiles con alto contraste */
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    border-radius: 0.75rem;
-    padding: 0.625rem 1.25rem;
+    border-radius: 0.625rem;
+    padding: 0.5625rem 1.125rem;
     font-size: 0.875rem;
     font-weight: 600;
     white-space: nowrap;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: pointer;
     text-decoration: none;
-    position: relative;
-    overflow: hidden;
   }
 
   .btn:hover {
     transform: translateY(-1px);
   }
 
-  .btn-primary {
-    color: #ffffff;
-    background-image: linear-gradient(135deg, #2563eb, #4f46e5);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 4px 20px -4px rgba(37, 99, 235, 0.5);
+  .btn:active {
+    transform: translateY(0);
   }
 
-  [data-theme='dark'] .btn-primary {
-    color: #07090e;
-    background-image: linear-gradient(135deg, #38bdf8, #818cf8);
-    border: 1px solid #ffffff;
-    box-shadow: 0 0 25px -4px rgba(56, 189, 248, 0.6);
+  .btn-primary {
+    color: var(--accent-fg);
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12);
   }
 
   .btn-primary:hover {
-    filter: brightness(1.1);
+    background-color: var(--accent-hover);
+    border-color: var(--accent-hover);
+    box-shadow: 0 4px 14px -2px rgba(29, 78, 216, 0.35);
+  }
+
+  [data-theme='dark'] .btn-primary:hover {
+    box-shadow: 0 4px 18px -2px rgba(59, 130, 246, 0.45);
   }
 
   .btn-secondary {
     color: var(--text);
     background-color: var(--surface);
     border: 1px solid var(--border);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   }
 
   .btn-secondary:hover {
-    background-color: var(--surface-2);
-    border-color: var(--accent);
+    background-color: var(--surface-muted);
+    border-color: var(--border-strong);
+  }
+
+  .btn-accent-subtle {
+    color: var(--accent);
+    background-color: var(--accent-subtle);
+    border: 1px solid var(--accent-border);
+    font-weight: 700;
+  }
+
+  .btn-accent-subtle:hover {
+    background-color: var(--accent);
+    color: var(--accent-fg);
   }
 
   .icon-btn {
     display: grid;
     place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 0.75rem;
+    width: 2.375rem;
+    height: 2.375rem;
+    border-radius: 0.5rem;
     border: 1px solid var(--border);
     background-color: var(--surface);
     color: var(--muted);
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
     text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
   }
 
   .icon-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-    background-color: var(--surface-2);
-    transform: translateY(-2px);
+    color: var(--text);
+    border-color: var(--border-strong);
+    background-color: var(--surface-muted);
+    transform: translateY(-1px);
   }
 
-  /* Shimmer animado para badges y títulos */
-  .text-shimmer {
-    background: linear-gradient(
-      90deg,
-      var(--text) 0%,
-      var(--accent) 50%,
-      var(--text) 100%
-    );
-    background-size: 200% auto;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: shimmer 4s linear infinite;
-  }
-
-  /* Header flotante con glassmorphism */
+  /* Header sticky con blur refinado y borde visible */
   #site-header.is-scrolled {
-    background-color: color-mix(in oklab, var(--bg) 80%, transparent);
+    background-color: color-mix(in srgb, var(--bg) 90%, transparent);
     border-bottom: 1px solid var(--border);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
 }
 
-/* ---------- Animaciones de Vanguardia ---------- */
-@keyframes shimmer {
-  to {
-    background-position: 200% center;
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
-}
-
-/* Reveal en scroll con entrada cinematográfica */
+/* Reveal en scroll con entrada sutil y sin lag */
 .reveal-ready [data-reveal] {
   opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(14px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: var(--d, 0ms);
 }
 

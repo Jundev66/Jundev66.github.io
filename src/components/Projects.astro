@@ -3,268 +3,398 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Section from './Section.astro';
 import SkillChip from './SkillChip.astro';
-import ProjectLogo from './ProjectLogo.astro';
 import { projects } from '../data/cv';
 import corebizApp from '../assets/projects/corebiz-app.png';
 import cryotechReports from '../assets/projects/cryotech-reports.png';
 import cryotechReportsDark from '../assets/projects/cryotech-reports-dark.png';
 
-const komboChannels = [
-  { label: 'Portal cliente', icon: 'lucide:globe', desc: 'Catálogo interactivo & checkout' },
-  { label: 'Bots WhatsApp/Telegram', icon: 'simple-icons:whatsapp', desc: 'Atención conversacional' },
-  { label: 'Punto de venta y caja', icon: 'lucide:receipt', desc: 'Sincronización hacia cocina' },
-];
+const corebiz = projects.find((p) => p.name === 'CoreBiz') || projects[0];
+const cryotech = projects.find((p) => p.name === 'CryoTech') || projects[1];
+const kombo = projects.find((p) => p.name === 'Kombo') || projects[2];
+const tornealo = projects.find((p) => p.name === 'Tornealo App') || projects[3];
 ---
 
 <Section
   id="proyectos"
-  eyebrow="Ingeniería & Producto"
-  title="Sistemas y plataformas en producción"
-  subtitle="Arquitecturas completas construidas desde los requerimientos de negocio: aislamiento multi-tenant, DDD táctico, servidores Linux y suites de pruebas automatizadas."
+  eyebrow={{ es: 'Casos de Estudio & SaaS', en: 'Case Studies & SaaS' }}
+  title={{ es: 'Plataformas construidas para entornos reales', en: 'Platforms built for real-world operations' }}
+  subtitle={{
+    es: 'Sistemas desarrollados de punta a punta: aislamiento multi-tenant con PostgreSQL RLS, DDD táctico, servidores Linux y suites automatizadas de pruebas.',
+    en: 'End-to-end architectures: multi-tenant PostgreSQL RLS isolation, tactical DDD, Linux servers, and automated test suites.',
+  }}
 >
-  <!-- Selector Interactivo de Proyectos (Tabs) -->
-  <div data-reveal class="flex flex-wrap items-center justify-center gap-2 mb-8">
-    {projects.map((p, idx) => (
-      <button
-        type="button"
-        data-project-tab={p.logo}
-        class:list={[
-          'project-tab group flex items-center gap-2.5 rounded-xl border border-line bg-surface/80 px-4 py-2.5 text-xs font-mono font-medium transition-all duration-300 hover:border-accent hover:bg-surface-2 cursor-pointer',
-          idx === 0 && 'is-active ring-1 ring-accent border-accent bg-surface-2 text-fg shadow-lg shadow-accent/10'
-        ]}
-      >
-        <ProjectLogo logo={p.logo} name={p.name} class="size-5 rounded-md" />
-        <span class="font-bold text-fg group-hover:text-accent transition-colors">{p.name}</span>
-        <span class="text-[10px] text-muted hidden sm:inline">· {p.subtitle}</span>
-      </button>
-    ))}
-  </div>
+  <div class="space-y-12">
+    
+    <!-- 1. PROYECTO INSIGNIA: COREBIZ (MULTI-TENANT ERP) -->
+    <article data-reveal class="card-editorial p-6 sm:p-8 lg:p-10 space-y-8">
+      
+      <!-- Encabezado de CoreBiz -->
+      <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6">
+        <div>
+          <div class="flex items-center gap-2 text-xs text-accent font-bold tracking-wider mb-1">
+            <span class="size-1.5 rounded-full bg-accent"></span>
+            <span>CASE STUDY 01 // SAAS MULTI-TENANT</span>
+            <span>·</span>
+            <span class="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
+              <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span class="lang-es">{corebiz.status.es}</span>
+              <span class="lang-en">{corebiz.status.en}</span>
+            </span>
+          </div>
+          <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-fg">{corebiz.name}</h3>
+          <p class="text-sm text-muted mt-0.5">
+            <span class="lang-es">{corebiz.subtitle.es}</span>
+            <span class="lang-en">{corebiz.subtitle.en}</span>
+          </p>
+        </div>
 
-  <!-- Contenedor de Proyectos con Transición Fluida -->
-  <div class="relative min-h-[580px]">
-    {projects.map((project, idx) => {
-      const isLive = project.statusTone === 'emerald';
-      return (
-        <div
-          data-project-panel={project.logo}
-          class:list={[
-            'project-panel transition-all duration-500 ease-out',
-            idx !== 0 && 'hidden opacity-0 translate-y-4'
-          ]}
-        >
-          <article class="glass-card glow-border overflow-hidden p-6 sm:p-8 lg:p-10 shadow-2xl">
-            
-            <!-- Barra Superior del Proyecto -->
-            <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-6">
-              <div class="flex items-center gap-4">
-                <ProjectLogo logo={project.logo} name={project.name} class="size-12 rounded-xl shadow-md" />
-                <div>
-                  <div class="flex flex-wrap items-center gap-3">
-                    <h3 class="font-display text-2xl font-bold text-fg sm:text-3xl">
-                      {project.name}
-                    </h3>
-                    <span class:list={[
-                      'inline-flex items-center gap-1.5 rounded-full border px-3 py-0.5 text-xs font-mono font-medium',
-                      isLive 
-                        ? 'border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400' 
-                        : 'border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400'
-                    ]}>
-                      <span class:list={['size-1.5 rounded-full animate-pulse', isLive ? 'bg-emerald-500' : 'bg-amber-500']} />
-                      {project.status}
-                    </span>
-                  </div>
-                  <p class="text-sm text-muted mt-1">{project.subtitle}</p>
-                </div>
-              </div>
+        <div class="flex items-center gap-2.5 text-xs font-semibold">
+          {corebiz.demo && (
+            <a
+              href={corebiz.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-primary !px-4 !py-2"
+            >
+              <span class="lang-es">Probar App en Vivo</span>
+              <span class="lang-en">Open Live Demo</span>
+              <Icon name="lucide:arrow-up-right" class="size-3.5" />
+            </a>
+          )}
+          {corebiz.repo && (
+            <a
+              href={corebiz.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-secondary !px-3.5 !py-2"
+            >
+              <Icon name="simple-icons:github" class="size-3.5" />
+              <span>GitHub</span>
+            </a>
+          )}
+        </div>
+      </header>
 
-              <!-- Botones de Acción Directa -->
-              <div class="flex items-center gap-3">
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-primary"
-                  >
-                    <span>Probar Demo en vivo</span>
-                    <Icon name="lucide:arrow-up-right" class="size-4" />
-                  </a>
-                )}
-                {project.repo && (
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-secondary"
-                  >
-                    <Icon name="simple-icons:github" class="size-4" />
-                    <span>Ver Código</span>
-                  </a>
-                )}
-              </div>
-            </header>
+      <!-- Grid de 2 Columnas: Descripción Técnica + Vista Previa -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Columna Izquierda: Arquitectura & Retos (6 cols) -->
+        <div class="lg:col-span-6 space-y-6">
+          <p class="text-sm leading-relaxed text-muted">
+            <span class="lang-es">{corebiz.description.es}</span>
+            <span class="lang-en">{corebiz.description.en}</span>
+          </p>
 
-            <!-- Grid de Contenido: 2 Columnas -->
-            <div class="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-10">
-              
-              <!-- Columna Izquierda: Arquitectura & Retos de Ingeniería (6 cols) -->
-              <div class="lg:col-span-6 flex flex-col justify-between space-y-6">
-                <div>
-                  <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-accent mb-2">
-                    Objetivo & Solución Técnica
-                  </h4>
-                  <p class="text-sm leading-relaxed text-muted sm:text-base">
-                    {project.description}
-                  </p>
+          <!-- Métricas Destacadas -->
+          <div class="grid grid-cols-3 gap-3 text-center">
+            {corebiz.metrics.map((m) => (
+              <div class="card-editorial !rounded-lg p-2.5 bg-surface-muted">
+              <span class="text-xs font-bold text-accent block">
+                <span class="lang-es">{m.es}</span>
+                <span class="lang-en">{m.en}</span>
+              </span>
+            </div>
+          ))}
+        </div>
 
-                  <div class="mt-6 space-y-3">
-                    <h4 class="font-mono text-xs font-bold uppercase tracking-wider text-fg">
-                      Puntos Clave de Arquitectura:
-                    </h4>
-                    <ul class="space-y-2.5">
-                      {project.bullets.map((bullet) => (
-                        <li class="flex items-start gap-2.5 text-xs sm:text-sm text-muted leading-relaxed">
-                          <Icon name="lucide:check-circle-2" class="size-4 shrink-0 text-accent mt-0.5" />
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+        <!-- Puntos Clave de Arquitectura -->
+        <ul class="space-y-2.5 text-xs text-muted font-medium">
+          {corebiz.bullets.map((b) => (
+            <li class="flex items-start gap-2.5 leading-relaxed">
+              <Icon name="lucide:check" class="size-4 text-accent shrink-0 mt-0.5" />
+              <span>
+                <span class="lang-es">{b.es}</span>
+                <span class="lang-en">{b.en}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
 
-                <!-- Métricas & Stack Utilizado -->
-                <div class="space-y-4 pt-6 border-t border-line">
-                  <!-- Métricas destacadas con badges -->
-                  <div class="flex flex-wrap items-center gap-2">
-                    {project.metrics.map((m) => (
-                      <span class="rounded-lg border border-line bg-surface-2/80 px-2.5 py-1 font-mono text-xs text-fg font-medium">
-                        {m}
-                      </span>
-                    ))}
-                  </div>
+        <!-- Stack de Tecnologías -->
+        <div class="pt-2">
+          <span class="block text-xs font-semibold text-muted uppercase tracking-wider mb-2">
+            <span class="lang-es">Stack Tecnológico:</span>
+            <span class="lang-en">Technology Stack:</span>
+          </span>
+          <ul class="flex flex-wrap gap-1.5">
+            {corebiz.stack.map((s) => (
+              <SkillChip skill={s} size="sm" />
+            ))}
+          </ul>
+        </div>
+      </div>
 
-                  <!-- Stack con chips -->
-                  <ul class="flex flex-wrap gap-1.5 pt-1">
-                    {project.stack.map((skill) => (
-                      <SkillChip skill={skill} size="sm" />
-                    ))}
-                  </ul>
-                </div>
-              </div>
+      <!-- Columna Derecha: Screenshot con Marco Limpio (6 cols) -->
+      <div class="lg:col-span-6 space-y-3">
+        <div class="rounded-xl border border-border bg-surface-muted overflow-hidden shadow-lg group">
+          
+          <!-- Barra superior simulada -->
+          <div class="flex items-center justify-between border-b border-border bg-surface px-4 py-2 text-xs text-muted font-medium">
+            <div class="flex items-center gap-1.5">
+              <span class="size-2.5 rounded-full bg-border-strong"></span>
+              <span class="size-2.5 rounded-full bg-border-strong"></span>
+              <span class="size-2.5 rounded-full bg-border-strong"></span>
+            </div>
+            <span class="text-xs text-muted truncate max-w-[200px] font-mono">corebiz-web.vercel.app</span>
+            <span class="text-xs text-emerald-600 dark:text-emerald-400 font-bold">&lt;85ms</span>
+          </div>
 
-              <!-- Columna Derecha: Vista Previa Visual del Producto (6 cols) -->
-              <div class="lg:col-span-6 flex items-center">
-                <div class="w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-xl">
-                  
-                  <!-- Barra simulada de aplicación -->
-                  <div class="flex items-center justify-between border-b border-line bg-surface-2/70 px-4 py-2.5 text-xs font-mono text-muted">
-                    <div class="flex items-center gap-1.5">
-                      <span class="size-2.5 rounded-full bg-red-500/70"></span>
-                      <span class="size-2.5 rounded-full bg-amber-500/70"></span>
-                      <span class="size-2.5 rounded-full bg-emerald-500/70"></span>
-                      <span class="ml-2 font-medium text-fg truncate">
-                        {project.demo ? new URL(project.demo).hostname : `${project.name.toLowerCase()}.internal`}
-                      </span>
-                    </div>
-                    <Icon name="lucide:external-link" class="size-3.5 text-muted" />
-                  </div>
+          <!-- Imagen del Dashboard -->
+          <div class="relative aspect-[16/10] overflow-hidden bg-surface">
+            <Image
+              src={corebizApp}
+              alt="CoreBiz App Dashboard"
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-102"
+            />
+          </div>
+        </div>
 
-                  <!-- Capturas reales según el proyecto -->
-                  {project.logo === 'corebiz' && (
-                    <div class="aspect-[16/10] overflow-hidden bg-surface">
-                      <Image
-                        src={corebizApp}
-                        alt="Pantalla principal de CoreBiz"
-                        widths={[480, 720, 1080]}
-                        sizes="(min-width: 1024px) 520px, 100vw"
-                        class="size-full object-cover transition-transform duration-500 hover:scale-103"
-                      />
-                    </div>
-                  )}
+        <div class="flex items-center justify-between text-xs text-muted px-1 font-medium">
+          <span>
+            <span class="lang-es">Aislamiento: <strong>PostgreSQL RLS</strong></span>
+            <span class="lang-en">Isolation: <strong>PostgreSQL RLS</strong></span>
+          </span>
+          <span>
+            <span class="lang-es">Cobertura: <strong>497 Tests en CI</strong></span>
+            <span class="lang-en">Coverage: <strong>497 CI Tests</strong></span>
+          </span>
+        </div>
+      </div>
 
-                  {project.logo === 'cryotech' && (
-                    <div class="aspect-[16/10] overflow-hidden bg-surface">
-                      <Image
-                        src={cryotechReports}
-                        alt="Panel de Analítica de CryoTech"
-                        widths={[540, 800, 1080]}
-                        sizes="(min-width: 1024px) 520px, 100vw"
-                        class="size-full object-cover dark:hidden transition-transform duration-500 hover:scale-103"
-                      />
-                      <Image
-                        src={cryotechReportsDark}
-                        alt="Panel de Analítica de CryoTech en modo oscuro"
-                        widths={[540, 800, 1080]}
-                        sizes="(min-width: 1024px) 520px, 100vw"
-                        class="size-full object-cover hidden dark:block transition-transform duration-500 hover:scale-103"
-                      />
-                    </div>
-                  )}
+    </div>
+  </article>
 
-                  {project.logo === 'kombo' && (
-                    <div class="p-6 space-y-4 bg-surface">
-                      <p class="text-xs font-mono uppercase tracking-wider text-muted font-bold">
-                        Arquitectura Multi-Canal Sincronizada en Tiempo Real:
-                      </p>
-                      <div class="space-y-2.5">
-                        {komboChannels.map((ch) => (
-                          <div class="flex items-center gap-3 rounded-xl border border-line bg-surface-2/60 p-3 transition-transform hover:scale-102">
-                            <Icon name={ch.icon} class="size-5 text-accent shrink-0" />
-                            <div class="min-w-0">
-                              <p class="font-display text-xs font-bold text-fg">{ch.label}</p>
-                              <p class="text-xs text-muted truncate">{ch.desc}</p>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <div class="rounded-xl border border-line bg-surface-2/40 p-3 text-center font-mono text-xs text-muted">
-                        Colas asíncronas en Redis · Contenedores Docker en Linux
-                      </div>
-                    </div>
-                  )}
+  <!-- 2. GRID SECUNDARIO: CRYOTECH, KOMBO & TORNEALO (3 COLUMNAS) -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+    
+    <!-- TARJETA CRYOTECH -->
+    <article data-reveal style="--d: 80ms" class="card-editorial p-6 sm:p-8 flex flex-col justify-between space-y-6">
+      <div class="space-y-5">
+        <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
+          <div>
+            <span class="text-xs font-bold text-accent tracking-wider block mb-1 uppercase">
+              CASE STUDY 02 // MULTIMODAL AI & OCR
+            </span>
+            <h3 class="font-display text-2xl font-bold text-fg">{cryotech.name}</h3>
+            <p class="text-xs text-muted mt-0.5 font-medium">
+              <span class="lang-es">{cryotech.subtitle.es}</span>
+              <span class="lang-en">{cryotech.subtitle.en}</span>
+            </p>
+          </div>
 
-                </div>
-              </div>
+          {cryotech.repo && (
+            <a
+              href={cryotech.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icon-btn size-8"
+              title="GitHub Repo"
+              aria-label="GitHub Repo"
+            >
+              <Icon name="simple-icons:github" class="size-4" />
+            </a>
+          )}
+        </div>
 
+        <p class="text-xs leading-relaxed text-muted">
+          <span class="lang-es">{cryotech.description.es}</span>
+          <span class="lang-en">{cryotech.description.en}</span>
+        </p>
+
+        <!-- Captura de CryoTech -->
+        <div class="rounded-xl overflow-hidden border border-border aspect-[16/9] bg-surface-muted">
+          <Image
+            src={cryotechReports}
+            alt="CryoTech Reports"
+            class="w-full h-full object-cover object-top dark:hidden"
+          />
+          <Image
+            src={cryotechReportsDark}
+            alt="CryoTech Reports Dark"
+            class="w-full h-full object-cover object-top hidden dark:block"
+          />
+        </div>
+
+        <!-- Bullets -->
+        <ul class="space-y-2 text-xs text-muted font-medium">
+          {cryotech.bullets.map((b) => (
+            <li class="flex items-start gap-2 leading-relaxed">
+              <Icon name="lucide:check" class="size-3.5 text-accent shrink-0 mt-0.5" />
+              <span>
+                <span class="lang-es">{b.es}</span>
+                <span class="lang-en">{b.en}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="pt-4 border-t border-border">
+        <ul class="flex flex-wrap gap-1.5">
+          {cryotech.stack.map((s) => (
+            <SkillChip skill={s} size="sm" />
+          ))}
+        </ul>
+      </div>
+    </article>
+
+    <!-- TARJETA KOMBO -->
+    <article data-reveal style="--d: 140ms" class="card-editorial p-6 sm:p-8 flex flex-col justify-between space-y-6">
+      <div class="space-y-5">
+        <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
+          <div>
+            <span class="text-xs font-bold text-accent tracking-wider block mb-1 uppercase">
+              CASE STUDY 03 // REAL-TIME & WEBSOCKETS
+            </span>
+            <h3 class="font-display text-2xl font-bold text-fg">{kombo.name}</h3>
+            <p class="text-xs text-muted mt-0.5 font-medium">
+              <span class="lang-es">{kombo.subtitle.es}</span>
+              <span class="lang-en">{kombo.subtitle.en}</span>
+            </p>
+          </div>
+
+          {kombo.repo && (
+            <a
+              href={kombo.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="icon-btn size-8"
+              title="GitHub Repo"
+              aria-label="GitHub Repo"
+            >
+              <Icon name="simple-icons:github" class="size-4" />
+            </a>
+          )}
+        </div>
+
+        <p class="text-xs leading-relaxed text-muted">
+          <span class="lang-es">{kombo.description.es}</span>
+          <span class="lang-en">{kombo.description.en}</span>
+        </p>
+
+        <!-- Bloque de Arquitectura Multicanal -->
+        <div class="card-editorial !rounded-xl p-4 bg-surface-muted space-y-2.5 text-xs">
+          <div class="flex items-center justify-between border-b border-border pb-1.5">
+            <span class="text-muted font-medium">
+              <span class="lang-es">Canales de entrada:</span>
+              <span class="lang-en">Intake channels:</span>
+            </span>
+            <span class="font-bold text-fg">Web + Bot + POS</span>
+          </div>
+          <div class="flex items-center justify-between border-b border-border pb-1.5">
+            <span class="text-muted font-medium">
+              <span class="lang-es">Despacho de cocina:</span>
+              <span class="lang-en">Kitchen Display:</span>
+            </span>
+            <span class="font-bold text-fg">KDS Sincronizado</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <span class="text-muted font-medium">
+              <span class="lang-es">Ecosistema IA:</span>
+              <span class="lang-en">AI Ecosystem:</span>
+            </span>
+            <span class="font-bold text-accent">AGENTS.md Context</span>
+          </div>
+        </div>
+
+        <!-- Bullets -->
+        <ul class="space-y-2 text-xs text-muted font-medium">
+          {kombo.bullets.map((b) => (
+            <li class="flex items-start gap-2 leading-relaxed">
+              <Icon name="lucide:check" class="size-3.5 text-accent shrink-0 mt-0.5" />
+              <span>
+                <span class="lang-es">{b.es}</span>
+                <span class="lang-en">{b.en}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+        <div class="pt-4 border-t border-border">
+          <ul class="flex flex-wrap gap-1.5">
+            {kombo.stack.map((s) => (
+              <SkillChip skill={s} size="sm" />
+            ))}
+          </ul>
+        </div>
+      </article>
+
+      <!-- TARJETA TORNEALO APP -->
+      <article data-reveal style="--d: 200ms" class="card-editorial p-6 sm:p-8 flex flex-col justify-between space-y-6">
+        <div class="space-y-5">
+          <div class="flex items-center justify-between gap-3 border-b border-border pb-4">
+            <div>
+              <span class="text-xs font-bold text-accent tracking-wider block mb-1 uppercase">
+                CASE STUDY 04 // FREEMIUM & SPORTS
+              </span>
+              <h3 class="font-display text-2xl font-bold text-fg">{tornealo.name}</h3>
+              <p class="text-xs text-muted mt-0.5 font-medium">
+                <span class="lang-es">{tornealo.subtitle.es}</span>
+                <span class="lang-en">{tornealo.subtitle.en}</span>
+              </p>
             </div>
 
-          </article>
+            <span class="rounded-full border border-sky-500/30 bg-sky-500/10 px-2.5 py-0.5 text-xs font-semibold text-sky-600 dark:text-sky-400">
+              <span class="lang-es">{tornealo.status.es}</span>
+              <span class="lang-en">{tornealo.status.en}</span>
+            </span>
+          </div>
+
+          <p class="text-xs leading-relaxed text-muted">
+            <span class="lang-es">{tornealo.description.es}</span>
+            <span class="lang-en">{tornealo.description.en}</span>
+          </p>
+
+          <!-- Bloque de Arquitectura Freemium -->
+          <div class="card-editorial !rounded-xl p-4 bg-surface-muted space-y-2.5 text-xs">
+            <div class="flex items-center justify-between border-b border-border pb-1.5">
+              <span class="text-muted font-medium">
+                <span class="lang-es">Modelo de negocio:</span>
+                <span class="lang-en">Business model:</span>
+              </span>
+              <span class="font-bold text-fg">Freemium Escalable</span>
+            </div>
+            <div class="flex items-center justify-between border-b border-border pb-1.5">
+              <span class="text-muted font-medium">
+                <span class="lang-es">Tarjetas digitales:</span>
+                <span class="lang-en">Digital cards:</span>
+              </span>
+              <span class="font-bold text-fg">Generación Dinámica</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-muted font-medium">
+                <span class="lang-es">Métricas y analíticas:</span>
+                <span class="lang-en">Metrics & analytics:</span>
+              </span>
+              <span class="font-bold text-accent">Tablas en Tiempo Real</span>
+            </div>
+          </div>
+
+          <!-- Bullets -->
+          <ul class="space-y-2 text-xs text-muted font-medium">
+            {tornealo.bullets.map((b) => (
+              <li class="flex items-start gap-2 leading-relaxed">
+                <Icon name="lucide:check" class="size-3.5 text-accent shrink-0 mt-0.5" />
+                <span>
+                  <span class="lang-es">{b.es}</span>
+                  <span class="lang-en">{b.en}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
-      );
-    })}
+
+        <div class="pt-4 border-t border-border">
+          <ul class="flex flex-wrap gap-1.5">
+            {tornealo.stack.map((s) => (
+              <SkillChip skill={s} size="sm" />
+            ))}
+          </ul>
+        </div>
+      </article>
+
+    </div>
+
   </div>
 </Section>
-
-<script>
-  // Script para alternar proyectos dinámicamente con animación fluida
-  const tabs = document.querySelectorAll<HTMLButtonElement>('[data-project-tab]');
-  const panels = document.querySelectorAll<HTMLElement>('[data-project-panel]');
-
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const targetId = tab.dataset.projectTab;
-
-      // Actualizar estilos de tabs
-      tabs.forEach((t) => {
-        t.classList.remove('is-active', 'ring-1', 'ring-accent', 'border-accent', 'bg-surface-2', 'shadow-lg');
-      });
-      tab.classList.add('is-active', 'ring-1', 'ring-accent', 'border-accent', 'bg-surface-2', 'shadow-lg');
-
-      // Actualizar paneles con animación de fade y slide
-      panels.forEach((panel) => {
-        if (panel.dataset.projectPanel === targetId) {
-          panel.classList.remove('hidden');
-          // Pequeño timeout para activar la transición CSS
-          setTimeout(() => {
-            panel.classList.remove('opacity-0', 'translate-y-4');
-          }, 20);
-        } else {
-          panel.classList.add('opacity-0', 'translate-y-4');
-          setTimeout(() => {
-            panel.classList.add('hidden');
-          }, 250);
-        }
-      });
-    });
-  });
-</script>
