@@ -63,7 +63,7 @@ export const profile = {
     es: 'Ingeniero de Software Full-Stack con 4 años de experiencia creando plataformas SaaS B2B y sistemas ERP bajo el paradigma de arquitectura evolutiva y agnóstico a la tecnología: diseño y lanzo MVPs ágiles, escalo alta concurrencia y modernizo plataformas legacy sin interrumpir la operación, combinando velocidad en producto con IA (MCP, RAG) y rigor corporativo (+500 pruebas en CI/CD).',
     en: 'Full-Stack Software Engineer with 4 years of experience building B2B SaaS and ERP platforms under an evolutionary, technology-agnostic architecture paradigm: I design and ship agile MVPs, scale high-concurrency systems, and modernize legacy platforms with zero downtime, pairing AI delivery speed (MCP, RAG) with corporate engineering rigor (500+ tests in CI/CD).',
   },
-  location: 'Carúpano, Venezuela (Remoto / Híbrido)',
+  location: 'Caracas, Venezuela (Remoto / Híbrido)',
   availability: {
     es: 'Disponibilidad inmediata · Remoto o híbrido',
     en: 'Immediate availability · Remote or hybrid',
