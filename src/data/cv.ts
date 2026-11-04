@@ -28,7 +28,7 @@ export interface Project {
   bullets: LocalizedString[];
   metrics: LocalizedString[];
   stack: Skill[];
-  logo: 'corebiz' | 'kombo' | 'cryotech' | 'tornealo';
+  logo: 'corebiz' | 'conciliabot' | 'kombo' | 'cryotech' | 'tornealo';
   repo?: string;
   demo?: string;
 }
@@ -46,6 +46,15 @@ export interface ADR {
   metrics: { label: LocalizedString; val: string }[];
   actionText: LocalizedString;
   actionUrl: string;
+}
+
+export interface CourseCertification {
+  title: LocalizedString;
+  issuer: string;
+  issueDate: LocalizedString;
+  url: string;
+  certificatePdf: string;
+  skills: string[];
 }
 
 export const profile = {
@@ -202,6 +211,53 @@ export const projects: Project[] = [
     logo: 'corebiz',
     repo: 'https://github.com/Jundev66/CoreBiz',
     demo: 'https://corebiz-web.vercel.app',
+  },
+  {
+    name: 'ConciliaBot',
+    subtitle: {
+      es: 'Asistente BYOC de conciliación ERP con IA y MCP',
+      en: 'Enterprise BYOC reconciliation assistant with AI & MCP',
+    },
+    status: {
+      es: 'Producción Local (BYOC)',
+      en: 'Live Local BYOC',
+    },
+    statusTone: 'emerald',
+    description: {
+      es: 'Asistente on-premise que valida, concilia y liquida facturas y notas de entrega contra ERPs (CoreBiz y protocolo MCP) bajo el paradigma Bring Your Own Cloud, garantizando que los datos contables nunca salgan del perímetro del cliente.',
+      en: 'On-premise assistant validating, reconciling, and settling invoice and delivery note records against ERPs (CoreBiz & MCP) under the Bring Your Own Cloud paradigm, guaranteeing accounting data never leaves the client perimeter.',
+    },
+    bullets: [
+      {
+        es: 'Arquitectura on-premise en FastAPI + SQLite con bitácora inmutable (WORM) encadenada por hashes SHA-256 verificables vía API.',
+        en: 'On-premise FastAPI + SQLite architecture with append-only WORM audit trail chained via SHA-256 hashes provably verifiable via API.',
+      },
+      {
+        es: 'Integración M2M directa con CoreBiz para conciliación de notas de entrega y confirmación física tolerante a fallos.',
+        en: 'Direct machine-to-machine bridge with CoreBiz for delivery note matching and durable, fail-safe physical confirmation.',
+      },
+      {
+        es: 'Seguridad defensiva en profundidad: mitigación SSRF perimetral, cifrado en reposo AES-256-GCM y defensa anti-prompt injection.',
+        en: 'Defense-in-depth security: perimeter SSRF mitigation, AES-256-GCM encryption at rest, and heuristic prompt injection defense.',
+      },
+    ],
+    metrics: [
+      { es: 'Bitácora WORM SHA-256', en: 'WORM SHA-256 Audit' },
+      { es: 'Servidor MCP & CoreBiz', en: 'MCP & CoreBiz Bridge' },
+      { es: 'Evals con Golden Set', en: 'Golden Set Evals' },
+    ],
+    stack: [
+      { name: 'Python', icon: 'simple-icons:python', color: '#3776AB' },
+      { name: 'FastAPI', icon: 'simple-icons:fastapi', color: '#009688' },
+      { name: 'React', icon: 'simple-icons:react', color: '#149ECA' },
+      { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+      { name: 'Model Context Protocol (MCP)', icon: 'lucide:cpu', color: '#3B82F6' },
+      { name: 'SQLite', icon: 'simple-icons:sqlite', color: '#003B57' },
+      { name: 'Docker', icon: 'simple-icons:docker', color: '#2496ED' },
+      { name: 'Caddy', icon: 'simple-icons:caddy', color: '#22B473' },
+    ],
+    logo: 'conciliabot',
+    repo: 'https://github.com/Jundev66/conciliabot',
   },
   {
     name: 'CryoTech',
@@ -500,6 +556,45 @@ export const adrs: ADR[] = [
     },
     actionUrl: 'https://github.com/Jundev66/CoreBiz',
   },
+  {
+    id: 'adr-05',
+    num: 'ADR-005',
+    title: {
+      es: 'Arquitectura BYOC vs SaaS Multi-Tenant y Bitácora WORM',
+      en: 'BYOC Architecture vs Multi-Tenant SaaS & WORM Audit Trail',
+    },
+    system: 'ConciliaBot (Python FastAPI + SQLite WORM)',
+    badge: {
+      es: 'SEGURIDAD & PRIVACIDAD BYOC',
+      en: 'BYOC SECURITY & PRIVACY',
+    },
+    summary: {
+      es: 'Aislamiento físico on-premise sin sobreingeniería de RLS, garantizando soberanía de datos contables y bitácora criptográfica inmutable.',
+      en: 'Physical on-premise isolation avoiding RLS over-engineering, guaranteeing accounting data sovereignty and an immutable cryptographic audit log.',
+    },
+    context: {
+      es: 'Al conciliar facturas de proveedores y notas de entrega con datos contables sensibles, un SaaS multi-tenant compartido obliga a custodiar secretos de terceros y arriesga fugas de memoria o caché entre inquilinos.',
+      en: 'When reconciling sensitive invoices and supplier delivery notes, a shared multi-tenant SaaS forces third-party secret custody and risks cross-tenant caching or data exposure.',
+    },
+    decision: {
+      es: 'Diseñamos el sistema bajo el paradigma BYOC (Bring Your Own Cloud / On-Premise):\n1. Una instalación aislada por cliente (FastAPI + SQLite local), sin columna tenant_id ni riesgo de fuga cruzada.\n2. Bitácora WORM con cadena de hashes SHA-256 (prev_hash -> hash) verificable matemáticamente en tiempo real vía API.\n3. Seguridad perimetral: Cifrado en reposo AES-256-GCM y mitigación estricta de SSRF bloqueando metadatos de nube.\n4. Protocolo MCP para integración estandarizada con ERPs externos y CoreBiz.',
+      en: 'Engineered under the BYOC (Bring Your Own Cloud / On-Premise) paradigm:\n1. Dedicated local deployment per client (FastAPI + local SQLite), eliminating tenant_id leakage risks and hosting liabilities.\n2. Append-only WORM audit trail with SHA-256 hash chains (prev_hash -> hash) provably verifiable in real time via API.\n3. Perimeter defense: AES-256-GCM encryption at rest and strict SSRF mitigation blocking cloud metadata endpoints.\n4. Standardized Model Context Protocol (MCP) server for external ERP and CoreBiz integration.',
+    },
+    tradeoffs: {
+      es: 'Distribución y actualizaciones gestionadas por contenedor en lugar de un deploy centralizado, compensado por cero riesgo legal de custodia y confianza total del cliente corporativo.',
+      en: 'Updates distributed via client containers instead of a single centralized push, heavily rewarded by zero data custody liability and complete corporate trust.',
+    },
+    metrics: [
+      { label: { es: 'Integridad WORM', en: 'WORM Integrity' }, val: 'SHA-256' },
+      { label: { es: 'Custodia de Datos', en: 'Data Custody' }, val: '0% Riesgo' },
+      { label: { es: 'Evaluación de IA', en: 'AI Evals' }, val: 'Golden Suite' },
+    ],
+    actionText: {
+      es: 'Ver Repositorio ConciliaBot ↗',
+      en: 'View ConciliaBot Repo ↗',
+    },
+    actionUrl: 'https://github.com/Jundev66/conciliabot',
+  },
 ];
 
 export const experience = [
@@ -692,6 +787,18 @@ export const ai = {
           },
           source: 'Medine & CryoTech',
         },
+        {
+          icon: 'lucide:file-check-2',
+          title: {
+            es: 'Conciliación ERP Autónoma & Servidor MCP',
+            en: 'Autonomous ERP Reconciliation & MCP Server',
+          },
+          text: {
+            es: 'Extracción multi-formato (PDF, CFDI, Excel) y cotejo directo contra ERPs vía servidor MCP y M2M, con bitácora criptográfica WORM y mitigación SSRF.',
+            en: 'Multi-format extraction (PDF, CFDI, Excel) and direct ERP matching via MCP server & M2M, backed by a cryptographic WORM log and SSRF guard.',
+          },
+          source: 'ConciliaBot & CoreBiz',
+        },
       ],
     },
     {
@@ -715,7 +822,19 @@ export const ai = {
             es: 'Conexión de modelos de lenguaje con bases de datos, APIs y herramientas del sistema mediante servidores MCP estandarizados.',
             en: 'Bridging language models with databases, internal APIs, and system tooling via standardized MCP servers.',
           },
-          source: 'MCP Architecture',
+          source: 'ConciliaBot & MCP Architecture',
+        },
+        {
+          icon: 'lucide:test-tube-2',
+          title: {
+            es: 'Evaluaciones Sistemáticas & Golden Dataset',
+            en: 'Systematic Evals & Golden Dataset',
+          },
+          text: {
+            es: 'Matriz de evaluación continua que valida precisión fiscal, recall de duplicados y seguimiento de trayectoria del agente en pipelines CI.',
+            en: 'Continuous evaluation framework measuring fiscal extraction accuracy, duplicate recall, and agent trajectory tracking in CI.',
+          },
+          source: 'ConciliaBot Evals',
         },
         {
           icon: 'lucide:folder-tree',
@@ -864,9 +983,88 @@ export const education = {
     {
       title: 'Codely',
       text: {
-        es: 'Principios SOLID, Clean Code, Programación Orientada a Objetos (OOP) y Testing Automatizado.',
-        en: 'SOLID Principles, Clean Code, Object-Oriented Programming (OOP) and Automated Testing.',
+        es: 'Arquitectura Hexagonal, Domain-Driven Design (DDD), Principios SOLID, Clean Code, Testing Frontend & Automatizado y Programación Agéntica con IA.',
+        en: 'Hexagonal Architecture, Domain-Driven Design (DDD), SOLID Principles, Clean Code, Frontend & Automated Testing, and Agentic AI Programming.',
       },
+    },
+  ],
+  codelyCourses: [
+    {
+      title: {
+        es: 'Testing: Introducción y buenas prácticas',
+        en: 'Testing: Introduction & Best Practices',
+      },
+      issuer: 'Codely',
+      issueDate: { es: 'Octubre 2022', en: 'October 2022' },
+      url: 'https://codely.com/cursos/testing-introduccion-y-buenas-practicas-o9me',
+      certificatePdf: '/certificados/testing-introduccion-y-buenas-practicas - Juan Mata.pdf',
+      skills: ['Unit Testing', 'TDD', 'Test Doubles'],
+    },
+    {
+      title: {
+        es: 'Arquitectura Hexagonal',
+        en: 'Hexagonal Architecture',
+      },
+      issuer: 'Codely',
+      issueDate: { es: 'Marzo 2023', en: 'March 2023' },
+      url: 'https://codely.com/cursos/arquitectura-hexagonal-t5m4',
+      certificatePdf: '/certificados/arquitectura-hexagonal - Juan Mata.pdf',
+      skills: ['Hexagonal Architecture', 'Ports & Adapters', 'Clean Architecture'],
+    },
+    {
+      title: {
+        es: 'Principios SOLID aplicados',
+        en: 'Applied SOLID Principles',
+      },
+      issuer: 'Codely',
+      issueDate: { es: 'Diciembre 2023', en: 'December 2023' },
+      url: 'https://codely.com/cursos/principios-solid-aplicados-ahbk',
+      certificatePdf: '/certificados/principios-solid-aplicados - Juan Mata.pdf',
+      skills: ['SOLID Principles', 'OOD', 'Clean Code'],
+    },
+    {
+      title: {
+        es: 'Clean Code',
+        en: 'Clean Code',
+      },
+      issuer: 'Codely',
+      issueDate: { es: 'Diciembre 2024', en: 'December 2024' },
+      url: 'https://codely.com/cursos/clean-code-cl3c',
+      certificatePdf: '/certificados/clean-code - Juan Mata.pdf',
+      skills: ['Clean Code', 'Refactoring', 'Code Smells'],
+    },
+    {
+      title: {
+        es: 'Testing en frontend',
+        en: 'Frontend Testing',
+      },
+      issuer: 'Codely',
+      issueDate: { es: 'Julio 2025', en: 'July 2025' },
+      url: 'https://codely.com/cursos/testing-en-frontend-odo8',
+      certificatePdf: '/certificados/testing-en-frontend - Juan Mata.pdf',
+      skills: ['Frontend Testing', 'Component Testing', 'E2E Testing'],
+    },
+    {
+      title: {
+        es: 'Domain-Driven Design - DDD Aplicado',
+        en: 'Domain-Driven Design - Applied DDD',
+      },
+      issuer: 'Codely',
+      issueDate: { es: 'Marzo 2026', en: 'March 2026' },
+      url: 'https://codely.com/cursos/domain-driven-design-ddd-aplicado-atft',
+      certificatePdf: '/certificados/domain-driven-design-ddd-aplicado - Juan Mata.pdf',
+      skills: ['Domain-Driven Design (DDD)', 'Bounded Contexts', 'Tactical & Strategic Design'],
+    },
+    {
+      title: {
+        es: 'Programación agéntica con IA: Fundamentos prácticos',
+        en: 'Agentic AI Programming: Practical Foundations',
+      },
+      issuer: 'Codely',
+      issueDate: { es: 'Abril 2026', en: 'April 2026' },
+      url: 'https://codely.com/cursos/programacion-agentica-con-ia-fundamentos-practicos-ag3n',
+      certificatePdf: '/certificados/programacion-agentica-con-ia-fundamentos-practicos - Juan Mata.pdf',
+      skills: ['Agentic AI', 'MCP (Model Context Protocol)', 'Autonomous Workflows'],
     },
   ],
   languages: [

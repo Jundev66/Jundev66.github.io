@@ -12,7 +12,7 @@
     }
     @page {
       size: A4;
-      margin: 10mm 12mm;
+      margin: 8.5mm 11mm;
     }
     * {
       box-sizing: border-box;
@@ -24,8 +24,8 @@
     }
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      font-size: 8.7pt;
-      line-height: 1.35;
+      font-size: 8.5pt;
+      line-height: 1.32;
       color: #0f172a;
     }
     a {
@@ -34,54 +34,54 @@
       text-underline-offset: 1.5px;
     }
     .header {
-      margin-bottom: 6px;
-      padding-bottom: 4px;
+      margin-bottom: 5px;
+      padding-bottom: 3.5px;
       border-bottom: 1.8px solid #0284c7;
     }
     h1 {
       margin: 0;
-      font-size: 19.5pt;
+      font-size: 19pt;
       font-weight: 800;
       color: #0f172a;
       letter-spacing: -0.4px;
       line-height: 1.1;
     }
     .role {
-      margin: 2.5px 0 2.5px;
-      font-size: 9.8pt;
+      margin: 2px 0;
+      font-size: 9.6pt;
       font-weight: 600;
       color: #0369a1;
       letter-spacing: -0.1px;
     }
     .contact {
-      margin: 1.5px 0;
-      font-size: 8.3pt;
+      margin: 1.2px 0;
+      font-size: 8.2pt;
       color: #334155;
     }
     h2 {
-      margin: 8.0px 0 3px;
+      margin: 6.5px 0 2.5px;
       padding-bottom: 1.5px;
       border-bottom: 1px solid #cbd5e1;
-      font-size: 9pt;
+      font-size: 8.9pt;
       font-weight: 700;
       color: #0f172a;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
     p {
-      margin: 0 0 3.5px;
+      margin: 0 0 2.6px;
     }
     ul {
-      margin: 2px 0 3.5px;
-      padding-left: 15px;
+      margin: 1.5px 0 2.6px;
+      padding-left: 14px;
       list-style: disc;
     }
     li {
-      margin: 2.0px 0;
+      margin: 1.4px 0;
     }
     .item-header {
-      margin-top: 3.0px;
-      margin-bottom: 1px;
+      margin-top: 2.2px;
+      margin-bottom: 0.5px;
     }
     .item-title {
       font-weight: 700;
@@ -112,10 +112,10 @@
 
   <h2>Habilidades técnicas</h2>
   <p><b>Desarrollo ágil e interfaces modernas:</b> TypeScript, JavaScript (ES6+), React, Next.js, Vue.js, Inertia.js, Astro, Tailwind CSS.</p>
-  <p><b>Arquitectura y backend (Enterprise &amp; MVP):</b> Node.js, NestJS, PHP, Laravel, Python, FastAPI, Arquitectura Hexagonal, DDD, CQRS, APIs RESTful, RabbitMQ.</p>
-  <p><b>Inteligencia Artificial y automatización:</b> Integración de APIs LLM (Anthropic), flujos RAG, Model Context Protocol (MCP), Skills, n8n, webhooks, bots conversacionales (WhatsApp) y agentes autónomos. Optimización de desarrollo con Claude Code y Cursor.</p>
-  <p><b>Bases de datos e infraestructura:</b> PostgreSQL (RLS / Multi-Tenancy), MySQL, Redis, Supabase, Docker, Nginx, Cloudflare.</p>
-  <p><b>Calidad y despliegue continuo (CI/CD):</b> GitHub Actions, automatización de pruebas (+500 tests) con Playwright (E2E/POM), PHPUnit, Behat (BDD), OWASP ZAP (Seguridad).</p>
+  <p><b>Arquitectura y backend (Enterprise &amp; MVP):</b> Python, FastAPI, Node.js, NestJS, PHP, Laravel, Arquitectura Hexagonal, DDD, CQRS, APIs RESTful, RabbitMQ.</p>
+  <p><b>Inteligencia Artificial y automatización:</b> Model Context Protocol (MCP), evaluación de IA (Golden Evals), APIs LLM, flujos RAG, n8n, webhooks, bots (WhatsApp) y agentes autónomos (Claude Code, Cursor).</p>
+  <p><b>Bases de datos e infraestructura:</b> PostgreSQL (RLS / Multi-Tenancy), SQLite (WORM), MySQL, Redis, Supabase, Docker, Nginx, Cloudflare.</p>
+  <p><b>Calidad y despliegue continuo (CI/CD):</b> GitHub Actions, automatización (+500 tests) con Playwright (E2E/POM), Pytest, PHPUnit, Behat (BDD), OWASP ZAP.</p>
 
   <h2>Experiencia laboral</h2>
   <p class="item-header"><span class="item-title">Desarrollador Full-Stack &mdash; Medine.tech (SaaS B2B &amp; Cloud Solutions &amp; ERP)</span> <span class="item-sub">| Remoto | 10/2022 &ndash; 09/2026 (4 años)</span></p>
@@ -130,23 +130,23 @@
   <h2>Proyectos destacados</h2>
   <p class="item-header"><span class="item-title">CoreBiz &mdash; ERP multi-tenant con Asistente IA Synapse</span> <span class="item-sub">| NestJS, Next.js, PostgreSQL RLS, IA Híbrida | <a href="https://corebiz-web.vercel.app" class="nobr">https://corebiz-web.vercel.app</a></span></p>
   <ul>
-    <li>Arquitectura hexagonal con CQRS ligero y aislamiento de datos vía PostgreSQL (RLS). Diseño e integración de "Synapse", asistente IA avanzado en modo híbrido local/multi-proveedor para análisis y gestión empresarial; 497 tests automatizados.</li>
+    <li>Arquitectura hexagonal con CQRS ligero y aislamiento estricto vía PostgreSQL (RLS). Asistente IA "Synapse" híbrido local/multi-proveedor para análisis y gestión empresarial; 497 tests automatizados en CI/CD.</li>
   </ul>
-  <p class="item-header"><span class="item-title">Kombo &mdash; Sistema Logístico y Delivery</span> <span class="item-sub">| Laravel, React, PWA, Redis Pub/Sub | En desarrollo</span></p>
+  <p class="item-header"><span class="item-title">ConciliaBot &mdash; Asistente de Conciliación ERP con IA y MCP (BYOC)</span> <span class="item-sub">| Python, FastAPI, React, SQLite WORM | <a href="https://github.com/Jundev66/conciliabot" class="nobr">https://github.com/Jundev66/conciliabot</a></span></p>
   <ul>
-    <li>MVP funcional escalado a multi-tenant con subdominios dinámicos. Sincronización omnicanal en tiempo real (web, bots de WhatsApp/Telegram, POS) mediante Redis para monitor de despacho de alta exigencia.</li>
+    <li>Arquitectura on-premise BYOC con servidor MCP y conexión M2M a CoreBiz. Bitácora inmutable (WORM) encadenada por hashes SHA-256, mitigación SSRF, cifrado AES-256-GCM y suite de evaluación con golden dataset en CI.</li>
   </ul>
-  <p class="item-header"><span class="item-title">Tornealo App &mdash; Gestión Deportiva con modelo Freemium</span> <span class="item-sub">| Astro, React, TypeScript, Tailwind CSS, PostgreSQL | MVP Funcional</span></p>
+  <p class="item-header"><span class="item-title">CryoTech &mdash; Gestión Agroindustrial con IA multimodal y OCR</span> <span class="item-sub">| NestJS, Prisma, Claude Vision | <a href="https://github.com/Jundev66/cryotech" class="nobr">https://github.com/Jundev66/cryotech</a></span></p>
   <ul>
-    <li>Estructuración de arquitectura funcional, desarrollo de métricas de seguimiento de torneos y diseño de tarjetas digitales de jugadores bajo un modelo de negocio escalable freemium.</li>
+    <li>Tesorería y costos multimoneda. Pipeline híbrido OCR (Tesseract.js) + fallback a Claude Vision (&gt;80% ahorro en API) y bot de Telegram para captura y conciliación inteligente de comprobantes.</li>
   </ul>
-  <p class="item-header"><span class="item-title">CryoTech &mdash; Gestión Agroindustrial con asistente IA</span> <span class="item-sub">| NestJS, Prisma, API Anthropic | API en producción</span></p>
+  <p class="item-header"><span class="item-title">Kombo &mdash; Pedidos Multi-Negocio y Despacho en Tiempo Real</span> <span class="item-sub">| Laravel, React, Redis Pub/Sub, RLS | <a href="https://github.com/Jundev66/kombo" class="nobr">https://github.com/Jundev66/kombo</a></span></p>
   <ul>
-    <li>Métricas operativas y tesorería multimoneda. Bot de Telegram con OCR (Tesseract.js) respaldado por LLM para extracción inteligente y categorización de gastos operativos.</li>
+    <li>Plataforma omnicanal con subdominios dinámicos y PostgreSQL RLS. Sincronización en tiempo real (web, bots de mensajería, POS) hacia monitor de cocina (KDS) con colas y Redis Pub/Sub.</li>
   </ul>
 
   <h2>Educación y Certificaciones</h2>
-  <p><b>Licenciatura en Informática:</b> Universidad de Oriente (UDO), Venezuela (6.&ordm; semestre cursado). &bull; <b>Certificación Profesional:</b> Principios SOLID, Clean Code, OOP y Testing Automatizado &mdash; Codely.</p>
+  <p><b>Licenciatura en Informática:</b> Universidad de Oriente (UDO), Venezuela (6.&ordm; semestre cursado). &bull; <b>Certificaciones Profesionales (Codely):</b> Arquitectura Hexagonal, Domain-Driven Design (DDD), Principios SOLID, Clean Code, Testing Frontend &amp; Automatizado, y Programación Agéntica con IA.</p>
 
   <h2>Idiomas</h2>
   <p><b>Español:</b> Nativo &bull; <b>Inglés:</b> Técnico profesional (comprensión fluida de documentación, repositorios y comunicación asíncrona técnica).</p>
