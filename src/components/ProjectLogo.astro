@@ -80,6 +80,42 @@ const gradientId = `project-logo-${logo}`;
     )
   }
   {
+    logo === 'labnet' && (
+      <>
+        {/* Logo de LabNet: acento violeta de .NET con capas simétricas */}
+        <rect width="32" height="32" rx="8" fill="#512bd4" />
+        <path d="M8 12l8-4 8 4-8 4-8-4z" fill="#fff" fill-opacity="0.9" />
+        <path d="M8 16l8 4 8-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" />
+        <path d="M8 20l8 4 8-4" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7" />
+      </>
+    )
+  }
+  {
+    logo === 'omnicore' && (
+      <>
+        {/* Logo de OmniCore: naranja Java/Spring con topología distribuida de microservicios */}
+        <rect width="32" height="32" rx="8" fill="#e8611a" />
+        <circle cx="16" cy="16" r="3.2" fill="#fff" />
+        <circle cx="9" cy="11" r="2.2" fill="#fff" fill-opacity="0.8" />
+        <circle cx="23" cy="11" r="2.2" fill="#fff" fill-opacity="0.8" />
+        <circle cx="16" cy="24" r="2.2" fill="#fff" fill-opacity="0.8" />
+        <path d="M16 16L9 11M16 16l7-5M16 16v8" stroke="#fff" stroke-width="1.6" stroke-opacity="0.9" />
+      </>
+    )
+  }
+  {
+    logo === 'workforce' && (
+      <>
+        {/* Logo de Workforce Dining: verde azulado FastAPI/Expo con tarjeta de identificación */}
+        <rect width="32" height="32" rx="8" fill="#009688" />
+        <rect x="8" y="7" width="16" height="18" rx="2" fill="none" stroke="#fff" stroke-width="1.8" />
+        <circle cx="16" cy="13" r="2.8" fill="#fff" />
+        <path d="M11 21c0-2.2 2.2-3.5 5-3.5s5 1.3 5 3.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" />
+        <rect x="13" y="5" width="6" height="2.5" rx="1" fill="#fff" />
+      </>
+    )
+  }
+  {
     logo === 'tornealo' && (
       <>
         <rect width="32" height="32" rx="8" fill="#0284c7" />

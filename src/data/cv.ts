@@ -28,7 +28,7 @@ export interface Project {
   bullets: LocalizedString[];
   metrics: LocalizedString[];
   stack: Skill[];
-  logo: 'corebiz' | 'conciliabot' | 'kombo' | 'cryotech' | 'tornealo';
+  logo: 'corebiz' | 'conciliabot' | 'kombo' | 'cryotech' | 'tornealo' | 'omnicore' | 'labnet' | 'workforce';
   repo?: string;
   demo?: string;
 }
@@ -61,12 +61,12 @@ export const profile = {
   name: 'Juan Mata',
   initials: 'JM',
   role: {
-    es: 'Full-Stack Software Engineer | Arquitectura Evolutiva & IA',
-    en: 'Full-Stack Software Engineer | Evolutionary Architecture & AI',
+    es: 'Full-Stack Software Engineer & QA Automation | Arquitectura Evolutiva',
+    en: 'Full-Stack Software Engineer & QA Automation | Evolutionary Architecture',
   },
   headline: {
-    es: 'Arquitectura Evolutiva · Python · FastAPI · NestJS · Laravel · MCP · RAG · Ex-Medine.tech',
-    en: 'Evolutionary Architecture · Python · FastAPI · NestJS · Laravel · MCP · RAG · Ex-Medine.tech',
+    es: 'Arquitectura Evolutiva · TypeScript · Python · Java · .NET · PHP · QA Automation · MCP · RAG',
+    en: 'Evolutionary Architecture · TypeScript · Python · Java · .NET · PHP · QA Automation · MCP · RAG',
   },
   tagline: {
     es: 'Ingeniero de Software Full-Stack con 4 años de experiencia creando plataformas SaaS B2B y sistemas ERP bajo el paradigma de arquitectura evolutiva y agnóstico a la tecnología: diseño y lanzo MVPs ágiles, escalo alta concurrencia y modernizo plataformas legacy sin interrumpir la operación, combinando velocidad en producto con IA (MCP, RAG) y rigor corporativo (+500 pruebas en CI/CD).',
@@ -167,8 +167,8 @@ export const projects: Project[] = [
   {
     name: 'CoreBiz',
     subtitle: {
-      es: 'ERP multi-tenant para comercios',
-      en: 'Multi-tenant ERP for commercial retail',
+      es: 'ERP multi-tenant & POS Offline-First PWA',
+      en: 'Multi-tenant ERP & Offline-First POS PWA',
     },
     status: {
       es: 'En producción viva',
@@ -176,13 +176,17 @@ export const projects: Project[] = [
     },
     statusTone: 'emerald',
     description: {
-      es: 'Sistema de gestión comercial multi-tenant —inventario, ventas y notas de entrega— con arquitectura hexagonal y aislamiento estricto de datos con PostgreSQL Row Level Security (RLS).',
-      en: 'Multi-tenant business management system —inventory, sales, and delivery notes— built with hexagonal architecture and strict data isolation via PostgreSQL Row Level Security (RLS).',
+      es: 'Sistema de gestión comercial multi-tenant y punto de venta (POS) offline-first con patrón Outbox en IndexedDB, sincronización bidireccional idempotente SHA-256, arquitectura hexagonal y PostgreSQL RLS.',
+      en: 'Multi-tenant business management and offline-first POS with IndexedDB Outbox pattern, SHA-256 idempotent bidirectional sync, hexagonal architecture, and PostgreSQL RLS.',
     },
     bullets: [
       {
         es: 'Arquitectura hexagonal con DDD táctico y CQRS ligero: el núcleo de dominio no tiene dependencias externas.',
         en: 'Hexagonal architecture with tactical DDD and lightweight CQRS: zero external dependencies in the domain core.',
+      },
+      {
+        es: 'POS Offline-First (PWA): ventas continuas sin internet con Dexie (IndexedDB), sincronización idempotente con hashes SHA-256 y lector de códigos.',
+        en: 'Offline-First POS (PWA): uninterrupted retail operations without internet via Dexie (IndexedDB), SHA-256 idempotent sync, and barcode scanning.',
       },
       {
         es: 'Asistente de IA "Synapse": asistente inteligente híbrido (local / multi-proveedor) para análisis contable y gestión empresarial.',
@@ -194,23 +198,160 @@ export const projects: Project[] = [
       },
     ],
     metrics: [
+      { es: 'POS Offline SHA-256', en: 'Offline POS SHA-256' },
       { es: '497 tests', en: '497 tests' },
-      { es: 'IA Synapse', en: 'Synapse AI' },
       { es: 'PostgreSQL RLS', en: 'PostgreSQL RLS' },
     ],
     stack: [
       { name: 'NestJS', icon: 'simple-icons:nestjs', color: '#E0234E' },
       { name: 'Next.js', icon: 'simple-icons:nextdotjs' },
       { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+      { name: 'IndexedDB (Dexie)', icon: 'lucide:database', color: '#3B82F6' },
       { name: 'Supabase RLS', icon: 'simple-icons:supabase', color: '#3ECF8E' },
       { name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
-      { name: 'Prisma', icon: 'simple-icons:prisma' },
       { name: 'Vitest', icon: 'simple-icons:vitest', color: '#6E9F18' },
       { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
     ],
     logo: 'corebiz',
     repo: 'https://github.com/Jundev66/CoreBiz',
     demo: 'https://corebiz-web.vercel.app',
+  },
+  {
+    name: 'OmniCore',
+    subtitle: {
+      es: 'Plataforma Retail Microservicios (Java & Spring Boot)',
+      en: 'Enterprise Retail Microservices Platform (Java & Spring Boot)',
+    },
+    status: {
+      es: 'Arquitectura Empresarial',
+      en: 'Enterprise Architecture',
+    },
+    statusTone: 'emerald',
+    description: {
+      es: 'Plataforma de microservicios retail con Java 17, Spring Boot 3, DDD táctico y Arquitectura Hexagonal. Saga distribuida coreografiada con RabbitMQ para reserva de stock sin bloqueos distribuidos.',
+      en: 'Retail microservices platform built with Java 17, Spring Boot 3, tactical DDD, and Hexagonal Architecture. Choreographed distributed saga with RabbitMQ for lock-free stock reservation.',
+    },
+    bullets: [
+      {
+        es: 'Saga Distribuida con RabbitMQ: coreografía asíncrona entre pedidos, pagos e inventario que garantiza consistencia eventual sin locks.',
+        en: 'Distributed Saga with RabbitMQ: asynchronous choreography across orders, payments, and inventory ensuring eventual consistency without locks.',
+      },
+      {
+        es: 'Arquitectura Hexagonal & CQRS: Command Bus, Query Bus y Event Bus independientes, con núcleo de dominio 100% puro.',
+        en: 'Hexagonal Architecture & CQRS: independent Command, Query, and Event buses with a pure, framework-free domain core.',
+      },
+      {
+        es: 'Database-per-Service: bases de datos PostgreSQL independientes por servicio desacoplando esquemas por completo.',
+        en: 'Database-per-Service: independent PostgreSQL databases per microservice fully decoupling persistence schemas.',
+      },
+    ],
+    metrics: [
+      { es: 'Sagas RabbitMQ', en: 'RabbitMQ Sagas' },
+      { es: 'Spring Boot 3', en: 'Spring Boot 3' },
+      { es: 'Database per Service', en: 'Database per Service' },
+    ],
+    stack: [
+      { name: 'Java 17', icon: 'simple-icons:openjdk', color: '#ED8B00' },
+      { name: 'Spring Boot 3', icon: 'simple-icons:springboot', color: '#6DB33F' },
+      { name: 'RabbitMQ', icon: 'simple-icons:rabbitmq', color: '#FF6600' },
+      { name: 'PostgreSQL', icon: 'simple-icons:postgresql', color: '#4169E1' },
+      { name: 'Docker', icon: 'simple-icons:docker', color: '#2496ED' },
+      { name: 'React', icon: 'simple-icons:react', color: '#149ECA' },
+      { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+    ],
+    logo: 'omnicore',
+    repo: 'https://github.com/Jundev66/omnicore',
+  },
+  {
+    name: 'LabNet',
+    subtitle: {
+      es: 'Enterprise Multi-Tenant SaaS (.NET 10 & C#)',
+      en: 'Enterprise Multi-Tenant SaaS (.NET 10 & C#)',
+    },
+    status: {
+      es: 'Arquitectura Empresarial',
+      en: 'Enterprise Architecture',
+    },
+    statusTone: 'emerald',
+    description: {
+      es: 'SaaS multi-tenant empresarial aplicando Modular Domain-Driven Design y Screaming Architecture (CodelyTV) con Bounded Contexts simétricos en .NET 10 (ASP.NET Core + EF Core) y Vue 3.',
+      en: 'Enterprise multi-tenant SaaS applying Modular DDD and Screaming Architecture (CodelyTV style) with symmetric Bounded Contexts across .NET 10 and Vue 3.',
+    },
+    bullets: [
+      {
+        es: 'REPR Pattern (Request-Endpoint-Response): Single Action Controllers desacoplados y enfocados en casos de uso únicos.',
+        en: 'REPR Pattern (Request-Endpoint-Response): decoupled Single Action Controllers dedicated to explicit use cases.',
+      },
+      {
+        es: 'Multi-Tenancy estricto en EF Core: interfaz IMustHaveTenant con filtrado global automático por inquilino y SQL Server 2022.',
+        en: 'Strict EF Core multi-tenancy: IMustHaveTenant interface with automated global tenant query filtering and SQL Server 2022.',
+      },
+      {
+        es: 'Arquitectura simétrica en Vue 3 + TypeScript: contexts en frontend reflejando exactamente los bounded contexts del backend.',
+        en: 'Symmetric Vue 3 + TypeScript architecture: frontend contexts mirroring backend bounded contexts.',
+      },
+    ],
+    metrics: [
+      { es: '.NET 10 & C#', en: '.NET 10 & C#' },
+      { es: 'REPR & Modular DDD', en: 'REPR & Modular DDD' },
+      { es: 'SQL Server 2022', en: 'SQL Server 2022' },
+    ],
+    stack: [
+      { name: 'C# / .NET 10', icon: 'simple-icons:dotnet', color: '#512BD4' },
+      { name: 'ASP.NET Core', icon: 'simple-icons:dotnet', color: '#512BD4' },
+      { name: 'SQL Server 2022', icon: 'simple-icons:microsoftsqlserver', color: '#CC292B' },
+      { name: 'Vue.js 3', icon: 'simple-icons:vuedotjs', color: '#42B883' },
+      { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+      { name: 'Docker', icon: 'simple-icons:docker', color: '#2496ED' },
+    ],
+    logo: 'labnet',
+    repo: 'https://github.com/Jundev66/lab-net',
+  },
+  {
+    name: 'Workforce Dining SaaS',
+    subtitle: {
+      es: 'Gestión de Asistencia y Comedores con IA (Python & Expo)',
+      en: 'Workforce Attendance & Dining AI SaaS (Python & Expo)',
+    },
+    status: {
+      es: 'SaaS en Producción',
+      en: 'Production SaaS',
+    },
+    statusTone: 'emerald',
+    description: {
+      es: 'Plataforma multi-tenant para control de asistencia laboral, fichaje en comedores industriales y predicción de demanda de raciones con IA. FastAPI, PostgreSQL 16 RLS y cliente móvil/web con React Native Expo.',
+      en: 'Multi-tenant platform for workforce attendance, industrial dining hall tracking, and AI meal demand forecasting. FastAPI, PostgreSQL 16 RLS, and React Native Expo client.',
+    },
+    bullets: [
+      {
+        es: 'Aislamiento PostgreSQL 16 RLS: políticas a nivel de motor de BD garantizando segregación absoluta entre empresas.',
+        en: 'PostgreSQL 16 RLS isolation: database-engine-level policies enforcing absolute cross-tenant data separation.',
+      },
+      {
+        es: 'Cross-Platform React Native (Expo SDK 58): aplicación móvil y web para escaneo rápido de credenciales y analíticas.',
+        en: 'Cross-Platform React Native (Expo SDK 58): mobile and web app for high-throughput badge scanning and analytics.',
+      },
+      {
+        es: 'Calidad rigurosa: 100% de tests unitarios y de integración con Pytest y validación E2E con Playwright.',
+        en: 'Rigorous quality: 100% unit and integration test coverage with Pytest and E2E validation with Playwright.',
+      },
+    ],
+    metrics: [
+      { es: 'FastAPI & RLS', en: 'FastAPI & RLS' },
+      { es: 'React Native Expo', en: 'React Native Expo' },
+      { es: 'Pytest + Playwright', en: 'Pytest + Playwright' },
+    ],
+    stack: [
+      { name: 'Python', icon: 'simple-icons:python', color: '#3776AB' },
+      { name: 'FastAPI', icon: 'simple-icons:fastapi', color: '#009688' },
+      { name: 'React Native', icon: 'simple-icons:react', color: '#61DAFB' },
+      { name: 'Expo', icon: 'simple-icons:expo', color: '#000020' },
+      { name: 'PostgreSQL RLS', icon: 'simple-icons:postgresql', color: '#4169E1' },
+      { name: 'Playwright', icon: 'simple-icons:playwright', color: '#2EAD33' },
+      { name: 'Pytest', icon: 'simple-icons:pytest', color: '#0A9EDC' },
+    ],
+    logo: 'workforce',
+    repo: 'https://github.com/Jundev66/workforce-dining-saas',
   },
   {
     name: 'ConciliaBot',
@@ -878,8 +1019,8 @@ export const ai = {
 export const skillGroups: SkillGroup[] = [
   {
     title: {
-      es: 'Arquitectura & Backend (Enterprise & MVP)',
-      en: 'Architecture & Backend (Enterprise & MVP)',
+      es: 'Arquitectura & Backend (Enterprise & Producción)',
+      en: 'Architecture & Backend (Enterprise & Production)',
     },
     icon: 'lucide:server',
     wide: true,
@@ -888,10 +1029,14 @@ export const skillGroups: SkillGroup[] = [
       { name: 'NestJS', icon: 'simple-icons:nestjs', color: '#E0234E' },
       { name: 'Python', icon: 'simple-icons:python', color: '#3776AB' },
       { name: 'FastAPI', icon: 'simple-icons:fastapi', color: '#009688' },
+      { name: 'Java 17', icon: 'simple-icons:openjdk', color: '#ED8B00' },
+      { name: 'Spring Boot 3', icon: 'simple-icons:springboot', color: '#6DB33F' },
+      { name: 'C# / .NET 10', icon: 'simple-icons:dotnet', color: '#512BD4' },
       { name: 'PHP 8.x', icon: 'simple-icons:php', color: '#8892BF' },
       { name: 'Laravel', icon: 'simple-icons:laravel', color: '#FF2D20' },
       { name: 'Arquitectura Hexagonal', icon: 'lucide:hexagon', color: '#3B82F6' },
       { name: 'Domain-Driven Design (DDD)', icon: 'lucide:boxes', color: '#3B82F6' },
+      { name: 'Sagas Distribuidas', icon: 'lucide:git-fork', color: '#3B82F6' },
       { name: 'CQRS', icon: 'lucide:workflow', color: '#3B82F6' },
       { name: 'APIs RESTful', icon: 'lucide:network', color: '#3B82F6' },
       { name: 'RabbitMQ', icon: 'simple-icons:rabbitmq', color: '#FF6600' },
@@ -909,7 +1054,7 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Flujos RAG', icon: 'lucide:database', color: '#10B981' },
       { name: 'n8n & Webhooks', icon: 'simple-icons:n8n', color: '#EA4B71' },
       { name: 'Anthropic Claude API', icon: 'simple-icons:anthropic' },
-      { name: 'Bots de WhatsApp', icon: 'simple-icons:whatsapp', color: '#25D366' },
+      { name: 'Bots de WhatsApp & Telegram', icon: 'simple-icons:whatsapp', color: '#25D366' },
       { name: 'Claude Code', icon: 'simple-icons:claude', color: '#D97757' },
       { name: 'Cursor', icon: 'simple-icons:cursor' },
       { name: 'Agent Skills & AGENTS.md', icon: 'lucide:folder-tree', color: '#8B5CF6' },
@@ -917,8 +1062,8 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: {
-      es: 'Desarrollo Ágil & Interfaces Modernas',
-      en: 'Agile Frontend & Modern Interfaces',
+      es: 'Desarrollo Frontend & Mobile',
+      en: 'Frontend & Mobile Development',
     },
     icon: 'lucide:code-xml',
     skills: [
@@ -926,10 +1071,12 @@ export const skillGroups: SkillGroup[] = [
       { name: 'JavaScript (ES6+)', icon: 'simple-icons:javascript', color: '#E8C900' },
       { name: 'React', icon: 'simple-icons:react', color: '#149ECA' },
       { name: 'Next.js', icon: 'simple-icons:nextdotjs' },
-      { name: 'Vue.js', icon: 'simple-icons:vuedotjs', color: '#42B883' },
+      { name: 'React Native (Expo)', icon: 'simple-icons:expo', color: '#000020' },
+      { name: 'Vue.js 3', icon: 'simple-icons:vuedotjs', color: '#42B883' },
       { name: 'Inertia.js', icon: 'simple-icons:inertia', color: '#9553E9' },
       { name: 'Astro', icon: 'simple-icons:astro', color: '#BC52EE' },
       { name: 'Tailwind CSS', icon: 'simple-icons:tailwindcss', color: '#06B6D4' },
+      { name: 'PWA (Offline-First)', icon: 'lucide:wifi-off', color: '#3B82F6' },
     ],
   },
   {
@@ -940,6 +1087,8 @@ export const skillGroups: SkillGroup[] = [
     icon: 'lucide:database',
     skills: [
       { name: 'PostgreSQL (RLS Multi-Tenancy)', icon: 'simple-icons:postgresql', color: '#4169E1' },
+      { name: 'Microsoft SQL Server', icon: 'simple-icons:microsoftsqlserver', color: '#CC292B' },
+      { name: 'IndexedDB (Dexie)', icon: 'lucide:database', color: '#3B82F6' },
       { name: 'Supabase', icon: 'simple-icons:supabase', color: '#3ECF8E' },
       { name: 'MySQL', icon: 'simple-icons:mysql', color: '#4479A1' },
       { name: 'Redis', icon: 'simple-icons:redis', color: '#FF4438' },
@@ -951,13 +1100,14 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: {
-      es: 'Calidad & Despliegue Continuo (CI/CD)',
-      en: 'Quality & Continuous Delivery (CI/CD)',
+      es: 'Calidad & QA Automation (CI/CD)',
+      en: 'Quality & QA Automation (CI/CD)',
     },
     icon: 'lucide:shield-check',
     skills: [
-      { name: 'Playwright (E2E POM)', icon: 'simple-icons:playwright', color: '#2EAD33' },
+      { name: 'Playwright (E2E POM & CLI)', icon: 'simple-icons:playwright', color: '#2EAD33' },
       { name: 'GitHub Actions', icon: 'simple-icons:githubactions', color: '#2088FF' },
+      { name: 'Pytest', icon: 'simple-icons:pytest', color: '#0A9EDC' },
       { name: 'PHPUnit', icon: 'lucide:flask-conical', color: '#3C9CD7' },
       { name: 'Behat (ATDD/BDD)', icon: 'lucide:test-tube', color: '#10B981' },
       { name: 'OWASP ZAP (Seguridad)', icon: 'simple-icons:owasp' },
