@@ -49,10 +49,17 @@ const contactChannels = [
       
       <!-- Columna Izquierda: Mensaje & Acciones Principales (7 cols) -->
       <div class="lg:col-span-7 space-y-5">
-        <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-          <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="lang-es">{profile.availability.es}</span>
-          <span class="lang-en">{profile.availability.en}</span>
+        <div class="flex flex-wrap items-center gap-2.5">
+          <div class="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+            <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span class="lang-es">{profile.availability.es}</span>
+            <span class="lang-en">{profile.availability.en}</span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface-muted px-3 py-1 text-xs font-semibold text-muted">
+            <Icon name="lucide:globe" class="size-3 text-accent" />
+            <span class="lang-es">{profile.citizenship.es}</span>
+            <span class="lang-en">{profile.citizenship.en}</span>
+          </div>
         </div>
 
         <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-fg tracking-tight">
